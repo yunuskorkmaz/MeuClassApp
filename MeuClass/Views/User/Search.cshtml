@@ -1,0 +1,8 @@
+﻿@model List<DataAccess.DBUsers>
+
+<ul style="list-style-type:none; width:150px;">
+    @foreach (var item in Model)
+    {
+        <li style="text-transform:capitalize;padding:5px;">@item.Name @item.Surname</li>
+    }
+</ul>

@@ -1,0 +1,35 @@
+﻿<script src="~/Scripts/jquery.signalR-2.2.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
+
+<script>
+    var messagehub = $.connection.msgHub;
+
+    messagehub.client.updateOnlineUsers = function (user) {
+        console.log(user);
+        $('#onlineusers').html("");
+        $.each(user, function (i, val) {
+
+            $('#onlineusers').append('<a href="#" class="list-group-item">' + val.Username + '</a>');
+        });
+
+
+
+    }
+
+    $.connection.hub.start().done(function () {
+        messagehub.server.connect("@Session["username"]");
+        console.log("connect");
+    }).fail(function (error) {
+        console.log(error);
+        });
+</script>
+
+<div class="row">
+
+    <div class="col-xs-4 col-md-4">
+        <div class="list-group" id="onlineusers"></div>
+    </div>
+    <div class="col-xs-8 col-md-8">
+        .col-xs-12 .col-md-8
+    </div>
+</div>

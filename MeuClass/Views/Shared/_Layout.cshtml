@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
+    <link href="~/Content/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/css/main.css" rel="stylesheet" />
+    <!-- Giriş yapıldıktan sonra ki sayfalar için başka bir css dosyası kullanılacak -->
+    <!--<link rel="stylesheet" type="text/css" href="~/Content/css/style.css">-->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <title>@ViewBag.Title - Sosyal Ağ</title>
+</head>
+<body>
+
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Mersin Üniversitesi</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#">Home</a></li>
+                <li>@Html.ActionLink("Mesajlar","","Messages")</li>
+                <li style="background: orange;font-weight: bold"><a style="text-transform: uppercase;color:white;" href="#">@Session["name"] [@Session["user_id"]]</a></li>
+                <li style="background: red;font-weight: bold">
+                    @Html.ActionLink("Çıkış Yap","Logout","Home","",new { @style = "color:white"})
+                    
+                </li>
+            </ul>
+               
+            @using (Html.BeginForm("Search", "User", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
+            {
+                <div class="form-group">
+                    <input type="text" class="form-control" placeHolde="Kullanıcı Ara" id="ogrenciNoInput" name="NameSurname">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default">Ara</button>
+                </div>
+            }
+        </div>
+    </nav>
+
+    @RenderBody()
+
+    
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+
+        });
+    </script>
+</body>
+</html>
