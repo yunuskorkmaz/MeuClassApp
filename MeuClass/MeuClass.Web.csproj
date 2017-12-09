@@ -169,6 +169,8 @@
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\Lesson\Detail.cshtml" />
+    <Content Include="Views\Lesson\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -183,9 +185,17 @@
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj">
-      <Project>{8cd87b47-ffa8-44d0-9257-f9fc1a54dc12}</Project>
-      <Name>DataAccess</Name>
+    <ProjectReference Include="..\MeuClass.Business\MeuClass.Business.csproj">
+      <Project>{cd2c2a7d-8f23-4622-afc6-de2472eebb11}</Project>
+      <Name>MeuClass.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeuClass.Data\MeuClass.Data.csproj">
+      <Project>{9e4776f3-6d7b-49ae-948f-3f81eb83f4a1}</Project>
+      <Name>MeuClass.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MeuClass.Entity\MeuClass.Entity.csproj">
+      <Project>{cc147199-afd1-46db-b25b-371aea410bc1}</Project>
+      <Name>MeuClass.Entity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,7 @@
-﻿using DataAccess;
+﻿
+using MeuClass.Business.Repository;
 using MeuClass.Controllers.Messages.Controller;
+using MeuClass.Entity.Models;
 using System;
 using System.Linq;
 using System.Web.Mvc;
@@ -36,54 +38,53 @@ namespace MeuClass.Controllers
 
         public ActionResult DoLogin(FormCollection form)
         {
-            using (var context = new ClassAppEntities())
+            
+
+
+            var check = UserRepository.Instance.CheckAuth(form.Get("SchoolNumber"),form.Get("Password"));
+
+            if(check == null)
             {
-                var number = form.Get("SchoolNumber");
-                var pass = form.Get("Password");
-                var query = context.DBUsers.Where(a => a.SchoolNumber == number && a.Password == pass).FirstOrDefault();
-                if(query != null)
-                {
-                    Session["user_id"] = query.ID;
-                    Session["name"] = query.Name;
-                    Session["surname"] = query.Surname;
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    TempData["error"] = "Giriş Yapılamadı";
-                    return RedirectToAction("Login", "Home");
-                }
+                TempData["error"] = "Giriş Yapılamadı";
+                return RedirectToAction("Login", "Home");
             }
+            else
+            {
+                Session["user_id"] = check.UserID;
+                Session["name"] = check.Name;
+                Session["surname"] = check.Surname;
+                return RedirectToAction("Index", "Home");
+            }
+           
         }
 
         public ActionResult DoRegister(FormCollection form)
         {
-            using (var context = new ClassAppEntities())
+
+
+            var user = new User()
             {
-                try
-                {
+                Name = form.Get("Name"),
+                Surname = form.Get("Surname"),
+                SchoolNumber = form.Get("SchoolNumber"),
+                Password = form.Get("Password"),
+                Birthday = DateTime.Now,
+                CreatedTime = DateTime.Now,
+                UpdatedTime = DateTime.Now
 
-                    var user = new DBUsers()
-                    {
-                        Name = form.Get("Name"),
-                        Surname = form.Get("Surname"),
-                        SchoolNumber = form.Get("SchoolNumber"),
-                        Password = form.Get("Password")
-                    };
-                    var id = context.DBUsers.Add(user);
-                    context.SaveChanges();
-                }
-                catch(Exception ex)
-                {
-                    TempData["error"] = ex.ToString() +" hata";
+            };
 
-                }
-                
+
+            try
+            {
+                UserRepository.Instance.Add(user);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = ex.ToString() + "hata";
             }
 
-            return RedirectToAction("Index", "Home");
-
-            
+            return RedirectToAction("Index", "Home");            
         }
 
         public ActionResult Logout()
