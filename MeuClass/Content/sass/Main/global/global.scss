@@ -1,0 +1,30 @@
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+a,
+a:hover {
+    text-decoration: none;
+    color: black;
+}
+
+input:focus,
+button:focus {
+    outline: none;
+}
+
+.pad-0 {
+    padding: 0 !important;
+}
+
+.container {
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ul {
+    display: flex;
+    justify-content: space-around;
+}
+

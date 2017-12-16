@@ -1,0 +1,75 @@
+﻿
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="content">
+
+                    <div class="row">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            @Html.Action("UserInfo", "UserPartial", new { id = 2 })
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 pad-0">
+                            <div class="content-right">
+                                <div class="row">
+
+                                    <div class="content-right-menu">
+
+
+                                        <ul class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nav navbar-nav">
+
+                                            <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <a href="#">
+                                                    Zaman Tüneli
+                                                    
+                                                </a>
+                                            </li>
+
+                                            <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <a href="#">
+                                                    Hakkında
+                                                    
+                                                </a>
+                                            </li>
+                                            <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <a href="#">
+                                                    Arkadaşlar
+                                                   
+                                                </a>
+                                            </li>
+
+                                            <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                                <a href="#">
+                                                    Dersler
+                                                   
+                                                </a>
+                                            </li>
+
+
+
+                                        </ul>
+
+                                        <div class="clearfix"></div>
+
+                                    </div>
+
+
+                                    @RenderBody();
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
