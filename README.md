@@ -4,7 +4,7 @@ Mersin Üniversitesi öğrenci ve öğretmen sosyal paylaşım platformu.
 ### Proje Mimarisi
 
 | Proje Katmanı        | Açıklama|
-|-------------         |::-------------:|
+|-------------         |:-------------|
 |   MeuClass.Business  |Proje arayüzü ile veritabanı arasında iletişim ve verilerin yönetildiği katmandır.  |
 |   MeuClass.Data      |Veritabanına erişim için gerekli olan DbContext sıfınını içerir. |
 |   MeuClass.Entity    |Veritabanı tablolarının model sınıflarını içeirir.  |
