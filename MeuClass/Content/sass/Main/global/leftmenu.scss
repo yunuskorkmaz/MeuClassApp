@@ -1,3 +1,28 @@
-#wrapper{
-    background-color: red;
+#leftmenu {
+    &-container {
+        ul {
+            li {
+                display: block;
+                text-transform: uppercase;
+                
+                &:hover {
+                    background-color: grey !important;
+                    color:black;
+                }
+                a {
+                    &:hover {
+                        color:black;
+                        background-color: grey !important;
+                    }
+                    padding: 20px;
+                    font-family: $font-barlow;
+                    font-size:18px;
+                    color:grey;
+                    i {
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+    }
 }

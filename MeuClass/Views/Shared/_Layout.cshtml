@@ -108,33 +108,38 @@
             </div>
         </div>
     </nav>
-    <section class="col-xs-2 col-sm-2 col-md-2 col-lg-2" id="wrapper">
-
+    <section class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padl-0 padr-0" id="leftmenu">
+ 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
+        <div id="leftmenu-container">
+            <ul class="nav myNav">
 
                 <li>
-                    <a href="#">Anasayfa</a>
+                    <a href="#">
+                        <i class="fa fa-home fa-2x" aria-hidden="true"></i> Anasayfa </i>
+                    </a>
                 </li>
                 <li>
-                    <a href="#">Profil</a>
+                    <a href="#">
+                        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Profil</a>
                 </li>
                 <li>
-                    <a href="#">Dersler</a>
+                    <a href="#">
+                        <i class="fa fa-book fa-2x" aria-hidden="true"></i> Dersler</a>
                 </li>
                 <li>
-                    <a href="#">Ders Programı</a>
+                    <a href="#">
+                        <i class="fa fa-calendar fa-2x" aria-hidden="true"></i> Ders Programı</a>
                 </li>
                 <li>
-                    <a href="#">Sınav Takvimi</a>
+                    <a href="#">
+                        <i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Sınav Takvimi</a>
                 </li>
                 <li>
-                    <a href="#">Ayarlar</a>
+                    <a href="#">
+                        <i class="fa fa-key fa-2x" aria-hidden="true"></i> Ayarlar</a>
                 </li>
-                <li>
-                    <a href="#">Çıkış</a>
-                </li>
+
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -145,8 +150,8 @@
 
     </section>
 
-<section class="col-xs-10 col-sm-10 col-md-10 col-lg-10"> @RenderBody()</section>  
-   
+    <section class="col-xs-10 col-sm-10 col-md-10 col-lg-10 padl-0"> @RenderBody()</section>
+
 
 
     <script src="~/Content/js/bootstrap.min.js"></script>
