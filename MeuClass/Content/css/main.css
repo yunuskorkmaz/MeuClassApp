@@ -1,3 +1,41 @@
+.mar-0 {
+  margin: 0 !important; }
+
+.mart-0 {
+  margin-top: 0 !important; }
+
+.marr-0 {
+  margin-right: 0 !important; }
+
+.marb-0 {
+  margin-bottom: 0 !important; }
+
+.pad-0 {
+  padding: 0 !important; }
+
+.padt-0 {
+  padding-top: 0 !important; }
+
+.padr-0 {
+  padding-right: 0 !important; }
+
+.padb-0 {
+  padding-bottom: 0 !important; }
+
+.padl-0 {
+  padding-left: 0 !important; }
+
+.border {
+  border: 1px solid black; }
+
+.container {
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto; }
+
+.radius-0 {
+  border-radius: 0px !important; }
+
 body {
   font-family: 'Source Sans Pro', sans-serif; }
 
@@ -18,9 +56,8 @@ button:focus {
   margin-left: auto;
   margin-right: auto; }
 
-ul {
-  display: flex;
-  justify-content: space-around; }
+#wrapper {
+  background-color: red; }
 
 .myNavbar {
   border: 0;
@@ -76,8 +113,7 @@ ul {
   display: flex;
   justify-content: flex-end; }
   .content-left-profile-follow button {
-    margin-left: 5px;
-    margin-right: 5px; }
+    margin-right: 20px; }
 
 .content-left .about {
   border-radius: 0; }
@@ -99,8 +135,8 @@ ul {
         border-right: 0; }
       .content-right-menu ul li a {
         font-family: 'Barlow Semi Condensed', sans-serif;
-        padding-top: 30px;
-        padding-bottom: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
         text-transform: uppercase;
         font-size: 18px; }
         .content-right-menu ul li a i {
@@ -114,11 +150,94 @@ ul {
   .friends-info span {
     color: grey;
     font-size: 11px; }
-  .friends-batin {
+  .friends-button {
     margin-top: 20px;
     display: flex;
     justify-content: flex-end;
     align-items: flex-end; }
+
+.portlet {
+  background-color: #C7C6C3; }
+
+/*profile*/
+.profile-sidebar {
+  float: left;
+  width: 300px;
+  margin-right: 20px; }
+
+.profile-content {
+  overflow: hidden; }
+
+.profile-sidebar-portlet {
+  padding: 30px 0 0 !important; }
+
+.profile-userpic img {
+  float: none;
+  margin: 0 auto;
+  width: 50%;
+  height: 50%;
+  width: 50px;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important; }
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 10px; }
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 7px; }
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 7px; }
+
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+  padding-bottom: 30px; }
+
+.profile-userbuttons .btn {
+  margin-right: 5px; }
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0; }
+
+.profile-userbuttons button {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px; }
+
+.lesson-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; }
+  .lesson-top-icon {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex; }
+  .lesson-top-image img {
+    width: 40px; }
+  .lesson-top-status {
+    padding-right: 15px; }
+    .lesson-top-status span {
+      color: green;
+      font-weight: bold; }
+
+.lesson-content-date {
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.lesson-content-lname {
+  margin-top: 10px;
+  margin-bottom: 10px; }
 
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document

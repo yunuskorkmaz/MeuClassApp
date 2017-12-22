@@ -30,8 +30,13 @@ namespace MeuClass.Controllers
             return View();
         }
 
+        public ActionResult Lesson(string number)
+        {
+            ViewBag.Number = number;
+            return View();
+        }
 
-    public ActionResult Search(FormCollection form)
+        public ActionResult Search(FormCollection form)
         {
 
             var name = form.Get("NameSurname");
