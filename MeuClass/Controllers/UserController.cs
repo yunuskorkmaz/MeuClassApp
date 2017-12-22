@@ -18,6 +18,24 @@ namespace MeuClass.Controllers
             return View();
         }
 
+        public ActionResult About(string number)
+        {
+            ViewBag.Number = number;
+            return View();
+        }
+
+        public ActionResult Friends(string number)
+        {
+            ViewBag.Number = number;
+            return View();
+        }
+
+        public ActionResult Lesson(string number)
+        {
+            ViewBag.Number = number;
+            return View();
+        }
+
         public ActionResult Search(FormCollection form)
         {
 

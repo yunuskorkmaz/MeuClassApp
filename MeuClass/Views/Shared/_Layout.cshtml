@@ -1,49 +1,159 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
     <link href="~/Content/css/bootstrap-theme.css" rel="stylesheet" />
     <link href="~/Content/css/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Content/css/font-awesome.min.css">
     <!-- Giriş yapıldıktan sonra ki sayfalar için başka bir css dosyası kullanılacak -->
     <!--<link rel="stylesheet" type="text/css" href="~/Content/css/style.css">-->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,500" rel="stylesheet">
     <script src="~/Content/js/jquery-3.2.1.min.js"></script>
     <title>@ViewBag.Title - Sosyal Ağ</title>
 </head>
+
 <body>
-
-
-    <nav class="navbar navbar-default">
-        <div class="container">
+    <nav class="navbar navbar-default myNavbar">
+        <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                    aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#">Mersin Üniversitesi</a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="#">Home</a></li>
-                <li>@Html.ActionLink("Mesajlar","","Messages")</li>
-                <li style="background: orange;font-weight: bold"><a style="text-transform: uppercase;color:white;" href="#">@Session["name"] [@Session["user_id"]]</a></li>
-                <li style="background: red;font-weight: bold">
-                    @Html.ActionLink("Çıkış Yap","Logout","Home","",new { @style = "color:white"})
-                    
-                </li>
-            </ul>
-               
-            @using (Html.BeginForm("Search", "User", FormMethod.Post, new { @class = "navbar-form navbar-left" }))
-            {
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                </ul>
+                @using (Html.BeginForm("Search", "User", FormMethod.Post, new { @class = "navbar-form navbar-left" })) {
                 <div class="form-group">
-                    <input type="text" class="form-control" placeHolde="Kullanıcı Ara" id="ogrenciNoInput" name="NameSurname">
+                    <div id="imaginary_container">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" class="form-control" placeholder="Ara">
+                            <span class="input-group-addon">
+                                <button type="submit">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default">Ara</button>
-                </div>
-            }
+                }
+                <ul class="nav navbar-nav navbar-right myNavbar-social">
+                    <li role="presentation">
+                        <a href="#">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">
+                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a href="#">
+                            <i class="fa fa-heart" aria-hidden="true"></i>
+                            <span class="badge">3</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="/img/profile.jpg" alt="" class="img-responsive img-circle profileImage">
+                            <strong>Ş. Furkan Bayram</strong>
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <div class="myNavbar-login">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <p class="text-left">
+                                                <strong>Şefik Furkan Bayram</strong>
+                                            </p>
+                                            <p class="text-left small">sefikfurkanbayram@gmail.com</p>
+                                            <p class="text-left">
+                                                <a href="#" class="btn btn-primary btn-block btn-sm">Ayarlar</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="myNavbar-login navbar-login-session">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <p>
+                                                <a href="#" class="btn btn-danger btn-block">Çıkış Yap</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
+    <section class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padl-0 padr-0" id="leftmenu">
+ 
+        <!-- Sidebar -->
+        <div id="leftmenu-container">
+            <ul class="nav myNav">
 
-    @RenderBody()
+                <li>
+                    <a href="#">
+                        <i class="fa fa-home fa-2x" aria-hidden="true"></i> Anasayfa </i>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-user-circle fa-2x" aria-hidden="true"></i> Profil</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-book fa-2x" aria-hidden="true"></i> Dersler</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-calendar fa-2x" aria-hidden="true"></i> Ders Programı</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-pencil fa-2x" aria-hidden="true"></i> Sınav Takvimi</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fa fa-key fa-2x" aria-hidden="true"></i> Ayarlar</a>
+                </li>
 
-    
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+
+        <!-- /#page-content-wrapper -->
+
+    </section>
+
+    <section class="col-xs-10 col-sm-10 col-md-10 col-lg-10 padl-0"> @RenderBody()</section>
+
+
+
     <script src="~/Content/js/bootstrap.min.js"></script>
     <script>
         $(function () {
@@ -51,4 +161,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -1,0 +1,18 @@
+.friends {
+    padding: 0 !important;
+    .panel {
+        border-radius: 0;
+    }
+    &-info {
+        span {
+            color: grey;
+            font-size: 11px;
+        }
+    }
+    &-button {
+        margin-top: $gutter;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+}

@@ -1,0 +1,58 @@
+.content {
+    &-left {
+        &-profile{
+            &-follow{
+                display: flex;
+                justify-content:flex-end;
+                button{
+                    margin-right:$gutter;
+                }
+            }
+        }
+        .about {
+            border-radius: 0;
+            &-content {
+                h5 {
+                    margin-top: 10px;
+                   
+                    font-weight: bold;
+                }
+                span {
+                    color: grey;
+                }
+            }
+        }
+    }
+    &-right {
+        &-menu {
+           
+            background-color: #F2EDE4;
+            ul {
+              
+                padding: 0;
+                li {
+                    &:not(:last-child) {
+                        border-right: 0;
+                    }
+                    text-align:center;
+                    padding:0;
+                    border:1px solid #D9D1C7;
+                    a {
+                        font-family: 'Barlow Semi Condensed', sans-serif;
+                        padding-top: $gutter;
+                        padding-bottom: $gutter;
+                        text-transform: uppercase;
+                       
+                        font-size: 18px;
+                        i {
+                            margin-left: 10px;
+                            font-size: 18px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+

@@ -1,0 +1,41 @@
+.myNavbar {
+    .navbar-brand,
+    .navbar-nav>li>a {
+        color: $navbar-color;
+        line-height: $navbar-height;
+        height: $navbar-height;
+        padding-top: 0;
+    }
+    border:0;
+    border-radius: 0;
+    &-login {
+        width: 305px;
+        padding: 10px;
+        padding-bottom: 0px;
+        .icon-size {
+            font-size: 87px;
+        }
+    }
+    &-login-session {
+        padding: 10px;
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    &-social {
+        li:nth-child(-n+3) {
+            a {
+                span {
+                    color: white;
+                    background-color: red;
+                }
+            }
+        }
+    }
+}
+
+.profileImage {
+    width: 36px;
+    height: 36px;
+    display: inline-block;
+    margin-right: 10px;
+}
