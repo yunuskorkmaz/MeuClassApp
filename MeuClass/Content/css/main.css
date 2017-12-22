@@ -48,20 +48,13 @@ input:focus,
 button:focus {
   outline: none; }
 
-.pad-0 {
-  padding: 0 !important; }
-
 .container {
   max-width: 1140px;
   margin-left: auto;
   margin-right: auto; }
 
 #leftmenu-container ul li {
-  display: block;
   text-transform: uppercase; }
-  #leftmenu-container ul li:hover {
-    background-color: grey !important;
-    color: black; }
   #leftmenu-container ul li a {
     padding: 20px;
     font-family: "Barlow Semi Condensed", sans-serif;
@@ -69,7 +62,7 @@ button:focus {
     color: grey; }
     #leftmenu-container ul li a:hover {
       color: black;
-      background-color: grey !important; }
+      background-color: grey; }
     #leftmenu-container ul li a i {
       margin-right: 15px; }
 
@@ -148,7 +141,7 @@ button:focus {
       .content-right-menu ul li:not(:last-child) {
         border-right: 0; }
       .content-right-menu ul li a {
-        font-family: 'Barlow Semi Condensed', sans-serif;
+        font-family: "Barlow Semi Condensed", sans-serif;
         padding-top: 20px;
         padding-bottom: 20px;
         text-transform: uppercase;
@@ -170,64 +163,46 @@ button:focus {
     justify-content: flex-end;
     align-items: flex-end; }
 
-.portlet {
+.lesson-cover {
   background-color: #C7C6C3; }
-
-/*profile*/
-.profile-sidebar {
-  float: left;
-  width: 300px;
-  margin-right: 20px; }
-
-.profile-content {
-  overflow: hidden; }
-
-.profile-sidebar-portlet {
-  padding: 30px 0 0 !important; }
-
-.profile-userpic img {
-  float: none;
-  margin: 0 auto;
-  width: 50%;
-  height: 50%;
-  width: 50px;
-  -webkit-border-radius: 50% !important;
-  -moz-border-radius: 50% !important;
-  border-radius: 50% !important; }
-
-.profile-usertitle {
-  text-align: center;
-  margin-top: 10px; }
-
-.profile-usertitle-name {
-  color: #5a7391;
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 7px; }
-
-.profile-usertitle-job {
-  text-transform: uppercase;
-  color: #5b9bd1;
-  font-size: 13px;
-  font-weight: 800;
-  margin-bottom: 7px; }
-
-.profile-userbuttons {
-  text-align: center;
-  margin-top: 10px;
-  padding-bottom: 30px; }
-
-.profile-userbuttons .btn {
-  margin-right: 5px; }
-
-.profile-userbuttons .btn:last-child {
-  margin-right: 0; }
-
-.profile-userbuttons button {
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 6px 15px; }
+  .lesson-cover-image {
+    padding-top: 20px; }
+    .lesson-cover-image img {
+      float: none;
+      margin: 0 auto;
+      width: 50%;
+      height: 50%;
+      width: 50px;
+      -webkit-border-radius: 50% !important;
+      -moz-border-radius: 50% !important;
+      border-radius: 50% !important; }
+  .lesson-cover-title {
+    text-align: center;
+    margin-top: 10px; }
+    .lesson-cover-title-code {
+      color: #5a7391;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 7px; }
+    .lesson-cover-title-name {
+      text-transform: uppercase;
+      color: #5b9bd1;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 7px; }
+  .lesson-cover-buttons {
+    text-align: center;
+    margin-top: 10px;
+    padding-bottom: 30px; }
+    .lesson-cover-buttons .btn {
+      margin-right: 5px; }
+      .lesson-cover-buttons .btn:last-child {
+        margin-right: 0; }
+  .lesson-cover button {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px; }
 
 .lesson-top {
   display: flex;

@@ -2,22 +2,16 @@
     &-container {
         ul {
             li {
-                display: block;
                 text-transform: uppercase;
-                
-                &:hover {
-                    background-color: grey !important;
-                    color:black;
-                }
                 a {
                     &:hover {
-                        color:black;
-                        background-color: grey !important;
+                        color:$leftmenu-hover-color;
+                        background-color: $leftmenu-hover-background;
                     }
                     padding: 20px;
                     font-family: $font-barlow;
                     font-size:18px;
-                    color:grey;
+                    color:$leftmenu-color;
                     i {
                         margin-right: 15px;
                     }
