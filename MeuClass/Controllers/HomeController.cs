@@ -1,9 +1,7 @@
 ﻿
 using MeuClass.Business.Repository;
-using MeuClass.Controllers.Messages.Controller;
-using MeuClass.Entity.Models;
+using MeuClass.Data;
 using System;
-using System.Linq;
 using System.Web.Mvc;
 
 namespace MeuClass.Controllers
@@ -69,8 +67,8 @@ namespace MeuClass.Controllers
                 SchoolNumber = form.Get("SchoolNumber"),
                 Password = form.Get("Password"),
                 Birthday = DateTime.Now,
-                CreatedTime = DateTime.Now,
-                UpdatedTime = DateTime.Now
+                RecordDate = DateTime.Now,
+                UpdateDate = DateTime.Now
 
             };
 

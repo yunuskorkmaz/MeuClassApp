@@ -1,5 +1,5 @@
 ﻿using MeuClass.Business.Interface;
-using MeuClass.Data.Context;
+using MeuClass.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace MeuClass.Business.Repository
     {
         public bool Delete(TEntry entry)
         {
-            using (var db = new DataContext())
+            using (var db = new UniversityClassContext())
             {
              var removed = db.Set<TEntry>().Remove(entry);
 
@@ -29,7 +29,7 @@ namespace MeuClass.Business.Repository
 
         public List<TEntry> GetAll()
         {
-            using (var db =  new DataContext())
+            using (var db =  new UniversityClassContext())
             {
                 return db.Set<TEntry>().ToList();
             }
@@ -37,7 +37,7 @@ namespace MeuClass.Business.Repository
 
         public TEntry GetByID(int id)
         {
-            using (var db = new DataContext())
+            using (var db = new UniversityClassContext())
             {
                return db.Set<TEntry>().Find(id);
             }
@@ -45,7 +45,7 @@ namespace MeuClass.Business.Repository
 
         public TEntry Insert(TEntry entry)
         {
-            using (var db = new DataContext())
+            using (var db = new UniversityClassContext())
             {
                var addedEntry = db.Set<TEntry>().Add(entry);
                 db.SaveChanges();
@@ -56,7 +56,7 @@ namespace MeuClass.Business.Repository
 
         public List<TEntry> Search(Expression<Func<TEntry, bool>> where)
         {
-            using (var db =  new DataContext())
+            using (var db =  new UniversityClassContext())
             {
                 return db.Set<TEntry>().Where(where).ToList();
             }
@@ -64,7 +64,7 @@ namespace MeuClass.Business.Repository
 
         public TEntry Update(TEntry entry)
         {
-            using (var db =  new DataContext())
+            using (var db =  new UniversityClassContext())
             {
                 var updatedEntry = db.Set<TEntry>().Attach(entry);
                 db.SaveChanges();
