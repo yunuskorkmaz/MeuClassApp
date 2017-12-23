@@ -1,83 +1,23 @@
-.lesson-cover {
-    background-color: #C7C6C3;
-    &-image{
-        padding-top:20px;
-        img {
-            float: none;
-            margin: 0 auto;
-            width: 50%;
-            height: 50%;
-            width: 50px;
-            -webkit-border-radius: 50%!important;
-            -moz-border-radius: 50%!important;
-            border-radius: 50%!important
-        }
+.lessonbox {
+    h5{
+        font-weight: bold;
+        margin-top:5px;
     }
-    &-title {
-        text-align: center;
-        margin-top: 10px;
-        &-code {
-            color: #5a7391;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 7px
-        }
-        &-name{
-            text-transform: uppercase;
-            color: #5b9bd1;
-            font-size: 13px;
-            font-weight: 800;
-            margin-bottom: 7px
-        }
-    }
-    &-buttons{
-        text-align: center;
-        margin-top: 10px;
-        padding-bottom: 30px;
-        .btn{
-            margin-right: 5px;
-            &:last-child{
-                margin-right:0;
-            }
-        }
-    }
-    button{
-        text-transform: uppercase;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 6px 15px
-    }
-}
-.lesson-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     &-icon {
-        padding-left: 10px;
-        padding-right: 10px;
         display: flex;
+        align-items: center;
+        justify-content: flex-end;
     }
-    &-image {
-        img {
-            width: 40px;
-        }
-    }
-    &-status {
-        padding-right: 15px;
-        span {
-            color: green;
-            font-weight: bold;
-        }
-    }
+.panel-body{
+    height:100px;
 }
 
-.lesson-content {
-    &-date {
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-    &-lname {
-        margin-top: 10px;
-        margin-bottom: 10px;
+    .panel-footer{
+        display: flex;
+        justify-content: flex-end;
+        i{
+            margin-left:5px;
+            margin-right:5px;
+        }
     }
 }

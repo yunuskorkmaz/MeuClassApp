@@ -228,6 +228,25 @@ button:focus {
   margin-top: 10px;
   margin-bottom: 10px; }
 
+.lessonbox h5 {
+  font-weight: bold;
+  margin-top: 5px; }
+
+.lessonbox-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; }
+
+.lessonbox .panel-body {
+  height: 100px; }
+
+.lessonbox .panel-footer {
+  display: flex;
+  justify-content: flex-end; }
+  .lessonbox .panel-footer i {
+    margin-left: 5px;
+    margin-right: 5px; }
+
 /*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
