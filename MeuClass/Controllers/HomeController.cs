@@ -11,7 +11,7 @@ namespace MeuClass.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if(Session["user_id"] == null)
+            if (Session["user_id"] == null)
             {
                 return RedirectToAction("Login", "Home");
             }
@@ -19,14 +19,14 @@ namespace MeuClass.Controllers
             {
                 ViewBag.Title = "Anasayfa";
                 return View();
-            }  
+            }
         }
 
 
 
         public ActionResult Login()
         {
-            if(TempData["error"] != null)
+            if (TempData["error"] != null)
             {
                 ViewBag.Error = TempData["error"].ToString();
 
@@ -36,24 +36,22 @@ namespace MeuClass.Controllers
 
         public ActionResult DoLogin(FormCollection form)
         {
-            
 
+            var result = UserRepository.Instance.CheckAuth(form.Get("SchoolNumber"), form.Get("Password"));
 
-            var check = UserRepository.Instance.CheckAuth(form.Get("SchoolNumber"),form.Get("Password"));
-
-            if(check == null)
+            if (result.Success == false)
             {
-                TempData["error"] = "Giriş Yapılamadı";
+                TempData["error"] = result.Message;
                 return RedirectToAction("Login", "Home");
             }
             else
             {
-                Session["user_id"] = check.UserID;
-                Session["name"] = check.Name;
-                Session["surname"] = check.Surname;
+                Session["user_id"] = result.Data.UserID;
+                Session["name"] = result.Data.Name;
+                Session["surname"] = result.Data.Surname;
                 return RedirectToAction("Index", "Home");
             }
-           
+
         }
 
         public ActionResult DoRegister(FormCollection form)
@@ -69,22 +67,15 @@ namespace MeuClass.Controllers
                 Birthday = DateTime.Now,
                 RecordDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
-                UserTypeID = 1             
-               
-
+                UserTypeID = 1
             };
 
+            var insert = UserRepository.Instance.Add(user);
 
-            try
-            {
-                UserRepository.Instance.Add(user);
-            }
-            catch (Exception ex)
-            {
-                TempData["error"] = ex.ToString() + "hata";
-            }
+            if (insert.Success == false)
+                TempData["error"] = insert.Message;
 
-            return RedirectToAction("Index", "Home");            
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Logout()
@@ -93,6 +84,6 @@ namespace MeuClass.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-       
+
     }
 }

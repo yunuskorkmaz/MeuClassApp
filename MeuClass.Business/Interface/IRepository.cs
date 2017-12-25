@@ -1,26 +1,24 @@
-﻿using System;
+﻿using MeuClass.Business.ResultData;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MeuClass.Business.Interface
 {
     interface IRepository<TEntry>
     {
 
-         TEntry Insert(TEntry entry);
+        ResultData<TEntry> Insert(TEntry entry);
 
-        bool Delete(TEntry entry);
+        ResultData<bool> Delete(TEntry entry);
 
-        List<TEntry> Search(Expression<Func<TEntry, bool>> predicate);
+        ResultData<List<TEntry>> Search(Expression<Func<TEntry, bool>> predicate);
 
-        List<TEntry> GetAll();
+        ResultData<List<TEntry>> GetAll();
 
-        TEntry GetByID(int id);
+        ResultData<TEntry> GetByID(int id);
 
-        TEntry Update(TEntry entry);
+        ResultData<TEntry> Update(TEntry entry);
 
 
     }
