@@ -20,7 +20,7 @@ namespace MeuClass.Data
         public Nullable<System.DateTime> RecordDate { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
-        public virtual User UsersFollower { get; set; }
-        public virtual User UsersFollowed { get; set; }
+        public virtual User UsersAreFollower { get; set; }
+        public virtual User UsersAreFollowed { get; set; }
     }
 }

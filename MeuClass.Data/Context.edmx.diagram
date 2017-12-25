@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1d7e3c95b9f647dca3521f309c414493" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="UniversityClassAppModel.Block" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.Department" Width="1.5" PointX="0.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.Follow" Width="1.5" PointX="5.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.Lesson" Width="1.5" PointX="3" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.LessonAccess" Width="1.5" PointX="5.25" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.LessonComment" Width="1.875" PointX="7.5" PointY="18.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.LessonCommentLike" Width="1.75" PointX="9.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.LessonContent" Width="1.75" PointX="10.25" PointY="18.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.LessonContentLike" Width="1.5" PointX="15.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.Report" Width="1.5" PointX="12.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.ReportType" Width="1.5" PointX="10.5" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.User" Width="1.875" PointX="2.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.UserFile" Width="1.5" PointX="5.25" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.UserType" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreBlocked_UsersAreBlocker" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreBlocker_UsersAreBlocked" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_Users_Department" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreFollowed_UsersAreFollower" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreFollower_UsersAreFollowed" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonAccesses_Lesson" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonContents_Lesson" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonAccesses_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonCommentLikes_LessonComment" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonComments_LessonContent" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonComments_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonComments_UserFile" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_Reports_LessonComment" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonCommentLikes_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonContentLikes_LessonContent" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonContents_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonContents_UserFile" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_Reports_LessonContent" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_LessonContentLikes_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_Reports_ReportType" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreReported_UsersAreReporter" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreReporter_UsersAreReported" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_UserFiles_User" ManuallyRouted="false" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_Users_UserType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="UniversityClassModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="UniversityClassAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Block">
           <Key>
             <PropertyRef Name="BlockID" />
@@ -46,8 +46,8 @@
             <PropertyRef Name="LessonAccessID" />
           </Key>
           <Property Name="LessonAccessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LessonID" Type="int" />
-          <Property Name="UserID" Type="int" />
+          <Property Name="LessonID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="LessonComment">
           <Key>
@@ -137,7 +137,7 @@
           <Property Name="Birthday" Type="datetime" />
           <Property Name="SchoolNumber" Type="varchar" MaxLength="50" />
           <Property Name="UserTypeID" Type="int" />
-          <Property Name="ProfilPicID" Type="nchar" MaxLength="10" />
+          <Property Name="ProfilPicID" Type="int" />
           <Property Name="DepartmentID" Type="int" />
           <Property Name="RecordDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
@@ -162,80 +162,20 @@
           <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserTypeName" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_Block_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Block" Type="Self.Block" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Block">
-              <PropertyRef Name="BlockerUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Block_User1">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Block" Type="Self.Block" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Block">
-              <PropertyRef Name="BlockedUser" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_FileUpload_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="UserFile" Type="Self.UserFile" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="UserFile">
-              <PropertyRef Name="FileAdderUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Follow_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Follow">
-              <PropertyRef Name="FollowerID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Follow_User1">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Follow">
-              <PropertyRef Name="FollowedID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LessonAccess_Lesson">
-          <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
-          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="*" />
+        <Association Name="FK_LessonAccesses_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Lesson">
               <PropertyRef Name="LessonID" />
             </Principal>
             <Dependent Role="LessonAccess">
-              <PropertyRef Name="LessonID" />
+              <PropertyRef Name="LessonAccessID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonAccess_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+        <Association Name="FK_LessonAccesses_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -246,7 +186,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonComment_LessonContent">
+        <Association Name="FK_LessonCommentLikes_LessonComment">
+          <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="0..1" />
+          <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LessonComment">
+              <PropertyRef Name="LessonCommentID" />
+            </Principal>
+            <Dependent Role="LessonCommentLike">
+              <PropertyRef Name="LessonCommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonCommentLikes_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="LessonCommentLike">
+              <PropertyRef Name="LikedUserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonComments_LessonContent">
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -258,7 +222,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonComment_User">
+        <Association Name="FK_LessonComments_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -266,11 +230,11 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="LessonComment">
-              <PropertyRef Name="LessonContentID" />
+              <PropertyRef Name="AddedUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonComment_UserFile">
+        <Association Name="FK_LessonComments_UserFile">
           <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -282,43 +246,31 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonCommentLike_LessonComment">
-          <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="0..1" />
-          <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
+        <Association Name="FK_LessonContentLikes_LessonContent">
+          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
+          <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LessonComment">
-              <PropertyRef Name="LessonCommentID" />
+            <Principal Role="LessonContent">
+              <PropertyRef Name="LessonContentID" />
             </Principal>
-            <Dependent Role="LessonCommentLike">
-              <PropertyRef Name="LessonCommentID" />
+            <Dependent Role="LessonContentLike">
+              <PropertyRef Name="LessonContentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonCommentLike_User">
+        <Association Name="FK_LessonContentLikes_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
+          <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="LessonCommentLike">
+            <Dependent Role="LessonContentLike">
               <PropertyRef Name="LikedUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContent_FileUpload">
-          <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
-          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserFile">
-              <PropertyRef Name="FileID" />
-            </Principal>
-            <Dependent Role="LessonContent">
-              <PropertyRef Name="LessonContentFileID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LessonContent_Lesson">
+        <Association Name="FK_LessonContents_Lesson">
           <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -330,7 +282,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContent_User">
+        <Association Name="FK_LessonContents_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -342,31 +294,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContentLike_LessonContent">
-          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
-          <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
+        <Association Name="FK_LessonContents_UserFile">
+          <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
+          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LessonContent">
-              <PropertyRef Name="LessonContentID" />
+            <Principal Role="UserFile">
+              <PropertyRef Name="FileID" />
             </Principal>
-            <Dependent Role="LessonContentLike">
-              <PropertyRef Name="LessonContentID" />
+            <Dependent Role="LessonContent">
+              <PropertyRef Name="LessonContentFileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContentLike_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="LessonContentLike">
-              <PropertyRef Name="LikedUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_LessonComment">
+        <Association Name="FK_Reports_LessonComment">
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -378,7 +318,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_LessonContent">
+        <Association Name="FK_Reports_LessonContent">
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -390,7 +330,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_ReportType">
+        <Association Name="FK_Reports_ReportType">
           <End Role="ReportType" Type="Self.ReportType" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -402,31 +342,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_User">
+        <Association Name="FK_UserFiles_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <End Role="UserFile" Type="Self.UserFile" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="UserID" />
             </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="ReporterID" />
+            <Dependent Role="UserFile">
+              <PropertyRef Name="FileAdderUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_User1">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
-          <End Role="Report" Type="Self.Report" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="UserID" />
-            </Principal>
-            <Dependent Role="Report">
-              <PropertyRef Name="ReportedUserID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_Department">
+        <Association Name="FK_Users_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -438,19 +366,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_FileUpload">
-          <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserFile">
-              <PropertyRef Name="FileID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_UserType">
+        <Association Name="FK_Users_UserType">
           <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -462,7 +378,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UniversityClassModelStoreContainer">
+        <Association Name="FK_UsersAreBlocked_UsersAreBlocker">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Block" Type="Self.Block" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Block">
+              <PropertyRef Name="BlockerUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAreBlocker_UsersAreBlocked">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Block" Type="Self.Block" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Block">
+              <PropertyRef Name="BlockedUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAreFollowed_UsersAreFollower">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="FollowerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAreFollower_UsersAreFollowed">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Follow">
+              <PropertyRef Name="FollowedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAreReported_UsersAreReporter">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReporterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UsersAreReporter_UsersAreReported">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="ReportTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UniversityClassAppModelStoreContainer">
           <EntitySet Name="Block" EntityType="Self.Block" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Follow" EntityType="Self.Follow" Schema="dbo" store:Type="Tables" />
@@ -478,112 +466,108 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFile" EntityType="Self.UserFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Block_User" Association="Self.FK_Block_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Block" EntitySet="Block" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Block_User1" Association="Self.FK_Block_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Block" EntitySet="Block" />
-          </AssociationSet>
-          <AssociationSet Name="FK_FileUpload_User" Association="Self.FK_FileUpload_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="UserFile" EntitySet="UserFile" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Follow_User" Association="Self.FK_Follow_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Follow" EntitySet="Follow" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Follow_User1" Association="Self.FK_Follow_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Follow" EntitySet="Follow" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonAccess_Lesson" Association="Self.FK_LessonAccess_Lesson">
+          <AssociationSet Name="FK_LessonAccesses_Lesson" Association="Self.FK_LessonAccesses_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonAccess_User" Association="Self.FK_LessonAccess_User">
+          <AssociationSet Name="FK_LessonAccesses_User" Association="Self.FK_LessonAccesses_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonComment_LessonContent" Association="Self.FK_LessonComment_LessonContent">
-            <End Role="LessonContent" EntitySet="LessonContent" />
-            <End Role="LessonComment" EntitySet="LessonComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonComment_User" Association="Self.FK_LessonComment_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="LessonComment" EntitySet="LessonComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonComment_UserFile" Association="Self.FK_LessonComment_UserFile">
-            <End Role="UserFile" EntitySet="UserFile" />
-            <End Role="LessonComment" EntitySet="LessonComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonCommentLike_LessonComment" Association="Self.FK_LessonCommentLike_LessonComment">
+          <AssociationSet Name="FK_LessonCommentLikes_LessonComment" Association="Self.FK_LessonCommentLikes_LessonComment">
             <End Role="LessonComment" EntitySet="LessonComment" />
             <End Role="LessonCommentLike" EntitySet="LessonCommentLike" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonCommentLike_User" Association="Self.FK_LessonCommentLike_User">
+          <AssociationSet Name="FK_LessonCommentLikes_User" Association="Self.FK_LessonCommentLikes_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonCommentLike" EntitySet="LessonCommentLike" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContent_FileUpload" Association="Self.FK_LessonContent_FileUpload">
-            <End Role="UserFile" EntitySet="UserFile" />
+          <AssociationSet Name="FK_LessonComments_LessonContent" Association="Self.FK_LessonComments_LessonContent">
             <End Role="LessonContent" EntitySet="LessonContent" />
+            <End Role="LessonComment" EntitySet="LessonComment" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContent_Lesson" Association="Self.FK_LessonContent_Lesson">
+          <AssociationSet Name="FK_LessonComments_User" Association="Self.FK_LessonComments_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LessonComment" EntitySet="LessonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonComments_UserFile" Association="Self.FK_LessonComments_UserFile">
+            <End Role="UserFile" EntitySet="UserFile" />
+            <End Role="LessonComment" EntitySet="LessonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonContentLikes_LessonContent" Association="Self.FK_LessonContentLikes_LessonContent">
+            <End Role="LessonContent" EntitySet="LessonContent" />
+            <End Role="LessonContentLike" EntitySet="LessonContentLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonContentLikes_User" Association="Self.FK_LessonContentLikes_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LessonContentLike" EntitySet="LessonContentLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonContents_Lesson" Association="Self.FK_LessonContents_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonContent" EntitySet="LessonContent" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContent_User" Association="Self.FK_LessonContent_User">
+          <AssociationSet Name="FK_LessonContents_User" Association="Self.FK_LessonContents_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonContent" EntitySet="LessonContent" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContentLike_LessonContent" Association="Self.FK_LessonContentLike_LessonContent">
+          <AssociationSet Name="FK_LessonContents_UserFile" Association="Self.FK_LessonContents_UserFile">
+            <End Role="UserFile" EntitySet="UserFile" />
             <End Role="LessonContent" EntitySet="LessonContent" />
-            <End Role="LessonContentLike" EntitySet="LessonContentLike" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContentLike_User" Association="Self.FK_LessonContentLike_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="LessonContentLike" EntitySet="LessonContentLike" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_LessonComment" Association="Self.FK_Report_LessonComment">
+          <AssociationSet Name="FK_Reports_LessonComment" Association="Self.FK_Reports_LessonComment">
             <End Role="LessonComment" EntitySet="LessonComment" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_LessonContent" Association="Self.FK_Report_LessonContent">
+          <AssociationSet Name="FK_Reports_LessonContent" Association="Self.FK_Reports_LessonContent">
             <End Role="LessonContent" EntitySet="LessonContent" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_ReportType" Association="Self.FK_Report_ReportType">
+          <AssociationSet Name="FK_Reports_ReportType" Association="Self.FK_Reports_ReportType">
             <End Role="ReportType" EntitySet="ReportType" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_User" Association="Self.FK_Report_User">
+          <AssociationSet Name="FK_UserFiles_User" Association="Self.FK_UserFiles_User">
             <End Role="User" EntitySet="User" />
-            <End Role="Report" EntitySet="Report" />
+            <End Role="UserFile" EntitySet="UserFile" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_User1" Association="Self.FK_Report_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Report" EntitySet="Report" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Department" Association="Self.FK_User_Department">
+          <AssociationSet Name="FK_Users_Department" Association="Self.FK_Users_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_FileUpload" Association="Self.FK_User_FileUpload">
-            <End Role="UserFile" EntitySet="UserFile" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+          <AssociationSet Name="FK_Users_UserType" Association="Self.FK_Users_UserType">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAreBlocked_UsersAreBlocker" Association="Self.FK_UsersAreBlocked_UsersAreBlocker">
+            <End Role="User" EntitySet="User" />
+            <End Role="Block" EntitySet="Block" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAreBlocker_UsersAreBlocked" Association="Self.FK_UsersAreBlocker_UsersAreBlocked">
+            <End Role="User" EntitySet="User" />
+            <End Role="Block" EntitySet="Block" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAreFollowed_UsersAreFollower" Association="Self.FK_UsersAreFollowed_UsersAreFollower">
+            <End Role="User" EntitySet="User" />
+            <End Role="Follow" EntitySet="Follow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAreFollower_UsersAreFollowed" Association="Self.FK_UsersAreFollower_UsersAreFollowed">
+            <End Role="User" EntitySet="User" />
+            <End Role="Follow" EntitySet="Follow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAreReported_UsersAreReporter" Association="Self.FK_UsersAreReported_UsersAreReporter">
+            <End Role="User" EntitySet="User" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UsersAreReporter_UsersAreReported" Association="Self.FK_UsersAreReporter_UsersAreReported">
+            <End Role="User" EntitySet="User" />
+            <End Role="Report" EntitySet="Report" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="UniversityClassModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="UniversityClassAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Block">
           <Key>
             <PropertyRef Name="BlockID" />
@@ -592,8 +576,8 @@
           <Property Name="BlockerUser" Type="Int32" />
           <Property Name="BlockedUser" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="UsersBlocker" Relationship="Self.FK_Block_User" FromRole="Block" ToRole="User" />
-          <NavigationProperty Name="UsersBlocked" Relationship="Self.FK_Block_User1" FromRole="Block" ToRole="User" />
+          <NavigationProperty Name="UsersAreBlocker" Relationship="Self.FK_UsersAreBlocked_UsersAreBlocker" FromRole="Block" ToRole="User" />
+          <NavigationProperty Name="UsersAreBlocked" Relationship="Self.FK_UsersAreBlocker_UsersAreBlocked" FromRole="Block" ToRole="User" />
         </EntityType>
         <EntityType Name="Department">
           <Key>
@@ -602,7 +586,7 @@
           <Property Name="DepartmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DepartmentName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DepartmentIsActive" Type="Boolean" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_Department" FromRole="Department" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_Department" FromRole="Department" ToRole="User" />
         </EntityType>
         <EntityType Name="Follow">
           <Key>
@@ -613,8 +597,8 @@
           <Property Name="FollowedID" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="UsersFollower" Relationship="Self.FK_Follow_User" FromRole="Follow" ToRole="User" />
-          <NavigationProperty Name="UsersFollowed" Relationship="Self.FK_Follow_User1" FromRole="Follow" ToRole="User" />
+          <NavigationProperty Name="UsersAreFollower" Relationship="Self.FK_UsersAreFollowed_UsersAreFollower" FromRole="Follow" ToRole="User" />
+          <NavigationProperty Name="UsersAreFollowed" Relationship="Self.FK_UsersAreFollower_UsersAreFollowed" FromRole="Follow" ToRole="User" />
         </EntityType>
         <EntityType Name="Lesson">
           <Key>
@@ -624,18 +608,18 @@
           <Property Name="LessonCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonAccesses" Relationship="Self.FK_LessonAccess_Lesson" FromRole="Lesson" ToRole="LessonAccess" />
-          <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContent_Lesson" FromRole="Lesson" ToRole="LessonContent" />
+          <NavigationProperty Name="LessonAccesses" Relationship="Self.FK_LessonAccesses_Lesson" FromRole="Lesson" ToRole="LessonAccess" />
+          <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContents_Lesson" FromRole="Lesson" ToRole="LessonContent" />
         </EntityType>
         <EntityType Name="LessonAccess">
           <Key>
             <PropertyRef Name="LessonAccessID" />
           </Key>
           <Property Name="LessonAccessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LessonID" Type="Int32" />
-          <Property Name="UserID" Type="Int32" />
-          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonAccess_Lesson" FromRole="LessonAccess" ToRole="Lesson" />
-          <NavigationProperty Name="User" Relationship="Self.FK_LessonAccess_User" FromRole="LessonAccess" ToRole="User" />
+          <Property Name="LessonID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonAccesses_Lesson" FromRole="LessonAccess" ToRole="Lesson" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LessonAccesses_User" FromRole="LessonAccess" ToRole="User" />
         </EntityType>
         <EntityType Name="LessonComment">
           <Key>
@@ -648,11 +632,11 @@
           <Property Name="LessonCommentFileID" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonContent" Relationship="Self.FK_LessonComment_LessonContent" FromRole="LessonComment" ToRole="LessonContent" />
-          <NavigationProperty Name="User" Relationship="Self.FK_LessonComment_User" FromRole="LessonComment" ToRole="User" />
-          <NavigationProperty Name="UserFile" Relationship="Self.FK_LessonComment_UserFile" FromRole="LessonComment" ToRole="UserFile" />
-          <NavigationProperty Name="LessonCommentLikes" Relationship="Self.FK_LessonCommentLike_LessonComment" FromRole="LessonComment" ToRole="LessonCommentLike" />
-          <NavigationProperty Name="Reports" Relationship="Self.FK_Report_LessonComment" FromRole="LessonComment" ToRole="Report" />
+          <NavigationProperty Name="LessonCommentLikes" Relationship="Self.FK_LessonCommentLikes_LessonComment" FromRole="LessonComment" ToRole="LessonCommentLike" />
+          <NavigationProperty Name="LessonContent" Relationship="Self.FK_LessonComments_LessonContent" FromRole="LessonComment" ToRole="LessonContent" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LessonComments_User" FromRole="LessonComment" ToRole="User" />
+          <NavigationProperty Name="UserFile" Relationship="Self.FK_LessonComments_UserFile" FromRole="LessonComment" ToRole="UserFile" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_LessonComment" FromRole="LessonComment" ToRole="Report" />
         </EntityType>
         <EntityType Name="LessonCommentLike">
           <Key>
@@ -662,8 +646,8 @@
           <Property Name="LessonCommentID" Type="Int32" />
           <Property Name="LikedUserID" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonComment" Relationship="Self.FK_LessonCommentLike_LessonComment" FromRole="LessonCommentLike" ToRole="LessonComment" />
-          <NavigationProperty Name="User" Relationship="Self.FK_LessonCommentLike_User" FromRole="LessonCommentLike" ToRole="User" />
+          <NavigationProperty Name="LessonComment" Relationship="Self.FK_LessonCommentLikes_LessonComment" FromRole="LessonCommentLike" ToRole="LessonComment" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LessonCommentLikes_User" FromRole="LessonCommentLike" ToRole="User" />
         </EntityType>
         <EntityType Name="LessonContent">
           <Key>
@@ -677,12 +661,12 @@
           <Property Name="LessonID" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonContent_Lesson" FromRole="LessonContent" ToRole="Lesson" />
-          <NavigationProperty Name="LessonComments" Relationship="Self.FK_LessonComment_LessonContent" FromRole="LessonContent" ToRole="LessonComment" />
-          <NavigationProperty Name="UserFile" Relationship="Self.FK_LessonContent_FileUpload" FromRole="LessonContent" ToRole="UserFile" />
-          <NavigationProperty Name="User" Relationship="Self.FK_LessonContent_User" FromRole="LessonContent" ToRole="User" />
-          <NavigationProperty Name="LessonContentLikes" Relationship="Self.FK_LessonContentLike_LessonContent" FromRole="LessonContent" ToRole="LessonContentLike" />
-          <NavigationProperty Name="Reports" Relationship="Self.FK_Report_LessonContent" FromRole="LessonContent" ToRole="Report" />
+          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonContents_Lesson" FromRole="LessonContent" ToRole="Lesson" />
+          <NavigationProperty Name="LessonComments" Relationship="Self.FK_LessonComments_LessonContent" FromRole="LessonContent" ToRole="LessonComment" />
+          <NavigationProperty Name="LessonContentLikes" Relationship="Self.FK_LessonContentLikes_LessonContent" FromRole="LessonContent" ToRole="LessonContentLike" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LessonContents_User" FromRole="LessonContent" ToRole="User" />
+          <NavigationProperty Name="UserFile" Relationship="Self.FK_LessonContents_UserFile" FromRole="LessonContent" ToRole="UserFile" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_LessonContent" FromRole="LessonContent" ToRole="Report" />
         </EntityType>
         <EntityType Name="LessonContentLike">
           <Key>
@@ -692,8 +676,8 @@
           <Property Name="LessonContentID" Type="Int32" />
           <Property Name="LikedUserID" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonContent" Relationship="Self.FK_LessonContentLike_LessonContent" FromRole="LessonContentLike" ToRole="LessonContent" />
-          <NavigationProperty Name="User" Relationship="Self.FK_LessonContentLike_User" FromRole="LessonContentLike" ToRole="User" />
+          <NavigationProperty Name="LessonContent" Relationship="Self.FK_LessonContentLikes_LessonContent" FromRole="LessonContentLike" ToRole="LessonContent" />
+          <NavigationProperty Name="User" Relationship="Self.FK_LessonContentLikes_User" FromRole="LessonContentLike" ToRole="User" />
         </EntityType>
         <EntityType Name="Report">
           <Key>
@@ -708,11 +692,11 @@
           <Property Name="ReportTypeID" Type="Int32" />
           <Property Name="IsCheckedReport" Type="Boolean" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonComment" Relationship="Self.FK_Report_LessonComment" FromRole="Report" ToRole="LessonComment" />
-          <NavigationProperty Name="LessonContent" Relationship="Self.FK_Report_LessonContent" FromRole="Report" ToRole="LessonContent" />
-          <NavigationProperty Name="ReportType" Relationship="Self.FK_Report_ReportType" FromRole="Report" ToRole="ReportType" />
-          <NavigationProperty Name="UsersReporter" Relationship="Self.FK_Report_User" FromRole="Report" ToRole="User" />
-          <NavigationProperty Name="UsersReported" Relationship="Self.FK_Report_User1" FromRole="Report" ToRole="User" />
+          <NavigationProperty Name="LessonComment" Relationship="Self.FK_Reports_LessonComment" FromRole="Report" ToRole="LessonComment" />
+          <NavigationProperty Name="LessonContent" Relationship="Self.FK_Reports_LessonContent" FromRole="Report" ToRole="LessonContent" />
+          <NavigationProperty Name="ReportType" Relationship="Self.FK_Reports_ReportType" FromRole="Report" ToRole="ReportType" />
+          <NavigationProperty Name="UsersAreReporter" Relationship="Self.FK_UsersAreReported_UsersAreReporter" FromRole="Report" ToRole="User" />
+          <NavigationProperty Name="UsersAreReported" Relationship="Self.FK_UsersAreReporter_UsersAreReported" FromRole="Report" ToRole="User" />
         </EntityType>
         <EntityType Name="ReportType">
           <Key>
@@ -720,7 +704,7 @@
           </Key>
           <Property Name="ReportTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ReportTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Reports" Relationship="Self.FK_Report_ReportType" FromRole="ReportType" ToRole="Report" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK_Reports_ReportType" FromRole="ReportType" ToRole="Report" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -746,24 +730,24 @@
           <Property Name="Birthday" Type="DateTime" Precision="3" />
           <Property Name="SchoolNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="UserTypeID" Type="Int32" />
-          <Property Name="ProfilPicID" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ProfilPicID" Type="Int32" />
           <Property Name="DepartmentID" Type="Int32" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="UsersBlockeds" Relationship="Self.FK_Block_User" FromRole="User" ToRole="Block" />
-          <NavigationProperty Name="UsersBlockers" Relationship="Self.FK_Block_User1" FromRole="User" ToRole="Block" />
-          <NavigationProperty Name="Department" Relationship="Self.FK_User_Department" FromRole="User" ToRole="Department" />
-          <NavigationProperty Name="UserFolloweds" Relationship="Self.FK_Follow_User" FromRole="User" ToRole="Follow" />
-          <NavigationProperty Name="UserFollowers" Relationship="Self.FK_Follow_User1" FromRole="User" ToRole="Follow" />
-          <NavigationProperty Name="LessonAccesses" Relationship="Self.FK_LessonAccess_User" FromRole="User" ToRole="LessonAccess" />
-          <NavigationProperty Name="LessonComments" Relationship="Self.FK_LessonComment_User" FromRole="User" ToRole="LessonComment" />
-          <NavigationProperty Name="LessonCommentLikes" Relationship="Self.FK_LessonCommentLike_User" FromRole="User" ToRole="LessonCommentLike" />
-          <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContent_User" FromRole="User" ToRole="LessonContent" />
-          <NavigationProperty Name="LessonContentLikes" Relationship="Self.FK_LessonContentLike_User" FromRole="User" ToRole="LessonContentLike" />
-          <NavigationProperty Name="UsersReporteds" Relationship="Self.FK_Report_User" FromRole="User" ToRole="Report" />
-          <NavigationProperty Name="UserReporters" Relationship="Self.FK_Report_User1" FromRole="User" ToRole="Report" />
-          <NavigationProperty Name="UserFiles" Relationship="Self.FK_FileUpload_User" FromRole="User" ToRole="UserFile" />
-          <NavigationProperty Name="UserType" Relationship="Self.FK_User_UserType" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="UsersAreBlocked" Relationship="Self.FK_UsersAreBlocked_UsersAreBlocker" FromRole="User" ToRole="Block" />
+          <NavigationProperty Name="UsersAreBlocker" Relationship="Self.FK_UsersAreBlocker_UsersAreBlocked" FromRole="User" ToRole="Block" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_Users_Department" FromRole="User" ToRole="Department" />
+          <NavigationProperty Name="UsersAreFollowed" Relationship="Self.FK_UsersAreFollowed_UsersAreFollower" FromRole="User" ToRole="Follow" />
+          <NavigationProperty Name="UsersAreFollower" Relationship="Self.FK_UsersAreFollower_UsersAreFollowed" FromRole="User" ToRole="Follow" />
+          <NavigationProperty Name="LessonAccesses" Relationship="Self.FK_LessonAccesses_User" FromRole="User" ToRole="LessonAccess" />
+          <NavigationProperty Name="LessonCommens" Relationship="Self.FK_LessonComments_User" FromRole="User" ToRole="LessonComment" />
+          <NavigationProperty Name="LessonCommentLikes" Relationship="Self.FK_LessonCommentLikes_User" FromRole="User" ToRole="LessonCommentLike" />
+          <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContents_User" FromRole="User" ToRole="LessonContent" />
+          <NavigationProperty Name="LessonContentLikes" Relationship="Self.FK_LessonContentLikes_User" FromRole="User" ToRole="LessonContentLike" />
+          <NavigationProperty Name="UsersAreReported" Relationship="Self.FK_UsersAreReported_UsersAreReporter" FromRole="User" ToRole="Report" />
+          <NavigationProperty Name="UsersAreReporter" Relationship="Self.FK_UsersAreReporter_UsersAreReported" FromRole="User" ToRole="Report" />
+          <NavigationProperty Name="UserFiles" Relationship="Self.FK_UserFiles_User" FromRole="User" ToRole="UserFile" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_Users_UserType" FromRole="User" ToRole="UserType" />
         </EntityType>
         <EntityType Name="UserFile">
           <Key>
@@ -777,9 +761,9 @@
           <Property Name="FileInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonComments" Relationship="Self.FK_LessonComment_UserFile" FromRole="UserFile" ToRole="LessonComment" />
-          <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContent_FileUpload" FromRole="UserFile" ToRole="LessonContent" />
-          <NavigationProperty Name="User" Relationship="Self.FK_FileUpload_User" FromRole="UserFile" ToRole="User" />
+          <NavigationProperty Name="LessonComments" Relationship="Self.FK_LessonComments_UserFile" FromRole="UserFile" ToRole="LessonComment" />
+          <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContents_UserFile" FromRole="UserFile" ToRole="LessonContent" />
+          <NavigationProperty Name="User" Relationship="Self.FK_UserFiles_User" FromRole="UserFile" ToRole="User" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -787,9 +771,9 @@
           </Key>
           <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserType" FromRole="UserType" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_Users_UserType" FromRole="UserType" ToRole="User" />
         </EntityType>
-        <Association Name="FK_Block_User">
+        <Association Name="FK_UsersAreBlocked_UsersAreBlocker">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Block" Type="Self.Block" Multiplicity="*" />
           <ReferentialConstraint>
@@ -801,7 +785,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Block_User1">
+        <Association Name="FK_UsersAreBlocker_UsersAreBlocked">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Block" Type="Self.Block" Multiplicity="*" />
           <ReferentialConstraint>
@@ -813,7 +797,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Department">
+        <Association Name="FK_Users_Department">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -825,7 +809,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Follow_User">
+        <Association Name="FK_UsersAreFollowed_UsersAreFollower">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -837,7 +821,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Follow_User1">
+        <Association Name="FK_UsersAreFollower_UsersAreFollowed">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Follow" Type="Self.Follow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -849,19 +833,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonAccess_Lesson">
-          <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
-          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="*" />
+        <Association Name="FK_LessonAccesses_Lesson">
+          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
+          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Lesson">
               <PropertyRef Name="LessonID" />
             </Principal>
             <Dependent Role="LessonAccess">
-              <PropertyRef Name="LessonID" />
+              <PropertyRef Name="LessonAccessID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContent_Lesson">
+        <Association Name="FK_LessonContents_Lesson">
           <End Role="Lesson" Type="Self.Lesson" Multiplicity="0..1" />
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -873,8 +857,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonAccess_User">
-          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+        <Association Name="FK_LessonAccesses_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
@@ -885,7 +869,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonComment_LessonContent">
+        <Association Name="FK_LessonCommentLikes_LessonComment">
+          <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="0..1" />
+          <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LessonComment">
+              <PropertyRef Name="LessonCommentID" />
+            </Principal>
+            <Dependent Role="LessonCommentLike">
+              <PropertyRef Name="LessonCommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LessonComments_LessonContent">
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -897,7 +893,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonComment_User">
+        <Association Name="FK_LessonComments_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -905,11 +901,11 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="LessonComment">
-              <PropertyRef Name="LessonContentID" />
+              <PropertyRef Name="AddedUserID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonComment_UserFile">
+        <Association Name="FK_LessonComments_UserFile">
           <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="*" />
           <ReferentialConstraint>
@@ -921,19 +917,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonCommentLike_LessonComment">
-          <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="0..1" />
-          <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="LessonComment">
-              <PropertyRef Name="LessonCommentID" />
-            </Principal>
-            <Dependent Role="LessonCommentLike">
-              <PropertyRef Name="LessonCommentID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Report_LessonComment">
+        <Association Name="FK_Reports_LessonComment">
           <End Role="LessonComment" Type="Self.LessonComment" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -945,7 +929,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonCommentLike_User">
+        <Association Name="FK_LessonCommentLikes_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LessonCommentLike" Type="Self.LessonCommentLike" Multiplicity="*" />
           <ReferentialConstraint>
@@ -957,19 +941,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContent_FileUpload">
-          <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
-          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
+        <Association Name="FK_LessonContentLikes_LessonContent">
+          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
+          <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UserFile">
-              <PropertyRef Name="FileID" />
+            <Principal Role="LessonContent">
+              <PropertyRef Name="LessonContentID" />
             </Principal>
-            <Dependent Role="LessonContent">
-              <PropertyRef Name="LessonContentFileID" />
+            <Dependent Role="LessonContentLike">
+              <PropertyRef Name="LessonContentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContent_User">
+        <Association Name="FK_LessonContents_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
           <ReferentialConstraint>
@@ -981,19 +965,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContentLike_LessonContent">
-          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
-          <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
+        <Association Name="FK_LessonContents_UserFile">
+          <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
+          <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="LessonContent">
-              <PropertyRef Name="LessonContentID" />
+            <Principal Role="UserFile">
+              <PropertyRef Name="FileID" />
             </Principal>
-            <Dependent Role="LessonContentLike">
-              <PropertyRef Name="LessonContentID" />
+            <Dependent Role="LessonContent">
+              <PropertyRef Name="LessonContentFileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_LessonContent">
+        <Association Name="FK_Reports_LessonContent">
           <End Role="LessonContent" Type="Self.LessonContent" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1005,7 +989,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonContentLike_User">
+        <Association Name="FK_LessonContentLikes_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="LessonContentLike" Type="Self.LessonContentLike" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1017,7 +1001,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_ReportType">
+        <Association Name="FK_Reports_ReportType">
           <End Role="ReportType" Type="Self.ReportType" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1029,7 +1013,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_User">
+        <Association Name="FK_UsersAreReported_UsersAreReporter">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1041,7 +1025,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Report_User1">
+        <Association Name="FK_UsersAreReporter_UsersAreReported">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="Report" Type="Self.Report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1049,11 +1033,11 @@
               <PropertyRef Name="UserID" />
             </Principal>
             <Dependent Role="Report">
-              <PropertyRef Name="ReportedUserID" />
+              <PropertyRef Name="ReportTypeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FileUpload_User">
+        <Association Name="FK_UserFiles_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="UserFile" Type="Self.UserFile" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1065,19 +1049,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_FileUpload">
-          <End Role="UserFile" Type="Self.UserFile" Multiplicity="0..1" />
-          <End Role="User" Type="Self.User" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserFile">
-              <PropertyRef Name="FileID" />
-            </Principal>
-            <Dependent Role="User">
-              <PropertyRef Name="UserTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_User_UserType">
+        <Association Name="FK_Users_UserType">
           <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1089,7 +1061,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="UniversityClassContext" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="ClassAppContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Block" EntityType="Self.Block" />
           <EntitySet Name="Department" EntityType="Self.Department" />
           <EntitySet Name="Follow" EntityType="Self.Follow" />
@@ -1105,103 +1077,99 @@
           <EntitySet Name="User" EntityType="Self.User" />
           <EntitySet Name="UserFile" EntityType="Self.UserFile" />
           <EntitySet Name="UserType" EntityType="Self.UserType" />
-          <AssociationSet Name="FK_Block_User" Association="Self.FK_Block_User">
+          <AssociationSet Name="FK_UsersAreBlocked_UsersAreBlocker" Association="Self.FK_UsersAreBlocked_UsersAreBlocker">
             <End Role="User" EntitySet="User" />
             <End Role="Block" EntitySet="Block" />
           </AssociationSet>
-          <AssociationSet Name="FK_Block_User1" Association="Self.FK_Block_User1">
+          <AssociationSet Name="FK_UsersAreBlocker_UsersAreBlocked" Association="Self.FK_UsersAreBlocker_UsersAreBlocked">
             <End Role="User" EntitySet="User" />
             <End Role="Block" EntitySet="Block" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_Department" Association="Self.FK_User_Department">
+          <AssociationSet Name="FK_Users_Department" Association="Self.FK_Users_Department">
             <End Role="Department" EntitySet="Department" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
-          <AssociationSet Name="FK_Follow_User" Association="Self.FK_Follow_User">
+          <AssociationSet Name="FK_UsersAreFollowed_UsersAreFollower" Association="Self.FK_UsersAreFollowed_UsersAreFollower">
             <End Role="User" EntitySet="User" />
             <End Role="Follow" EntitySet="Follow" />
           </AssociationSet>
-          <AssociationSet Name="FK_Follow_User1" Association="Self.FK_Follow_User1">
+          <AssociationSet Name="FK_UsersAreFollower_UsersAreFollowed" Association="Self.FK_UsersAreFollower_UsersAreFollowed">
             <End Role="User" EntitySet="User" />
             <End Role="Follow" EntitySet="Follow" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonAccess_Lesson" Association="Self.FK_LessonAccess_Lesson">
+          <AssociationSet Name="FK_LessonAccesses_Lesson" Association="Self.FK_LessonAccesses_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContent_Lesson" Association="Self.FK_LessonContent_Lesson">
+          <AssociationSet Name="FK_LessonContents_Lesson" Association="Self.FK_LessonContents_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonContent" EntitySet="LessonContent" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonAccess_User" Association="Self.FK_LessonAccess_User">
+          <AssociationSet Name="FK_LessonAccesses_User" Association="Self.FK_LessonAccesses_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonComment_LessonContent" Association="Self.FK_LessonComment_LessonContent">
-            <End Role="LessonContent" EntitySet="LessonContent" />
-            <End Role="LessonComment" EntitySet="LessonComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonComment_User" Association="Self.FK_LessonComment_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="LessonComment" EntitySet="LessonComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonComment_UserFile" Association="Self.FK_LessonComment_UserFile">
-            <End Role="UserFile" EntitySet="UserFile" />
-            <End Role="LessonComment" EntitySet="LessonComment" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonCommentLike_LessonComment" Association="Self.FK_LessonCommentLike_LessonComment">
+          <AssociationSet Name="FK_LessonCommentLikes_LessonComment" Association="Self.FK_LessonCommentLikes_LessonComment">
             <End Role="LessonComment" EntitySet="LessonComment" />
             <End Role="LessonCommentLike" EntitySet="LessonCommentLike" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_LessonComment" Association="Self.FK_Report_LessonComment">
+          <AssociationSet Name="FK_LessonComments_LessonContent" Association="Self.FK_LessonComments_LessonContent">
+            <End Role="LessonContent" EntitySet="LessonContent" />
+            <End Role="LessonComment" EntitySet="LessonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonComments_User" Association="Self.FK_LessonComments_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LessonComment" EntitySet="LessonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonComments_UserFile" Association="Self.FK_LessonComments_UserFile">
+            <End Role="UserFile" EntitySet="UserFile" />
+            <End Role="LessonComment" EntitySet="LessonComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reports_LessonComment" Association="Self.FK_Reports_LessonComment">
             <End Role="LessonComment" EntitySet="LessonComment" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonCommentLike_User" Association="Self.FK_LessonCommentLike_User">
+          <AssociationSet Name="FK_LessonCommentLikes_User" Association="Self.FK_LessonCommentLikes_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonCommentLike" EntitySet="LessonCommentLike" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContent_FileUpload" Association="Self.FK_LessonContent_FileUpload">
+          <AssociationSet Name="FK_LessonContentLikes_LessonContent" Association="Self.FK_LessonContentLikes_LessonContent">
+            <End Role="LessonContent" EntitySet="LessonContent" />
+            <End Role="LessonContentLike" EntitySet="LessonContentLike" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonContents_User" Association="Self.FK_LessonContents_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="LessonContent" EntitySet="LessonContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LessonContents_UserFile" Association="Self.FK_LessonContents_UserFile">
             <End Role="UserFile" EntitySet="UserFile" />
             <End Role="LessonContent" EntitySet="LessonContent" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContent_User" Association="Self.FK_LessonContent_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="LessonContent" EntitySet="LessonContent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_LessonContentLike_LessonContent" Association="Self.FK_LessonContentLike_LessonContent">
-            <End Role="LessonContent" EntitySet="LessonContent" />
-            <End Role="LessonContentLike" EntitySet="LessonContentLike" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Report_LessonContent" Association="Self.FK_Report_LessonContent">
+          <AssociationSet Name="FK_Reports_LessonContent" Association="Self.FK_Reports_LessonContent">
             <End Role="LessonContent" EntitySet="LessonContent" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonContentLike_User" Association="Self.FK_LessonContentLike_User">
+          <AssociationSet Name="FK_LessonContentLikes_User" Association="Self.FK_LessonContentLikes_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonContentLike" EntitySet="LessonContentLike" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_ReportType" Association="Self.FK_Report_ReportType">
+          <AssociationSet Name="FK_Reports_ReportType" Association="Self.FK_Reports_ReportType">
             <End Role="ReportType" EntitySet="ReportType" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_User" Association="Self.FK_Report_User">
+          <AssociationSet Name="FK_UsersAreReported_UsersAreReporter" Association="Self.FK_UsersAreReported_UsersAreReporter">
             <End Role="User" EntitySet="User" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_Report_User1" Association="Self.FK_Report_User1">
+          <AssociationSet Name="FK_UsersAreReporter_UsersAreReported" Association="Self.FK_UsersAreReporter_UsersAreReported">
             <End Role="User" EntitySet="User" />
             <End Role="Report" EntitySet="Report" />
           </AssociationSet>
-          <AssociationSet Name="FK_FileUpload_User" Association="Self.FK_FileUpload_User">
+          <AssociationSet Name="FK_UserFiles_User" Association="Self.FK_UserFiles_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserFile" EntitySet="UserFile" />
           </AssociationSet>
-          <AssociationSet Name="FK_User_FileUpload" Association="Self.FK_User_FileUpload">
-            <End Role="UserFile" EntitySet="UserFile" />
-            <End Role="User" EntitySet="User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserType" Association="Self.FK_User_UserType">
+          <AssociationSet Name="FK_Users_UserType" Association="Self.FK_Users_UserType">
             <End Role="UserType" EntitySet="UserType" />
             <End Role="User" EntitySet="User" />
           </AssociationSet>
@@ -1211,9 +1179,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="UniversityClassModelStoreContainer" CdmEntityContainer="UniversityClassContext">
+        <EntityContainerMapping StorageEntityContainer="UniversityClassAppModelStoreContainer" CdmEntityContainer="ClassAppContext">
           <EntitySetMapping Name="Block">
-            <EntityTypeMapping TypeName="UniversityClassModel.Block">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.Block">
               <MappingFragment StoreEntitySet="Block">
                 <ScalarProperty Name="BlockID" ColumnName="BlockID" />
                 <ScalarProperty Name="BlockerUser" ColumnName="BlockerUser" />
@@ -1223,7 +1191,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Department">
-            <EntityTypeMapping TypeName="UniversityClassModel.Department">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.Department">
               <MappingFragment StoreEntitySet="Department">
                 <ScalarProperty Name="DepartmentID" ColumnName="DepartmentID" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
@@ -1232,7 +1200,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Follow">
-            <EntityTypeMapping TypeName="UniversityClassModel.Follow">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.Follow">
               <MappingFragment StoreEntitySet="Follow">
                 <ScalarProperty Name="FollowID" ColumnName="FollowID" />
                 <ScalarProperty Name="FollowerID" ColumnName="FollowerID" />
@@ -1243,7 +1211,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Lesson">
-            <EntityTypeMapping TypeName="UniversityClassModel.Lesson">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.Lesson">
               <MappingFragment StoreEntitySet="Lesson">
                 <ScalarProperty Name="LessonID" ColumnName="LessonID" />
                 <ScalarProperty Name="LessonCode" ColumnName="LessonCode" />
@@ -1253,7 +1221,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LessonAccess">
-            <EntityTypeMapping TypeName="UniversityClassModel.LessonAccess">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.LessonAccess">
               <MappingFragment StoreEntitySet="LessonAccess">
                 <ScalarProperty Name="LessonAccessID" ColumnName="LessonAccessID" />
                 <ScalarProperty Name="LessonID" ColumnName="LessonID" />
@@ -1262,7 +1230,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LessonComment">
-            <EntityTypeMapping TypeName="UniversityClassModel.LessonComment">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.LessonComment">
               <MappingFragment StoreEntitySet="LessonComment">
                 <ScalarProperty Name="LessonCommentID" ColumnName="LessonCommentID" />
                 <ScalarProperty Name="LessonContentID" ColumnName="LessonContentID" />
@@ -1275,7 +1243,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LessonCommentLike">
-            <EntityTypeMapping TypeName="UniversityClassModel.LessonCommentLike">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.LessonCommentLike">
               <MappingFragment StoreEntitySet="LessonCommentLike">
                 <ScalarProperty Name="LessonCommentLikeID" ColumnName="LessonCommentLikeID" />
                 <ScalarProperty Name="LessonCommentID" ColumnName="LessonCommentID" />
@@ -1285,7 +1253,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LessonContent">
-            <EntityTypeMapping TypeName="UniversityClassModel.LessonContent">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.LessonContent">
               <MappingFragment StoreEntitySet="LessonContent">
                 <ScalarProperty Name="LessonContentID" ColumnName="LessonContentID" />
                 <ScalarProperty Name="AddedUserID" ColumnName="AddedUserID" />
@@ -1299,7 +1267,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="LessonContentLike">
-            <EntityTypeMapping TypeName="UniversityClassModel.LessonContentLike">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.LessonContentLike">
               <MappingFragment StoreEntitySet="LessonContentLike">
                 <ScalarProperty Name="LessonContentLikeID" ColumnName="LessonContentLikeID" />
                 <ScalarProperty Name="LessonContentID" ColumnName="LessonContentID" />
@@ -1309,7 +1277,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Report">
-            <EntityTypeMapping TypeName="UniversityClassModel.Report">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.Report">
               <MappingFragment StoreEntitySet="Report">
                 <ScalarProperty Name="ReportID" ColumnName="ReportID" />
                 <ScalarProperty Name="ReporterID" ColumnName="ReporterID" />
@@ -1324,7 +1292,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ReportType">
-            <EntityTypeMapping TypeName="UniversityClassModel.ReportType">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.ReportType">
               <MappingFragment StoreEntitySet="ReportType">
                 <ScalarProperty Name="ReportTypeID" ColumnName="ReportTypeID" />
                 <ScalarProperty Name="ReportTypeName" ColumnName="ReportTypeName" />
@@ -1332,7 +1300,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="UniversityClassModel.sysdiagrams">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -1343,7 +1311,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="User">
-            <EntityTypeMapping TypeName="UniversityClassModel.User">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -1363,7 +1331,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserFile">
-            <EntityTypeMapping TypeName="UniversityClassModel.UserFile">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.UserFile">
               <MappingFragment StoreEntitySet="UserFile">
                 <ScalarProperty Name="FileID" ColumnName="FileID" />
                 <ScalarProperty Name="FileAdderUserID" ColumnName="FileAdderUserID" />
@@ -1377,7 +1345,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserType">
-            <EntityTypeMapping TypeName="UniversityClassModel.UserType">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.UserType">
               <MappingFragment StoreEntitySet="UserType">
                 <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
                 <ScalarProperty Name="UserTypeName" ColumnName="UserTypeName" />

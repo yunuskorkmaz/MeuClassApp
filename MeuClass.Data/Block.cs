@@ -19,7 +19,7 @@ namespace MeuClass.Data
         public Nullable<int> BlockedUser { get; set; }
         public Nullable<System.DateTime> RecordDate { get; set; }
     
-        public virtual User UsersBlocker { get; set; }
-        public virtual User UsersBlocked { get; set; }
+        public virtual User UsersAreBlocker { get; set; }
+        public virtual User UsersAreBlocked { get; set; }
     }
 }

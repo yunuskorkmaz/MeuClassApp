@@ -27,7 +27,7 @@ namespace MeuClass.Data
         public virtual LessonComment LessonComment { get; set; }
         public virtual LessonContent LessonContent { get; set; }
         public virtual ReportType ReportType { get; set; }
-        public virtual User UsersReporter { get; set; }
-        public virtual User UsersReported { get; set; }
+        public virtual User UsersAreReporter { get; set; }
+        public virtual User UsersAreReported { get; set; }
     }
 }
