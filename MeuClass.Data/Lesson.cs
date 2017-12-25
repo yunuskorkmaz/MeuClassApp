@@ -17,7 +17,6 @@ namespace MeuClass.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Lesson()
         {
-            this.LessonAccesses = new HashSet<LessonAccess>();
             this.LessonContents = new HashSet<LessonContent>();
         }
     
@@ -26,8 +25,7 @@ namespace MeuClass.Data
         public Nullable<System.DateTime> RecordDate { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonAccess> LessonAccesses { get; set; }
+        public virtual LessonAccess LessonAccesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonContent> LessonContents { get; set; }
     }

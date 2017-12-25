@@ -17,17 +17,17 @@ namespace MeuClass.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
-            this.UsersBlockeds = new HashSet<Block>();
-            this.UsersBlockers = new HashSet<Block>();
-            this.UserFolloweds = new HashSet<Follow>();
-            this.UserFollowers = new HashSet<Follow>();
+            this.UsersAreBlocked = new HashSet<Block>();
+            this.UsersAreBlocker = new HashSet<Block>();
+            this.UsersAreFollowed = new HashSet<Follow>();
+            this.UsersAreFollower = new HashSet<Follow>();
             this.LessonAccesses = new HashSet<LessonAccess>();
-            this.LessonComments = new HashSet<LessonComment>();
+            this.LessonCommens = new HashSet<LessonComment>();
             this.LessonCommentLikes = new HashSet<LessonCommentLike>();
             this.LessonContents = new HashSet<LessonContent>();
             this.LessonContentLikes = new HashSet<LessonContentLike>();
-            this.UsersReporteds = new HashSet<Report>();
-            this.UserReporters = new HashSet<Report>();
+            this.UsersAreReported = new HashSet<Report>();
+            this.UsersAreReporter = new HashSet<Report>();
             this.UserFiles = new HashSet<UserFile>();
         }
     
@@ -41,24 +41,24 @@ namespace MeuClass.Data
         public Nullable<System.DateTime> Birthday { get; set; }
         public string SchoolNumber { get; set; }
         public Nullable<int> UserTypeID { get; set; }
-        public string ProfilPicID { get; set; }
+        public Nullable<int> ProfilPicID { get; set; }
         public Nullable<int> DepartmentID { get; set; }
         public Nullable<System.DateTime> RecordDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Block> UsersBlockeds { get; set; }
+        public virtual ICollection<Block> UsersAreBlocked { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Block> UsersBlockers { get; set; }
+        public virtual ICollection<Block> UsersAreBlocker { get; set; }
         public virtual Department Department { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Follow> UserFolloweds { get; set; }
+        public virtual ICollection<Follow> UsersAreFollowed { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Follow> UserFollowers { get; set; }
+        public virtual ICollection<Follow> UsersAreFollower { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonAccess> LessonAccesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonComment> LessonComments { get; set; }
+        public virtual ICollection<LessonComment> LessonCommens { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonCommentLike> LessonCommentLikes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -66,9 +66,9 @@ namespace MeuClass.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonContentLike> LessonContentLikes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Report> UsersReporteds { get; set; }
+        public virtual ICollection<Report> UsersAreReported { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Report> UserReporters { get; set; }
+        public virtual ICollection<Report> UsersAreReporter { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserFile> UserFiles { get; set; }
         public virtual UserType UserType { get; set; }

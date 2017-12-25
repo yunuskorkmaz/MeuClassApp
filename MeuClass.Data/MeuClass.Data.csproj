@@ -50,92 +50,92 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Block.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Context.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
     <Compile Include="Department.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Follow.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Lesson.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="LessonAccess.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="LessonComment.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="LessonCommentLike.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="LessonContent.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="LessonContentLike.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Model.edmx</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="ReportType.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="User.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="UserFile.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
     <Compile Include="UserType.cs">
-      <DependentUpon>Model.tt</DependentUpon>
+      <DependentUpon>Context.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="Model.edmx">
+    <EntityDeploy Include="Context.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model.Designer.cs</LastGenOutput>
+      <LastGenOutput>Context.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Model.edmx.diagram">
-      <DependentUpon>Model.edmx</DependentUpon>
+    <None Include="Context.edmx.diagram">
+      <DependentUpon>Context.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Model.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Model.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model.edmx</DependentUpon>
-      <LastGenOutput>Model.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Context.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Context.edmx</DependentUpon>
+      <LastGenOutput>Context.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Context.edmx</DependentUpon>
+      <LastGenOutput>Context.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

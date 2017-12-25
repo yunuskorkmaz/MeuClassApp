@@ -68,7 +68,9 @@ namespace MeuClass.Controllers
                 Password = form.Get("Password"),
                 Birthday = DateTime.Now,
                 RecordDate = DateTime.Now,
-                UpdateDate = DateTime.Now
+                UpdateDate = DateTime.Now,
+                UserTypeID = 1             
+               
 
             };
 

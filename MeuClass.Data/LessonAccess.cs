@@ -15,8 +15,8 @@ namespace MeuClass.Data
     public partial class LessonAccess
     {
         public int LessonAccessID { get; set; }
-        public Nullable<int> LessonID { get; set; }
-        public Nullable<int> UserID { get; set; }
+        public int LessonID { get; set; }
+        public int UserID { get; set; }
     
         public virtual Lesson Lesson { get; set; }
         public virtual User User { get; set; }

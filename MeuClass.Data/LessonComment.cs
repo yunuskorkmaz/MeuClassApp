@@ -29,11 +29,11 @@ namespace MeuClass.Data
         public Nullable<System.DateTime> RecordDate { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LessonCommentLike> LessonCommentLikes { get; set; }
         public virtual LessonContent LessonContent { get; set; }
         public virtual User User { get; set; }
         public virtual UserFile UserFile { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LessonCommentLike> LessonCommentLikes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Report> Reports { get; set; }
     }

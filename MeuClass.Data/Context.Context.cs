@@ -13,11 +13,12 @@ namespace MeuClass.Data
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UniversityClassContext : DbContext
+    public partial class ClassAppContext : DbContext
     {
-        public UniversityClassContext()
-            : base("name=UniversityClassContext")
+        public ClassAppContext()
+            : base("name=ClassAppContext")
         {
+            Database.SetInitializer(new MyConfig());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -40,5 +41,20 @@ namespace MeuClass.Data
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserFile> UserFile { get; set; }
         public virtual DbSet<UserType> UserType { get; set; }
+    }
+
+    public class MyConfig : CreateDatabaseIfNotExists<ClassAppContext>
+    {
+        public override void InitializeDatabase(ClassAppContext context)
+        {
+            base.InitializeDatabase(context);
+        }
+
+        protected override void Seed(ClassAppContext context)
+        {
+
+            context.UserType.Add(new UserType() { UserTypeID = 1, UserTypeName = "Öğrenci" });
+            base.Seed(context);
+        }
     }
 }
