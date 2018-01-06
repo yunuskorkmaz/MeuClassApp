@@ -4,5 +4,9 @@ before_build:
   - nuget restore
   
 build:
-  parallel: true                  # enable MSBuild parallel builds
-  project: MeuClass.sln  
+  parallel: true
+  project: MeuClass.sln
+  
+branches:
+  only:
+    - master
