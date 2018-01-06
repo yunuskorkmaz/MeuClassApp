@@ -1,6 +1,8 @@
 # Mersin Üniversitesi Sosyal Paylaşım Sistemi
 Mersin Üniversitesi öğrenci ve öğretmen sosyal paylaşım platformu.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/cyl9cynl0s6r649q/branch/master?svg=true)](https://ci.appveyor.com/project/yunuskorkmaz/meuclassapp/branch/master)
+
 ### Proje Mimarisi
 
 | Proje Katmanı        | Açıklama|
