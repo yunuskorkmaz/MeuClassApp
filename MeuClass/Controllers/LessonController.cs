@@ -20,5 +20,11 @@ namespace MeuClass.Controllers
             return View();
         }
 
+        public ActionResult AddLesson(string number)
+        {
+            ViewBag.Number = number;
+            return View();
+        }
+
     }
 }
