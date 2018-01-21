@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Interface\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\LessonRepository.cs" />
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Repository\_BaseRepository.cs" />
     <Compile Include="ResultData\ResultData.cs" />

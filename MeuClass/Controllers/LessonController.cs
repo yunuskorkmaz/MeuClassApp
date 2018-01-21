@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿
+using MeuClass.Business.Repository;
+using MeuClass.Data;
+using System;
 using System.Web.Mvc;
 
 namespace MeuClass.Controllers
@@ -20,10 +20,39 @@ namespace MeuClass.Controllers
             return View();
         }
 
-        public ActionResult AddLesson(string number)
+        public ActionResult AddLesson()
         {
-            ViewBag.Number = number;
-            return View();
+            if (Session["user_id"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                ViewBag.Title = "Ders Ekle";
+                return View();
+            }
+        }
+        public ActionResult DoRegister (FormCollection form)
+        {
+            var lesson = new Lesson()
+            {
+                LessonCode = form.Get("lessonCode"),
+                LessonName = form.Get("lessonName"),
+                RecordDate = DateTime.Now
+            };
+
+            var insert = LessonRepository.Instance.Add(lesson);
+
+            if (insert.Success == false)
+            { 
+                TempData["error"] = insert.Message;
+                return RedirectToAction("detail", "Lesson");
+
+            }
+            else
+            {
+                return RedirectToAction("AddLesson", "Lesson");
+            }
         }
 
     }
