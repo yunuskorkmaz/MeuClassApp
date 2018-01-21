@@ -24,6 +24,7 @@ namespace MeuClass.Data
         public string LessonCode { get; set; }
         public Nullable<System.DateTime> RecordDate { get; set; }
         public Nullable<System.DateTime> DeleteDate { get; set; }
+        public string LessonName { get; set; }
     
         public virtual LessonAccess LessonAccesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
