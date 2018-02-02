@@ -67,7 +67,7 @@ namespace MeuClass.Controllers
                 Birthday = DateTime.Now,
                 RecordDate = DateTime.Now,
                 UpdateDate = DateTime.Now,
-                UserTypeID = 1
+                UserTypeID = 3
             };
 
             var insert = UserRepository.Instance.Add(user);
