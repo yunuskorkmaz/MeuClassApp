@@ -139,6 +139,8 @@
     <Content Include="Areas\Admin\Views\User\AddUser.cshtml" />
     <Content Include="Areas\Admin\Views\User\ViewUser.cshtml" />
     <Content Include="Areas\Admin\Views\Lesson\ViewLesson.cshtml" />
+    <Content Include="Areas\Admin\Views\Personnel\AddPersonnel.cshtml" />
+    <Content Include="Areas\Admin\Views\Personnel\ViewPersonnel.cshtml" />
     <None Include="Content\sass\LoginMain.scss" />
     <Content Include="Global.asax" />
     <Content Include="Content\sass\main.scss" />
@@ -157,6 +159,7 @@
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\LessonController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\PersonnelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
     <Compile Include="Controllers\Messages\Controller\MessagesController.cs" />

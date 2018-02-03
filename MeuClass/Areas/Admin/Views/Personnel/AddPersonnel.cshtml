@@ -4,7 +4,7 @@
             <div class="header">
                 <h2>
 
-                    DERS EKLEME
+                    PERSONEL EKLEME
                 </h2>
                 <ul class="header-dropdown m-r--5">
                     <li class="dropdown">
@@ -26,50 +26,62 @@
                 </ul>
             </div>
             <div class="body">
-                @using (Html.BeginForm("AddLesson", "Lesson", FormMethod.Post, new { @class = "adminAddLessonForm form-horizontal" })) {
+                @using (Html.BeginForm("AddPersonnel", "Personnel", FormMethod.Post, new { @class = "adminAddPersonnelForm form-horizontal" })) {
                 <div class="row clearfix">
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                        <label for="lessonName">Ders Adı:</label>
+                        <label for="personnelName">Ad:</label>
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" id="lessonName" class="form-control" placeholder="Ders Adını Giriniz">
+                                <input type="text" id="personnelName" class="form-control" placeholder="Personel Adını Giriniz">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row clearfix">
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                        <label for="lessonCode">Ders Kodu:</label>
+                        <label for="personnelSurname">Soyad:</label>
                     </div>
                     <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="text" id="lessonCode" class="form-control" placeholder="Ders Kodunu Giriniz">
+                                <input type="text" id="personnelSurname" class="form-control" placeholder="Personel Soyadını Giriniz">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row clearfix">
                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                        <label for="personnelName">Görevli Adı:</label>
+                        <label for="personnelMission">Görev:</label>
                     </div>
                     <div class="col-sm-10">
-                        <select class="form-control show-tick" id="personnelName">
-                            <option value="">-- Lütfen görevli seçiniz--</option>
-                            <option value="10">Yrd. Doç. Evrim Ersin Kangal</option>
-                            <option value="20">Yrd. Doç. Hürol Aslan</option>
-                            <option value="30">Okutman Jale Bektaş</option>
-                            <option value="40">Prof. Dr. Cemile Çelik</option>
+                        <select class="form-control show-tick" id="personnelMission">
+                            <option value="">-- Lütfen görev seçiniz--</option>
+                            <option value="10">Okutman</option>
+                            <option value="20">Öğretim Görevlisi</option>
+                            <option value="30">Profesör</option>
+                            <option value="40">Yardımcı Doçent</option>
                         </select>
                     </div>
 
                 </div>
+                <div class="row clearfix">
+                    <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                        <label for="personnelPasswrod">Şifre:</label>
+                    </div>
+                    <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                        <div class="form-group">
+                            <div class="form-line">
+                                <input type="password" id="personnelPassword" class="form-control" placeholder="Personel Şifresini Giriniz">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row clearfix">
                     <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                        <button type="button" class="btn btn-primary m-t-15 waves-effect">Ders Ekle</button>
+                        <button type="button" class="btn btn-primary m-t-15 waves-effect">Personel Kaydet</button>
                     </div>
                 </div>
                 }
