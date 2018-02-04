@@ -18,6 +18,7 @@ namespace MeuClass.Data
         public Lesson()
         {
             this.LessonContents = new HashSet<LessonContent>();
+            this.LessonAccess = new HashSet<LessonAccess>();
         }
     
         public int LessonID { get; set; }
@@ -26,8 +27,9 @@ namespace MeuClass.Data
         public Nullable<System.DateTime> DeleteDate { get; set; }
         public string LessonName { get; set; }
     
-        public virtual LessonAccess LessonAccesses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LessonContent> LessonContents { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LessonAccess> LessonAccess { get; set; }
     }
 }

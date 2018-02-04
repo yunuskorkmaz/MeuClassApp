@@ -2,6 +2,7 @@
 using MeuClass.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,7 +14,7 @@ namespace MeuClass.Areas.Admin.Controllers
         // GET: Admin/AdminLesson
         public ActionResult Index()
         {
-            return Json(new { test = "test"});
+            return Json(new { test = "test" });
         }
         public ActionResult ViewLesson(string number)
         {
@@ -24,11 +25,11 @@ namespace MeuClass.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            
-                ViewBag.Title = "Ders Ekle | Admin Paneli";
-                var users = UserRepository.Instance.Search(x => x.UserTypeID == 2);
-                return View(users.Data);
-            
+
+            ViewBag.Title = "Ders Ekle | Admin Paneli";
+            var users = UserRepository.Instance.Search(x => x.UserTypeID == 2);
+            return View(users.Data);
+
         }
 
         [HttpPost]
@@ -38,16 +39,22 @@ namespace MeuClass.Areas.Admin.Controllers
             {
                 LessonName = form.Get("lessonName"),
                 LessonCode = form.Get("lessonCode"),
-                RecordDate = DateTime.Now
+                RecordDate = DateTime.Now,
+                LessonAccess=new Collection<LessonAccess>()
+                {
+                    new LessonAccess()
+                    {
+                        UserID =Convert.ToInt32(form.Get("personnelName"))
+                    }
+                }
+               
             };
-
             var insert = LessonRepository.Instance.Add(lesson);
 
-            if (insert.Success == false)
+            if (insert.Success == false )
             {
                 TempData["error"] = insert.Message;
-                return RedirectToAction("Index", "AdminLesson",new {Area= "Admin"});
-
+                return RedirectToAction("Index", "AdminLesson", new { Area = "Admin" });
             }
             else
             {
