@@ -8,7 +8,7 @@ namespace MeuClass.Areas.Admin.Controllers
 {
     public class AdminUserController : Controller
     {
-        // GET: Admin/AdminUser
+        // GET: Admin/User
         public ActionResult Index()
         {
             return View();

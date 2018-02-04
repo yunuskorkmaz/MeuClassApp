@@ -1,12 +1,15 @@
 .button {
-    border-radius: 2px;
-    color: #000000;
-    background-color: #dbdbdb;
-    padding: 10px 20px 10px 20px;
-    text-decoration: none;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    display: inline-flex;
+    align-items: center;
+    padding-left: $button-gutter;
+    padding-right: $button-gutter;
+    font-weight: bold;
+    height: $finger-size;
+    border: 1px solid black;
+    border-radius: $border-radius;
     &:hover {
-        background-color: #35BECC;
-        text-decoration: none;
+        opacity: 0.5;
     }
 }
 
@@ -18,9 +21,4 @@
         color: black;
         opacity: 0.7;
     }
-}
-
-.myPanel{
-    margin-bottom:$gutter;
-    border:1px solid #E0E0E0;
 }

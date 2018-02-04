@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACI,aAAE;EACE,WAAW,EAAE,IAAI;EACjB,UAAU,EAAC,GAAG;AAElB,eAAO;EACH,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,QAAQ;AAEjC,sBAAW;EACP,MAAM,EAAC,KAAK;AAGZ,wBAAa;EACT,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,QAAQ;EACzB,0BAAC;IACG,WAAW,EAAC,GAAG;IACf,YAAY,EAAC,GAAG",
-"sources": ["../../../sass/Main/pages/lesson.scss"],
-"names": [],
-"file": "lesson.css"
-}

@@ -2,24 +2,21 @@
     &-container {
         ul {
             li {
-                text-align: center;
                 text-transform: uppercase;
                 a {
-                    text-align: center;
                     &:hover {
                         color:$leftmenu-hover-color;
                         background-color: $leftmenu-hover-background;
                     }
                     padding: 20px;
                     font-family: $font-barlow;
-                    
+                    font-size:18px;
                     color:$leftmenu-color;
                     i {
-                       display:block;
+                        margin-right: 15px;
                     }
                 }
             }
         }
     }
 }
-
