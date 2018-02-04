@@ -13,30 +13,26 @@ namespace MeuClass.Areas.Admin.Controllers
         // GET: Admin/AdminLesson
         public ActionResult Index()
         {
-            return View();
+            return Json(new { test = "test"});
         }
         public ActionResult ViewLesson(string number)
         {
             ViewBag.Number = number;
             return View();
         }
-        public ActionResult AddLesson()
+
+        [HttpGet]
+        public ActionResult Add()
         {
-            if (Session["user_id"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            else
-            {
+            
                 ViewBag.Title = "Ders Ekle | Admin Paneli";
-                ClassAppContext context = new ClassAppContext();
-                IEnumerable<User> users = new List<User>();
-                users = context.User.Where(x => x.UserTypeID == 2);
-                ViewBag.users = users;
-                return View();
-            }
+                var users = UserRepository.Instance.Search(x => x.UserTypeID == 2);
+                return View(users.Data);
+            
         }
-        public ActionResult AddLessonRegister(FormCollection form)
+
+        [HttpPost]
+        public ActionResult Add(FormCollection form)
         {
             var lesson = new Lesson()
             {
@@ -50,12 +46,12 @@ namespace MeuClass.Areas.Admin.Controllers
             if (insert.Success == false)
             {
                 TempData["error"] = insert.Message;
-                return RedirectToAction("Index", "AdminLesson");
+                return RedirectToAction("Index", "AdminLesson",new {Area= "Admin"});
 
             }
             else
             {
-                return RedirectToAction("AddLesson", "AdminLesson");
+                return RedirectToAction("Add", "AdminLesson", new { Area = "Admin" });
             }
         }
     }
