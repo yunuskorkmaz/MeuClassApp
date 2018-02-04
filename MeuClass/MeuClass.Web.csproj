@@ -131,16 +131,8 @@
     <Content Include="Content\js\jquery-3.2.1.min.js" />
     <Content Include="Content\js\style.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\Admin\Views\AdminDashboard\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Lesson\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Lesson\AddLesson.cshtml" />
-    <Content Include="Areas\Admin\Views\User\AddUser.cshtml" />
-    <Content Include="Areas\Admin\Views\User\ViewUser.cshtml" />
-    <Content Include="Areas\Admin\Views\Lesson\ViewLesson.cshtml" />
-    <Content Include="Areas\Admin\Views\Personnel\AddPersonnel.cshtml" />
-    <Content Include="Areas\Admin\Views\Personnel\ViewPersonnel.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminDashboard\Index.cshtml" />
     <None Include="Content\sass\LoginMain.scss" />
     <Content Include="Global.asax" />
     <Content Include="Content\sass\main.scss" />

@@ -8,7 +8,7 @@ namespace MeuClass.Areas.Admin.Controllers
 {
     public class AdminLessonController : Controller
     {
-        // GET: Admin/Lesson
+        // GET: Admin/AdminLesson
         public ActionResult Index()
         {
             return View();

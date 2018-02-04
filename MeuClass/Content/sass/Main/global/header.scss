@@ -1,4 +1,12 @@
+.navbar{
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    
+}
+
 .myNavbar {
+    background-color:$myNavBar-backgroundcolor;
     .navbar-brand,
     .navbar-nav>li>a {
         color: $navbar-color;
