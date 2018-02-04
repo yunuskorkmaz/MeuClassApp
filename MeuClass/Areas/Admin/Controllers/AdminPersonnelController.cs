@@ -13,9 +13,11 @@ namespace MeuClass.Areas.Admin.Controllers
         {
             return View();
         }
-        public ActionResult AddPersonnel(string number)
+
+        [HttpGet]
+        public ActionResult Add()
         {
-            ViewBag.Number = number;
+          
             return View();
         }
         public ActionResult ViewPersonnel(string number)

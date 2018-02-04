@@ -18,7 +18,7 @@ namespace MeuClass.Data
         public int LessonID { get; set; }
         public int UserID { get; set; }
     
-        public virtual Lesson Lesson { get; set; }
         public virtual User User { get; set; }
+        public virtual Lesson Lesson { get; set; }
     }
 }

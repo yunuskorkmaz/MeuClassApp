@@ -163,19 +163,19 @@
           <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="UserTypeName" Type="varchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_LessonAccesses_Lesson">
+        <Association Name="FK_LessonAccess_Lesson">
           <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
-          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="0..1" />
+          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Lesson">
               <PropertyRef Name="LessonID" />
             </Principal>
             <Dependent Role="LessonAccess">
-              <PropertyRef Name="LessonAccessID" />
+              <PropertyRef Name="LessonID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_LessonAccesses_User">
+        <Association Name="FK_LessonAccess_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="*" />
           <ReferentialConstraint>
@@ -498,11 +498,11 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserFile" EntityType="Self.UserFile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_LessonAccesses_Lesson" Association="Self.FK_LessonAccesses_Lesson">
+          <AssociationSet Name="FK_LessonAccess_Lesson" Association="Self.FK_LessonAccess_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonAccesses_User" Association="Self.FK_LessonAccesses_User">
+          <AssociationSet Name="FK_LessonAccess_User" Association="Self.FK_LessonAccess_User">
             <End Role="User" EntitySet="User" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
@@ -639,9 +639,9 @@
           <Property Name="LessonCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RecordDate" Type="DateTime" Precision="3" />
           <Property Name="DeleteDate" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="LessonAccesses" Relationship="Self.FK_LessonAccesses_Lesson" FromRole="Lesson" ToRole="LessonAccess" />
           <NavigationProperty Name="LessonContents" Relationship="Self.FK_LessonContents_Lesson" FromRole="Lesson" ToRole="LessonContent" />
           <Property Name="LessonName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="LessonAccess" Relationship="UniversityClassAppModel.FK_LessonAccess_Lesson" FromRole="Lesson" ToRole="LessonAccess" />
         </EntityType>
         <EntityType Name="LessonAccess">
           <Key>
@@ -650,8 +650,8 @@
           <Property Name="LessonAccessID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LessonID" Type="Int32" Nullable="false" />
           <Property Name="UserID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Lesson" Relationship="Self.FK_LessonAccesses_Lesson" FromRole="LessonAccess" ToRole="Lesson" />
           <NavigationProperty Name="User" Relationship="Self.FK_LessonAccesses_User" FromRole="LessonAccess" ToRole="User" />
+          <NavigationProperty Name="Lesson" Relationship="UniversityClassAppModel.FK_LessonAccess_Lesson" FromRole="LessonAccess" ToRole="Lesson" />
         </EntityType>
         <EntityType Name="LessonComment">
           <Key>
@@ -862,18 +862,6 @@
             </Principal>
             <Dependent Role="Follow">
               <PropertyRef Name="FollowedID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_LessonAccesses_Lesson">
-          <End Role="Lesson" Type="Self.Lesson" Multiplicity="1" />
-          <End Role="LessonAccess" Type="Self.LessonAccess" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="Lesson">
-              <PropertyRef Name="LessonID" />
-            </Principal>
-            <Dependent Role="LessonAccess">
-              <PropertyRef Name="LessonAccessID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1129,10 +1117,6 @@
             <End Role="User" EntitySet="User" />
             <End Role="Follow" EntitySet="Follow" />
           </AssociationSet>
-          <AssociationSet Name="FK_LessonAccesses_Lesson" Association="Self.FK_LessonAccesses_Lesson">
-            <End Role="Lesson" EntitySet="Lesson" />
-            <End Role="LessonAccess" EntitySet="LessonAccess" />
-          </AssociationSet>
           <AssociationSet Name="FK_LessonContents_Lesson" Association="Self.FK_LessonContents_Lesson">
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonContent" EntitySet="LessonContent" />
@@ -1235,6 +1219,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <AssociationSet Name="FK_LessonAccess_Lesson" Association="UniversityClassAppModel.FK_LessonAccess_Lesson">
+            <End Role="Lesson" EntitySet="Lesson" />
+            <End Role="LessonAccess" EntitySet="LessonAccess" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1247,6 +1235,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <Association Name="FK_LessonAccess_Lesson">
+          <End Type="UniversityClassAppModel.Lesson" Role="Lesson" Multiplicity="1" />
+          <End Type="UniversityClassAppModel.LessonAccess" Role="LessonAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lesson">
+              <PropertyRef Name="LessonID" />
+            </Principal>
+            <Dependent Role="LessonAccess">
+              <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

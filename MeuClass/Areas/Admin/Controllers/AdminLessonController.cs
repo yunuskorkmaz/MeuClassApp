@@ -2,6 +2,7 @@
 using MeuClass.Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,49 +14,51 @@ namespace MeuClass.Areas.Admin.Controllers
         // GET: Admin/AdminLesson
         public ActionResult Index()
         {
-            return View();
+            return Json(new { test = "test" });
         }
         public ActionResult ViewLesson(string number)
         {
             ViewBag.Number = number;
             return View();
         }
-        public ActionResult AddLesson()
+
+        [HttpGet]
+        public ActionResult Add()
         {
-            if (Session["user_id"] == null)
-            {
-                return RedirectToAction("Login", "Home");
-            }
-            else
-            {
-                ViewBag.Title = "Ders Ekle | Admin Paneli";
-                ClassAppContext context = new ClassAppContext();
-                IEnumerable<User> users = new List<User>();
-                users = context.User.Where(x => x.UserTypeID == 2);
-                ViewBag.users = users;
-                return View();
-            }
+
+            ViewBag.Title = "Ders Ekle | Admin Paneli";
+            var users = UserRepository.Instance.Search(x => x.UserTypeID == 2);
+            return View(users.Data);
+
         }
-        public ActionResult AddLessonRegister(FormCollection form)
+
+        [HttpPost]
+        public ActionResult Add(FormCollection form)
         {
             var lesson = new Lesson()
             {
                 LessonName = form.Get("lessonName"),
                 LessonCode = form.Get("lessonCode"),
-                RecordDate = DateTime.Now
+                RecordDate = DateTime.Now,
+                LessonAccess=new Collection<LessonAccess>()
+                {
+                    new LessonAccess()
+                    {
+                        UserID =Convert.ToInt32(form.Get("personnelName"))
+                    }
+                }
+               
             };
-
             var insert = LessonRepository.Instance.Add(lesson);
 
-            if (insert.Success == false)
+            if (insert.Success == false )
             {
                 TempData["error"] = insert.Message;
-                return RedirectToAction("Index", "AdminLesson");
-
+                return RedirectToAction("Index", "AdminLesson", new { Area = "Admin" });
             }
             else
             {
-                return RedirectToAction("AddLesson", "AdminLesson");
+                return RedirectToAction("Add", "AdminLesson", new { Area = "Admin" });
             }
         }
     }
