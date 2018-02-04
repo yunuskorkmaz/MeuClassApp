@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace MeuClass.Areas.Admin
 {
-    public class AdminPersonnelController : Controller
+    public class PersonnelController : Controller
     {
         // GET: Admin/Personnel
         public ActionResult Index()
