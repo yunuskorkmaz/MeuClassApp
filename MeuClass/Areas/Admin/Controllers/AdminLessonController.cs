@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace MeuClass.Areas.Admin.Controllers
 {
-    public class LessonController : Controller
+    public class AdminLessonController : Controller
     {
-        // GET: Admin/Lesson
+        // GET: Admin/AdminLesson
         public ActionResult Index()
         {
             return View();
