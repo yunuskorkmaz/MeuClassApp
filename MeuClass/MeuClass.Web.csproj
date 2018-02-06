@@ -136,11 +136,11 @@
     <Content Include="Areas\Admin\Views\AdminDashboard\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdminLesson\AddLesson.cshtml" />
     <Content Include="Areas\Admin\Views\AdminLesson\ViewLesson.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminUser\AddUser.cshtml" />
     <Content Include="Areas\Admin\Views\AdminUser\ViewUser.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPersonnel\AddPersonnel.cshtml" />
     <Content Include="Areas\Admin\Views\AdminPersonnel\ViewPersonnel.cshtml" />
     <Content Include="Areas\Admin\Views\AdminLesson\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUser\Add.cshtml" />
     <None Include="Content\sass\LoginMain.scss" />
     <Content Include="Global.asax" />
     <Content Include="Content\sass\main.scss" />
