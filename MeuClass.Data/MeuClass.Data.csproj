@@ -91,6 +91,9 @@
     <Compile Include="LessonContentLike.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="PersonnelTitle.cs">
+      <DependentUpon>Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report.cs">
       <DependentUpon>Context.tt</DependentUpon>

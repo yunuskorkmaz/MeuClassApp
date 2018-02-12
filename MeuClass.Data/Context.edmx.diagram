@@ -44,6 +44,8 @@
         <AssociationConnector Association="UniversityClassAppModel.FK_UsersAreReporter_UsersAreReported" ManuallyRouted="false" />
         <AssociationConnector Association="UniversityClassAppModel.FK_UserFiles_User" ManuallyRouted="false" />
         <AssociationConnector Association="UniversityClassAppModel.FK_Users_UserType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UniversityClassAppModel.PersonnelTitle" Width="1.5" PointX="0.75" PointY="16.25" />
+        <AssociationConnector Association="UniversityClassAppModel.FK_User_PersonnelTitle" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

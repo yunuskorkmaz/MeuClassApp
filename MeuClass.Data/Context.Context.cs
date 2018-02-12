@@ -42,6 +42,7 @@ namespace MeuClass.Data
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserFile> UserFile { get; set; }
         public virtual DbSet<UserType> UserType { get; set; }
+        public virtual DbSet<PersonnelTitle> PersonnelTitle { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

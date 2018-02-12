@@ -45,6 +45,7 @@ namespace MeuClass.Data
         public Nullable<int> DepartmentID { get; set; }
         public Nullable<System.DateTime> RecordDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
+        public Nullable<int> PersonnelTitleID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Block> UsersAreBlocked { get; set; }
@@ -72,5 +73,6 @@ namespace MeuClass.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserFile> UserFiles { get; set; }
         public virtual UserType UserType { get; set; }
+        public virtual PersonnelTitle PersonnelTitle { get; set; }
     }
 }

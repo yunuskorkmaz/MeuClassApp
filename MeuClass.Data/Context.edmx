@@ -93,6 +93,13 @@
           <Property Name="LikedUserID" Type="int" />
           <Property Name="RecordDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="PersonnelTitle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="personnel_title" Type="varchar" MaxLength="30" />
+        </EntityType>
         <EntityType Name="Report">
           <Key>
             <PropertyRef Name="ReportID" />
@@ -142,6 +149,7 @@
           <Property Name="DepartmentID" Type="int" />
           <Property Name="RecordDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="PersonnelTitleID" Type="int" />
         </EntityType>
         <EntityType Name="UserFile">
           <Key>
@@ -343,6 +351,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_PersonnelTitle">
+          <End Role="PersonnelTitle" Type="Self.PersonnelTitle" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonnelTitle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PersonnelTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserFiles_User">
           <End Role="User" Type="Self.User" Multiplicity="0..1" />
           <End Role="UserFile" Type="Self.UserFile" Multiplicity="*" />
@@ -492,6 +512,7 @@
           <EntitySet Name="LessonCommentLike" EntityType="Self.LessonCommentLike" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LessonContent" EntityType="Self.LessonContent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LessonContentLike" EntityType="Self.LessonContentLike" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PersonnelTitle" EntityType="Self.PersonnelTitle" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportType" EntityType="Self.ReportType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
@@ -557,6 +578,10 @@
           <AssociationSet Name="FK_Reports_ReportType" Association="Self.FK_Reports_ReportType">
             <End Role="ReportType" EntitySet="ReportType" />
             <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_PersonnelTitle" Association="Self.FK_User_PersonnelTitle">
+            <End Role="PersonnelTitle" EntitySet="PersonnelTitle" />
+            <End Role="User" EntitySet="User" />
           </AssociationSet>
           <AssociationSet Name="FK_UserFiles_User" Association="Self.FK_UserFiles_User">
             <End Role="User" EntitySet="User" />
@@ -780,6 +805,8 @@
           <NavigationProperty Name="UsersAreReporter" Relationship="Self.FK_UsersAreReporter_UsersAreReported" FromRole="User" ToRole="Report" />
           <NavigationProperty Name="UserFiles" Relationship="Self.FK_UserFiles_User" FromRole="User" ToRole="UserFile" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_Users_UserType" FromRole="User" ToRole="UserType" />
+          <Property Name="PersonnelTitleID" Type="Int32" />
+          <NavigationProperty Name="PersonnelTitle" Relationship="UniversityClassAppModel.FK_User_PersonnelTitle" FromRole="User" ToRole="PersonnelTitle" />
         </EntityType>
         <EntityType Name="UserFile">
           <Key>
@@ -1223,6 +1250,11 @@
             <End Role="Lesson" EntitySet="Lesson" />
             <End Role="LessonAccess" EntitySet="LessonAccess" />
           </AssociationSet>
+          <EntitySet Name="PersonnelTitle" EntityType="UniversityClassAppModel.PersonnelTitle" />
+          <AssociationSet Name="FK_User_PersonnelTitle" Association="UniversityClassAppModel.FK_User_PersonnelTitle">
+            <End Role="PersonnelTitle" EntitySet="PersonnelTitle" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -1244,6 +1276,26 @@
             </Principal>
             <Dependent Role="LessonAccess">
               <PropertyRef Name="LessonID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="PersonnelTitle">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="personnel_title" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="UniversityClassAppModel.FK_User_PersonnelTitle" FromRole="PersonnelTitle" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_User_PersonnelTitle">
+          <End Type="UniversityClassAppModel.PersonnelTitle" Role="PersonnelTitle" Multiplicity="0..1" />
+          <End Type="UniversityClassAppModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PersonnelTitle">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="PersonnelTitleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1387,6 +1439,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="UniversityClassAppModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="PersonnelTitleID" ColumnName="PersonnelTitleID" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
@@ -1450,6 +1503,14 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="UniversityClassAppModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="UniversityClassAppModel.Store.sp_upgraddiagrams" />
+          <EntitySetMapping Name="PersonnelTitle">
+            <EntityTypeMapping TypeName="UniversityClassAppModel.PersonnelTitle">
+              <MappingFragment StoreEntitySet="PersonnelTitle">
+                <ScalarProperty Name="personnel_title" ColumnName="personnel_title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
