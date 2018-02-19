@@ -141,6 +141,7 @@
     <Content Include="Areas\Admin\Views\AdminPersonnel\ViewPersonnel.cshtml" />
     <Content Include="Areas\Admin\Views\AdminLesson\Add.cshtml" />
     <Content Include="Areas\Admin\Views\AdminUser\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminUser\Edit.cshtml" />
     <None Include="Content\sass\LoginMain.scss" />
     <Content Include="Global.asax" />
     <Content Include="Content\sass\main.scss" />
