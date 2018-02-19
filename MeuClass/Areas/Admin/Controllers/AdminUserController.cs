@@ -51,5 +51,11 @@ namespace MeuClass.Areas.Admin.Controllers
             ViewBag.Number = number;
             return View();
         }
+
+        public ActionResult Edit(string number)
+        {
+            ViewBag.Number = number;
+            return View();
+        }
     }
 }
