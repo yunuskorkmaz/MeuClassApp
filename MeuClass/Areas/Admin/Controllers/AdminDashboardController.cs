@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeuClass.Filters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -9,6 +10,7 @@ namespace MeuClass.Areas.Admin.Controllers
     public class AdminDashboardController : Controller
     {
         // GET: Admin/AdminDashboard
+        [CheckAuth(UserRole.OnlyAdmin)]
         public ActionResult Index()
         {
             return View();

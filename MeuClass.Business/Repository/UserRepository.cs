@@ -31,6 +31,21 @@ namespace MeuClass.Business.Repository
 
         }
 
+        public ResultData<int> GetUserType(int id)
+        {
+            var result = Search(a => a.UserID == id);
+
+            if(result.Success == true)
+            {
+                var typeid = (int) result.Data.FirstOrDefault().UserTypeID;
+                return  ResultData<int>.Instance.Fill(true, typeid);
+            }
+            else
+            {
+                return ResultData<int>.Instance.Fill(false, result.Message);
+            }
+        }
+
         public ResultData<User> Add(User user)
         {
             var result = Insert(user);
