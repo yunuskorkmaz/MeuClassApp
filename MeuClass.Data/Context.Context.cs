@@ -20,6 +20,7 @@ namespace MeuClass.Data
         public ClassAppContext()
             : base("name=ClassAppContext")
         {
+            Database.SetInitializer(new ContextConfig());
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

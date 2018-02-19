@@ -67,9 +67,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Context.edmx</DependentUpon>
     </Compile>
+    <Compile Include="ContextConfig.cs" />
     <Compile Include="Department.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>
+    <Compile Include="Enums\UserRole.cs" />
     <Compile Include="Follow.cs">
       <DependentUpon>Context.tt</DependentUpon>
     </Compile>

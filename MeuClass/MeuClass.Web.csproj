@@ -166,6 +166,7 @@
     <Compile Include="Controllers\Messages\Controller\MessagesController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\UserPartialController.cs" />
+    <Compile Include="Filters\CheckAuthAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
