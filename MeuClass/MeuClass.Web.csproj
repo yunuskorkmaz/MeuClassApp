@@ -161,6 +161,7 @@
     <Compile Include="Areas\Admin\Controllers\AdminLessonController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminPersonnelController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminUserController.cs" />
+    <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
     <Compile Include="Areas\Admin\PersonnelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LessonController.cs" />
@@ -207,7 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Controllers\Messages\ViewModel\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
