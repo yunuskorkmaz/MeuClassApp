@@ -70,15 +70,15 @@ namespace MeuClass.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(FormCollection form,int id)
+        public ActionResult Edit(FormCollection form)
         {
             var user = new User()
             {
-                UserID=id,
+                UserID = Convert.ToInt32(form.Get("userid")),
                 Name = form.Get("usereditName"),
                 Surname = form.Get("usereditSurname"),
                 SchoolNumber = form.Get("usereditNumber"),
-                UserTypeID = Convert.ToInt32(form.Get("usereditType")),
+                UserTypeID =  Convert.ToInt32(form.Get("usereditType")) ,
                 UpdateDate = DateTime.Now
 
             };
@@ -87,13 +87,10 @@ namespace MeuClass.Areas.Admin.Controllers
             if (UpdateUser.Success == false)
             {
                 TempData["error"] = UpdateUser.Message;
-                return RedirectToAction("Index", "AdminUser", new { Area = "Admin" });
+               
             }
-            else
-            {
-                return View();
-            }
-            
+            return RedirectToAction("Edit", "AdminUser", new { Area = "Admin" ,@id= Convert.ToInt32(form.Get("userid"))});
+
         }
     }
 }

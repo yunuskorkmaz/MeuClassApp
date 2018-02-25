@@ -104,8 +104,10 @@ namespace MeuClass.Business.Repository
             using (var db = new ClassAppContext())
             {
                 try
-                {
+                {    
                     var updatedEntry = db.Set<TEntry>().Attach(entry);
+                    var up = db.Entry(updatedEntry);
+                    up.State = System.Data.Entity.EntityState.Modified;
                     db.SaveChanges();
                     return ResultData<TEntry>.Instance.Fill(true, updatedEntry);
                 }

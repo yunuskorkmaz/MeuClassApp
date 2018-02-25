@@ -32,8 +32,9 @@
             <div class="body">
                
 
-                    @using (Html.BeginForm("Edit", "AdminUser", FormMethod.Post, new { @class = "adminEditUserForm form-horizontal" }))
+                    @using (Html.BeginForm("Edit", "AdminUser", new { area = "Admin" }, FormMethod.Post, new { @class = "adminEditUserForm form-horizontal" }))
                     {
+                        <input type="hidden" value="@Model.User.UserID" name="userid" />
                         <div class="row clearfix">
                             <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
                                 <label for="userName">Ad:</label>

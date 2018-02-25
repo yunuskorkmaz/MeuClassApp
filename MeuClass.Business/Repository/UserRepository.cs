@@ -64,18 +64,22 @@ namespace MeuClass.Business.Repository
 
         public ResultData<User> Update_User(User user)
         {
-            using (var db = new ClassAppContext())
+            try
             {
-                try
+                var result = Update(user);
+                if(result.Success == true)
                 {
-                    var updatedEntry = db.Set<User>().Attach(user);
-                    db.SaveChanges();
-                    return ResultData<User>.Instance.Fill(true, updatedEntry);
+                    return ResultData<User>.Instance.Fill(true, result.Data);
+
                 }
-                catch (Exception ex)
+                else
                 {
-                    return ResultData<User>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
+                    return ResultData<User>.Instance.Fill(false, "Hata Oluştu");
                 }
+            }
+            catch(Exception ex)
+            {
+               return ResultData<User>.Instance.Fill(false, ex.Message);
             }
 
         }
