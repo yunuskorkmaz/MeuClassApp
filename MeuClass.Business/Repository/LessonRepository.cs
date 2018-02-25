@@ -9,15 +9,18 @@ namespace MeuClass.Business.Repository
 
         public ResultData<Lesson> Add(Lesson lesson)
         {
-            var result = Insert(lesson);
-
-            if (result.Success == true)
+            using (this)
             {
-                return ResultData<Lesson>.Instance.Fill(true, result.Data);
-            }
-            else
-            {
-                return ResultData<Lesson>.Instance.Fill(false, result.Message);
+                var result = _Add(lesson);
+                SaveChanges();
+                if (result != null)
+                {
+                    return ResultData<Lesson>.Instance.Fill(true, result);
+                }
+                else
+                {
+                    return ResultData<Lesson>.Instance.Fill(false, "hata");
+                }
             }
         }
 

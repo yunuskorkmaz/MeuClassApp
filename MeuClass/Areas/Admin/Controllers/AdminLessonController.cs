@@ -25,7 +25,7 @@ namespace MeuClass.Areas.Admin.Controllers
 
             ViewBag.Title = "Ders Ekle | Admin Paneli";
             var users = UserRepository.Instance.Search(x => x.UserTypeID == 2);
-            return View(users.Data);
+            return View(users);
 
         }
 

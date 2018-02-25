@@ -1,6 +1,9 @@
 ﻿using MeuClass.Business.ResultData;
 using MeuClass.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace MeuClass.Business.Repository
 {
@@ -10,53 +13,81 @@ namespace MeuClass.Business.Repository
 
         public ResultData<User> CheckAuth(string schoolNumber, string password)
         {
-            var result = Search(a => a.SchoolNumber == schoolNumber && a.Password == password);
-
-            if (result.Success == true)
+            using (this)
             {
-                if (result.Data == null)
+                try
                 {
-                    return ResultData<User>.Instance.Fill(false, "Kullanıcı adı yada şifre yanlış");
+                    var result = _Get(a => (a.SchoolNumber == schoolNumber || a.MailAddress == schoolNumber) && a.Password == password);
+
+                    if (result != null)
+                    {
+                        return ResultData<User>.Instance.Fill(true, result);
+                    }
+                    else
+                    {
+                        return ResultData<User>.Instance.Fill(false, "Kullanıcı adı yada şifre yanlış");
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    return ResultData<User>.Instance.Fill(true, result.Data.FirstOrDefault());
+                    return ResultData<User>.Instance.Fill(false, ex.Message);
                 }
             }
-            else
-            {
-                return ResultData<User>.Instance.Fill(false, result.Message);
-            }
+        }
 
+
+        public ResultData<List<User>> Search(Expression<Func<User, bool>> predicate)
+        {
+            using (this)
+            {
+                try
+                {
+                    var result = _GetAll(predicate);
+
+                    return ResultData<List<User>>.Instance.Fill(true, result.ToList());
+                }
+                catch(Exception ex)
+                {
+                    return ResultData<List<User>>.Instance.Fill(false, ex.Message);
+                }
+               
+            }
+        }
+
+
+        public ResultData<User> Add(User user)
+        {
+            try
+            {
+                using (this)
+                {
+                    var result = _Add(user);
+                    SaveChanges();
+
+                    if (result != null)
+                    {
+                        return ResultData<User>.Instance.Fill(true, result);
+                    }
+                    else
+                    {
+                        return ResultData<User>.Instance.Fill(false, "Bir Hata Oluştu");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return ResultData<User>.Instance.Fill(false, ex.Message);
+            }
 
         }
 
         public ResultData<int> GetUserType(int id)
         {
-            var result = Search(a => a.UserID == id);
-
-            if(result.Success == true)
+            using (this)
             {
-                var typeid = (int) result.Data.FirstOrDefault().UserTypeID;
-                return  ResultData<int>.Instance.Fill(true, typeid);
-            }
-            else
-            {
-                return ResultData<int>.Instance.Fill(false, result.Message);
-            }
-        }
-
-        public ResultData<User> Add(User user)
-        {
-            var result = Insert(user);
-
-            if(result.Success == true)
-            {
-                return ResultData<User>.Instance.Fill(true, result.Data);
-            }
-            else
-            {
-                return ResultData<User>.Instance.Fill(false, result.Message);
+                var result = _GetById(id);
+                return ResultData<int>.Instance.Fill(true, (int)result.UserTypeID);
             }
         }
 

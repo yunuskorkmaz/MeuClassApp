@@ -3,118 +3,125 @@ using MeuClass.Business.ResultData;
 using MeuClass.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace MeuClass.Business.Repository
 {
-    public class BaseRepository<TEntry> : IRepository<TEntry> where TEntry : class
+    public class BaseRepository<TEntry> : IDisposable where TEntry : class
     {
-        public ResultData<bool> Delete(TEntry entry)
+
+        private readonly DbContext _dbContext;
+        private readonly DbSet<TEntry> _dbSet;
+
+        public BaseRepository()
         {
-            using (var db = new ClassAppContext())
+           
+            _dbContext = new ClassAppContext();
+            _dbSet = _dbContext.Set<TEntry>();
+        }
+
+
+        public List<TEntry> _GetAll()
+        {
+            return _dbSet.ToList();
+        }
+
+        public IQueryable<TEntry> _GetAll(Expression<Func<TEntry, bool>> predicate)
+        {
+            return _dbSet.Where(predicate);
+        }
+
+
+        public TEntry _GetById(int id)
+        {
+            return _dbSet.Find(id);
+        }
+
+        public TEntry _Get(Expression<Func<TEntry, bool>> predicate)
+        {
+            return _dbSet.Where(predicate).SingleOrDefault();
+        }
+
+        public TEntry _Add(TEntry entity)
+        {
+           return _dbSet.Add(entity);
+        }
+
+        public TEntry _Update(TEntry entity)
+        {
+           var _entity = _dbSet.Attach(entity);
+            _dbContext.Entry(entity).State = EntityState.Modified;
+            return _entity;
+        }
+
+
+        public void _Delete(TEntry entity)
+        {
+           
+               
+                DbEntityEntry dbEntityEntry = _dbContext.Entry(entity);
+
+                if (dbEntityEntry.State != EntityState.Deleted)
+                {
+                    dbEntityEntry.State = EntityState.Deleted;
+                }
+                else
+                {
+                    _dbSet.Attach(entity);
+                    _dbSet.Remove(entity);
+                }
+            
+        }
+
+        public void _Delete(int id)
+        {
+            var entity = _GetById(id);
+            if (entity == null) return;
+            else
             {
-                try
-                {
-                    db.Set<TEntry>().Remove(entry);
-                    db.SaveChanges();
-
-                    return ResultData<bool>.Instance.Fill(true, true);
-                }
-                catch (Exception ex)
-                {
-                    return ResultData<bool>.Instance.Fill(false, "İşlem yapılırken hata oluştu." + ex.ToString());
-                }
-
-
+                _Delete(entity);
             }
         }
 
-        public ResultData<List<TEntry>> GetAll()
-        {
-            using (var db = new ClassAppContext())
-            {
-                try
-                {
-                    var result = db.Set<TEntry>().ToList();
-                    return ResultData<List<TEntry>>.Instance.Fill(true, result);
-                }
-                catch (Exception ex)
-                {
-                    return ResultData<List<TEntry>>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
-                }
 
+
+
+        public bool SaveChanges()
+        {
+            try
+            {
+                return Convert.ToBoolean(_dbContext.SaveChanges());
+            }
+            catch
+            {
+                return false ;
             }
         }
 
-        public ResultData<TEntry> GetByID(int id)
+        #region IDisposable Members
+        private bool disposed = false;
+        protected virtual void Dispose(bool disposing)
         {
-            using (var db = new ClassAppContext())
+            if (!this.disposed)
             {
-                try
+                if (disposing)
                 {
-                    var result = db.Set<TEntry>().Find(id);
-                    return ResultData<TEntry>.Instance.Fill(true, result);
-                }
-                catch(Exception ex)
-                {
-                    return ResultData<TEntry>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
-                }
-
-
-            }
-        }
-
-        public ResultData<TEntry> Insert(TEntry entry)
-        {
-            using (var db = new ClassAppContext())
-            {
-                try
-                {
-                    var addedEntry = db.Set<TEntry>().Add(entry);
-                    db.SaveChanges();
-                    return ResultData<TEntry>.Instance.Fill(true, addedEntry);
-                }
-                catch(Exception ex)
-                {
-                    return ResultData<TEntry>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
-                }
-            }
-        }
-
-        public ResultData<List<TEntry>> Search(Expression<Func<TEntry, bool>> where)
-        {
-            using (var db = new ClassAppContext())
-            {
-                try
-                {
-                    var result =  db.Set<TEntry>().Where(where).ToList();
-                    return ResultData<List<TEntry>>.Instance.Fill(true, result);
-                }
-                catch(Exception ex)
-                {
-                    return ResultData<List<TEntry>>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
-                }
-                
-            }
-        }
-
-        public ResultData<TEntry> Update(TEntry entry)
-        {
-            using (var db = new ClassAppContext())
-            {
-                try
-                {
-                    var updatedEntry = db.Set<TEntry>().Attach(entry);
-                    db.SaveChanges();
-                    return ResultData<TEntry>.Instance.Fill(true, updatedEntry);
-                }
-                catch(Exception ex)
-                {
-                    return ResultData<TEntry>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
+                    _dbContext.Dispose();
                 }
             }
 
+            this.disposed = true;
         }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+        #endregion
+
+
     }
 }
