@@ -2,6 +2,7 @@
 using MeuClass.Business.Repository;
 using MeuClass.Data;
 using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace MeuClass.Areas.Admin.Controllers
@@ -18,7 +19,7 @@ namespace MeuClass.Areas.Admin.Controllers
         {
 
             ViewBag.Title = "Üye Ekle | Admin Paneli";
-            var usertypes = UserTypeRepository.Instance.GetAll();
+            var usertypes = UserTypeRepository.Instance._getAll();
             return View(usertypes.Data);
 
         }
@@ -49,16 +50,22 @@ namespace MeuClass.Areas.Admin.Controllers
         }
         public ActionResult ViewUser()
         {
-            ViewBag.Title = "Ders Ekle | Admin Paneli";
-            var users = UserRepository.Instance.GetAll();
-            return View(users.Data);
+
+            var repo = UserRepository.Instance;
+            
+                ViewBag.Title = "Ders Ekle | Admin Paneli";
+
+                var users =  repo.GetList();
+                return  View(users.Data);
+            
+            
         }
 
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var user = UserRepository.Instance.GetByID(id);
-            var usertypes = UserTypeRepository.Instance.GetAll();
+            var user = UserRepository.Instance._getByID(id);
+            var usertypes = UserTypeRepository.Instance._getAll();
 
             var result = new UserViewModel()
             {

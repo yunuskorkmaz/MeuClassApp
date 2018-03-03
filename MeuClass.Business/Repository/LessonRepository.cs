@@ -9,7 +9,7 @@ namespace MeuClass.Business.Repository
 
         public ResultData<Lesson> Add(Lesson lesson)
         {
-            var result = Insert(lesson);
+            var result = _insert(lesson);
 
             if (result.Success == true)
             {

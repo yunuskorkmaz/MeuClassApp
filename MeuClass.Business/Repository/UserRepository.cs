@@ -3,6 +3,7 @@ using MeuClass.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MeuClass.Business.Repository
 {
@@ -12,11 +13,11 @@ namespace MeuClass.Business.Repository
 
         public ResultData<User> CheckAuth(string schoolNumber, string password)
         {
-            var result = Search(a => a.SchoolNumber == schoolNumber && a.Password == password);
+            var result = _search(a => a.SchoolNumber == schoolNumber && a.Password == password);
 
             if (result.Success == true)
             {
-                if (result.Data == null)
+                if (result.Data.Count == 0)
                 {
                     return ResultData<User>.Instance.Fill(false, "Kullanıcı adı yada şifre yanlış");
                 }
@@ -35,7 +36,7 @@ namespace MeuClass.Business.Repository
 
         public ResultData<int> GetUserType(int id)
         {
-            var result = Search(a => a.UserID == id);
+            var result = _search(a => a.UserID == id);
 
             if (result.Success == true)
             {
@@ -50,7 +51,7 @@ namespace MeuClass.Business.Repository
 
         public ResultData<User> Add(User user)
         {
-            var result = Insert(user);
+            var result = _insert(user);
 
             if (result.Success == true)
             {
@@ -66,8 +67,8 @@ namespace MeuClass.Business.Repository
         {
             try
             {
-                var result = Update(user);
-                if(result.Success == true)
+                var result = _update(user);
+                if (result.Success == true)
                 {
                     return ResultData<User>.Instance.Fill(true, result.Data);
 
@@ -77,30 +78,28 @@ namespace MeuClass.Business.Repository
                     return ResultData<User>.Instance.Fill(false, "Hata Oluştu");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               return ResultData<User>.Instance.Fill(false, ex.Message);
+                return ResultData<User>.Instance.Fill(false, ex.Message);
             }
 
         }
 
         public ResultData<List<User>> GetList()
         {
-
             try
             {
-                var result = GetAll();
-
-                if(result.Success == true)
+                var result = _getAll();
+                if (result.Success == true)
                 {
-                    return ResultData<List<User>>.Instance.Fill(true, result.Data);
+                    return (ResultData<List<User>>.Instance.Fill(true, result.Data));
+
                 }
                 else
                 {
-                    return ResultData<List<User>>.Instance.Fill(false, result.Message);
+                    return ResultData<List<User>>.Instance.Fill(false, result.Data);
                 }
 
-               
             }
             catch (Exception ex)
             {

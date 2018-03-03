@@ -8,12 +8,19 @@ using System.Linq.Expressions;
 
 namespace MeuClass.Business.Repository
 {
-    public class BaseRepository<TEntry> : IRepository<TEntry> where TEntry : class
+    public class BaseRepository<TEntry>  where TEntry : class
     {
-        public ResultData<bool> Delete(TEntry entry)
+        private ClassAppContext db;
+
+        public BaseRepository()
         {
-            using (var db = new ClassAppContext())
-            {
+            db = new ClassAppContext();
+        }
+
+        public ResultData<bool> _delete(TEntry entry)
+        {
+            var db = new ClassAppContext();
+            
                 try
                 {
                     db.Set<TEntry>().Remove(entry);
@@ -27,13 +34,13 @@ namespace MeuClass.Business.Repository
                 }
 
 
-            }
+            
         }
 
-        public ResultData<List<TEntry>> GetAll()
+        public ResultData<List<TEntry>> _getAll()
         {
-            using (var db = new ClassAppContext())
-            {
+            var db = new ClassAppContext();
+            
                 try
                 {
                     var result = db.Set<TEntry>().ToList();
@@ -44,13 +51,13 @@ namespace MeuClass.Business.Repository
                     return ResultData<List<TEntry>>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
                 }
 
-            }
+            
         }
 
-        public ResultData<TEntry> GetByID(int id)
+        public ResultData<TEntry> _getByID(int id)
         {
-            using (var db = new ClassAppContext())
-            {
+            var db = new ClassAppContext();
+            
                 try
                 {
                     var result = db.Set<TEntry>().Find(id);
@@ -62,10 +69,10 @@ namespace MeuClass.Business.Repository
                 }
 
 
-            }
+            
         }
 
-        public ResultData<TEntry> Insert(TEntry entry)
+        public ResultData<TEntry> _insert(TEntry entry)
         {
             using (var db = new ClassAppContext())
             {
@@ -82,10 +89,10 @@ namespace MeuClass.Business.Repository
             }
         }
 
-        public ResultData<List<TEntry>> Search(Expression<Func<TEntry, bool>> where)
+        public ResultData<List<TEntry>> _search(Expression<Func<TEntry, bool>> where)
         {
-            using (var db = new ClassAppContext())
-            {
+            var db = new ClassAppContext();
+            
                 try
                 {
                     var result =  db.Set<TEntry>().Where(where).ToList();
@@ -96,13 +103,13 @@ namespace MeuClass.Business.Repository
                     return ResultData<List<TEntry>>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
                 }
                 
-            }
+            
         }
 
-        public ResultData<TEntry> Update(TEntry entry)
+        public ResultData<TEntry> _update(TEntry entry)
         {
-            using (var db = new ClassAppContext())
-            {
+            var db = new ClassAppContext();
+            
                 try
                 {    
                     var updatedEntry = db.Set<TEntry>().Attach(entry);
@@ -115,7 +122,7 @@ namespace MeuClass.Business.Repository
                 {
                     return ResultData<TEntry>.Instance.Fill(false, "İşlem yapılırken hata oluştu" + ex.ToString());
                 }
-            }
+            
 
         }
     }
