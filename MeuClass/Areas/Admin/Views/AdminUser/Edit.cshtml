@@ -1,4 +1,5 @@
-﻿@model List<MeuClass.Data.UserType>
+﻿
+@model MeuClass.Areas.Admin.Models.UserViewModel
 
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -27,81 +28,75 @@
                     </li>
                 </ul>
             </div>
+
             <div class="body">
-                @using (Html.BeginForm("Edit", "AdminUser", FormMethod.Post, new { @class = "adminEditUserForm form-horizontal" }))
-                {
-                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="userName">Ad:</label>
-                        </div>
-                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="usereditName" name="usereditName" class="form-control" placeholder="Adınızı Giriniz">
+               
+
+                    @using (Html.BeginForm("Edit", "AdminUser", new { area = "Admin" }, FormMethod.Post, new { @class = "adminEditUserForm form-horizontal" }))
+                    {
+                        <input type="hidden" value="@Model.User.UserID" name="userid" />
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="userName">Ad:</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="usereditName" name="usereditName" value="@Model.User.Name" class="form-control" placeholder="Adınızı Giriniz">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="userSurname">Soyad:</label>
-                        </div>
-                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="usereditSurname" name="usereditSurname" class="form-control" placeholder="Soyadınızı Giriniz">
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="userSurname">Soyad:</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="usereditSurname" value="@Model.User.Surname" name="usereditSurname" class="form-control" placeholder="Soyadınızı Giriniz">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="userNumber">Okul Numarası:</label>
-                        </div>
-                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="usereditNumber" name="usereditNumber" class="form-control" placeholder="Okul Numaranızı Giriniz">
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="userNumber">Okul Numarası:</label>
+                            </div>
+                            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="usereditNumber" value="@Model.User.SchoolNumber" name="usereditNumber" class="form-control" placeholder="Okul Numaranızı Giriniz">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="userPassword">Şifre:</label>
-                        </div>
-                        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="password" id="usereditPassword" name="usereditPassword" class="form-control" placeholder="Şifrenizi Giriniz">
-                                </div>
+                        <div class="row clearfix">
+                            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                                <label for="personnelName">Üyelik Tipi:</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <select class="form-control " id="usereditType" name="usereditType">
+                                        
+                                    @*//kolay gesin*@
+                                   
+                                       @foreach (var item in Model.UserTypes)
+                                       {
+                                            <option @(Model.User.UserTypeID == item.UserTypeID ? "selected=\"selected\"" : "")  value="@item.UserTypeID">@item.UserTypeName</option>
+                                       }
+                                   
+                                </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
-                            <label for="personnelName">Üyelik Tipi:</label>
+                        <div class="row clearfix">
+                            <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect">Değişiklikleri Kaydet</button>
+                            </div>
                         </div>
-                        <div class="col-sm-10">
-                            <select class="form-control show-tick" id="usereditType" name="usereditType">
-                               
-                                    @if (Model.Count > 0)
-                                {
-                                    foreach (var user in Model)
-                                    {
-                                        <option value="@user.UserTypeID">@user.UserTypeName</option>
-                                    }
-                                }
-                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row clearfix">
-                        <div class="col-lg-offset-2 col-md-offset-2 col-sm-offset-4 col-xs-offset-5">
-                            <button type="submit" class="btn btn-primary m-t-15 waves-effect">Değişiklikleri Kaydet</button>
-                        </div>
-                    </div>
-                }
+                     }
+
+
+                
 
             </div>
         </div>

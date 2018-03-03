@@ -1,4 +1,5 @@
-﻿using MeuClass.Business.Repository;
+﻿using MeuClass.Areas.Admin.Models;
+using MeuClass.Business.Repository;
 using MeuClass.Data;
 using System;
 using System.Web.Mvc;
@@ -46,16 +47,50 @@ namespace MeuClass.Areas.Admin.Controllers
                 return RedirectToAction("Add", "AdminUser", new { Area = "Admin" });
             }
         }
-        public ActionResult ViewUser(string number)
+        public ActionResult ViewUser()
         {
-            ViewBag.Number = number;
-            return View();
+            ViewBag.Title = "Ders Ekle | Admin Paneli";
+            var users = UserRepository.Instance.GetAll();
+            return View(users.Data);
         }
 
-        public ActionResult Edit(string number)
+        [HttpGet]
+        public ActionResult Edit(int id)
         {
-            ViewBag.Number = number;
-            return View();
+            var user = UserRepository.Instance.GetByID(id);
+            var usertypes = UserTypeRepository.Instance.GetAll();
+
+            var result = new UserViewModel()
+            {
+                User = user.Data,
+                UserTypes = usertypes.Data
+            };
+
+            return View(result);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(FormCollection form)
+        {
+            var user = new User()
+            {
+                UserID = Convert.ToInt32(form.Get("userid")),
+                Name = form.Get("usereditName"),
+                Surname = form.Get("usereditSurname"),
+                SchoolNumber = form.Get("usereditNumber"),
+                UserTypeID =  Convert.ToInt32(form.Get("usereditType")) ,
+                UpdateDate = DateTime.Now
+
+            };
+            var UpdateUser = UserRepository.Instance.Update_User(user);
+
+            if (UpdateUser.Success == false)
+            {
+                TempData["error"] = UpdateUser.Message;
+               
+            }
+            return RedirectToAction("Edit", "AdminUser", new { Area = "Admin" ,@id= Convert.ToInt32(form.Get("userid"))});
+
         }
     }
 }
