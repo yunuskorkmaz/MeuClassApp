@@ -1,9 +1,8 @@
-﻿using MeuClass.Admin;
-using Microsoft.AspNet.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 
 namespace MeuClass.Hubs
 {
-    public class MessagaService : BaseController
+    public class MessagaService 
     {
         //public static void Connect(string _connectionID, string _username)
         //{

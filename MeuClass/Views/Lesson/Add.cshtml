@@ -1,0 +1,27 @@
+﻿@model MeuClass.Data.Lesson
+<div class="panel panel-default">
+
+    @using (Html.BeginForm("Add", "Lesson", FormMethod.Post))
+    {
+        <div class="panel-body">
+
+
+            <div class="form-group">
+                <label for="LessonName">Ders Adı</label>
+                <input type="text" class="form-control" id="LessonName" placeholder="Ders ismi" name="LessonName">
+            </div>
+
+
+        </div>
+        <div class="panel-footer" style="text-align:right">
+            <button class="btn btn-primary" type="submit">Kaydet</button>
+        </div>
+
+    }
+</div>
+
+@if (ViewBag.Code != null)
+{
+    <div> @ViewBag.Code </div>
+    <div> @ViewBag.Name </div>
+}

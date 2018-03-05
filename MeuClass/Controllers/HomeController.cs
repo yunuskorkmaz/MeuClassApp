@@ -49,6 +49,7 @@ namespace MeuClass.Controllers
                 Session["user_id"] = result.Data.UserID;
                 Session["name"] = result.Data.Name;
                 Session["surname"] = result.Data.Surname;
+                Session["usertypeid"] = result.Data.UserTypeID;
                 return RedirectToAction("Index", "Home");
             }
 

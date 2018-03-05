@@ -1,8 +1,14 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using MeuClass.Business.Repository;
 using MeuClass.Data;
-using System;
+using MeuClass.Filters;
 using System.Web.Mvc;
+using MeuClass.Business.ResultData;
+using MeuClass.Models;
 
 namespace MeuClass.Controllers
 {
@@ -14,46 +20,83 @@ namespace MeuClass.Controllers
             return View();
         }
 
-        public ActionResult Detail(string number)
+        public ActionResult Detail(int id, string subview = "")
         {
-            ViewBag.Number = number;
+            var lesson = LessonRepository.Instance._getByID(id);
+            var teacher = lesson.Data.LessonAccess.Where(a => a.User.UserTypeID == 2).FirstOrDefault().User;
+            ViewBag.SubView = subview;
+
+            var data = new LessonDetailViewModel()
+            {
+                Lesson = lesson.Data,
+                Teacher = teacher
+            };
+
+
+            return View(data);
+        }
+
+        [CheckAuth(UserRole.OnlyTeacher)]
+        [HttpGet]
+        public ActionResult Add()
+        {
             return View();
         }
 
-        public ActionResult AddLesson()
+        [CheckAuth(UserRole.OnlyTeacher)]
+        [HttpPost]
+        public ActionResult Add(Lesson lesson)
         {
-            if (Session["user_id"] == null)
+            lesson.LessonAccess = new Collection<LessonAccess>()
             {
-                return RedirectToAction("Login", "Home");
-            }
-            else
-            {
-                ViewBag.Title = "Ders Ekle";
-                return View();
-            }
-        }
-        public ActionResult DoRegister (FormCollection form)
-        {
-            var lesson = new Lesson()
-            {
-                LessonCode = form.Get("lessonCode"),
-                LessonName = form.Get("lessonName"),
-                RecordDate = DateTime.Now
+                new LessonAccess()
+                {
+                    UserID = Convert.ToInt32(Session["user_id"])
+                }
             };
-
             var insert = LessonRepository.Instance.Add(lesson);
+            return RedirectToAction("Detail", "Lesson", new { id = insert.Data.LessonID });
+        }
 
-            if (insert.Success == false)
-            { 
-                TempData["error"] = insert.Message;
-                return RedirectToAction("detail", "Lesson");
+        [HttpGet]
+        [Route("Lesson/Join/{code}/{id}")]
+        public ActionResult Join(string code, int id = 0)
+        {
+            ResultData<Lesson> data;
+
+
+
+            if (id != 0)
+            {
+                data = LessonRepository.Instance.Join(code, id);
+            }
+            else
+            {
+                data = ResultData<Lesson>.Instance.Fill(false, "Hata var");
+            }
+
+            ResultData<Lesson> result = new ResultData<Lesson>();
+            if (data.Success == true)
+            {
+                result.Success = true;
+                result.Data = new Lesson
+                {
+                    LessonName = data.Data.LessonName,
+                    LessonID = data.Data.LessonID
+                };
 
             }
             else
             {
-                return RedirectToAction("AddLesson", "Lesson");
+                result.Success = false;
+                result.Data = null;
+                result.Message = data.Message;
             }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+
         }
+
 
     }
 }

@@ -12,26 +12,27 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Barlow+Semi+Condensed:400,500" rel="stylesheet">
     <script src="~/Content/js/jquery-3.2.1.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <title>@ViewBag.Title - Sosyal Ağ</title>
 </head>
 
-<body>
-    <nav class="navbar navbar-default myNavbar">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+<body style="background:#eef2f6">
+<nav class="navbar navbar-default myNavbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
                     aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Mersin Üniversitesi</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                </ul>
-                @using (Html.BeginForm("Search", "User", FormMethod.Post, new { @class = "navbar-form navbar-left" })) {
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Mersin Üniversitesi</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+            </ul>
+            @using (Html.BeginForm("Search", "User", FormMethod.Post, new { @class = "navbar-form navbar-left" })) {
                 <div class="form-group">
                     <div id="imaginary_container">
                         <div class="input-group stylish-input-group">
@@ -45,70 +46,90 @@
                     </div>
 
                 </div>
-                }
-                <ul class="nav navbar-nav navbar-right myNavbar-social">
-                    <li role="presentation">
-                        <a href="#">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#">
-                            <i class="fa fa-envelope-open" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li role="presentation">
-                        <a href="#">
-                            <i class="fa fa-heart" aria-hidden="true"></i>
-                            <span class="badge">3</span>
-                        </a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/img/profile.jpg" alt="" class="img-responsive img-circle profileImage">
-                            <strong>@Session["name"] @Session["surname"]</strong>
-                            <span class="glyphicon glyphicon-chevron-down"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <div class="myNavbar-login">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <p class="text-center">
-                                                <span class="glyphicon glyphicon-user icon-size"></span>
-                                            </p>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <p class="text-left">
-                                                <strong>@Session["name"] @Session["surname"]</strong>
-                                            </p>
-                                            <p class="text-left small">mail@gmail.com</p>
-                                            <p class="text-left">
-                                                <a href="#" class="btn btn-primary btn-block btn-sm">Ayarlar</a>
-                                            </p>
-                                        </div>
+            }
+            <ul class="nav navbar-nav navbar-right myNavbar-social">
+                <li role="presentation">
+                    <a href="#">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#">
+                        <i class="fa fa-envelope-open" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li role="presentation">
+                    <a href="#">
+                        <i class="fa fa-heart" aria-hidden="true"></i>
+                        <span class="badge">3</span>
+                    </a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/img/profile.jpg" alt="" class="img-responsive img-circle profileImage">
+                        <strong>@Session["name"] @Session["surname"]</strong>
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <div class="myNavbar-login">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <p class="text-center">
+                                            <span class="glyphicon glyphicon-user icon-size"></span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-8">
+                                        <p class="text-left">
+                                            <strong>@Session["name"] @Session["surname"]</strong>
+                                        </p>
+                                        <p class="text-left small">mail@gmail.com</p>
+                                        <p class="text-left">
+                                            <a href="#" class="btn btn-primary btn-block btn-sm">Ayarlar</a>
+                                        </p>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="myNavbar-login navbar-login-session">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <p>
-                                                @Html.ActionLink("Çıkış Yap","Logout","Home",new { @class= "btn btn-danger btn-block" })
-                                            </p>
-                                        </div>
+                            </div>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="myNavbar-login navbar-login-session">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <p>
+                                            @Html.ActionLink("Çıkış Yap","Logout","Home",new { @class= "btn btn-danger btn-block" })
+                                        </p>
                                     </div>
                                 </div>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
         </div>
-    </nav>
-    <section class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padl-0 padr-0" id="leftmenu">
+    </div>
+</nav>
+
+<div class="row">
+    <div class="container">
+        <div class="col-lg-4">
+            @{
+                Html.RenderAction("MainPageInfo", "User", new { area = "Partial" });
+                Html.RenderAction("MainPageSide", "Lesson", new { area = "Partial" });
+
+            }
+        </div>
+        <div class="col-lg-8">
+            <div class="row">
+              
+                        @RenderBody()
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<section class="col-xs-2 col-sm-2 col-md-2 col-lg-2 padl-0 padr-0" id="leftmenu">
  
         <!-- Sidebar -->
         <div id="leftmenu-container">
@@ -150,11 +171,12 @@
 
     </section>
 
-    <section class="col-xs-10 col-sm-10 col-md-10 col-lg-10 padl-0"> @RenderBody()</section>
+    <section class="col-xs-10 col-sm-10 col-md-10 col-lg-10 padl-0"> </section>
 
 
 
-    <script src="~/Content/js/bootstrap.min.js"></script>
+<script src="~/Content/js/bootstrap.min.js"></script>
+
     <script>
         $(function () {
 

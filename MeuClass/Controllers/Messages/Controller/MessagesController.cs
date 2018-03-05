@@ -1,13 +1,8 @@
-﻿using MeuClass.Admin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace MeuClass.Controllers.Messages.Controller
 {
-    public class MessagesController : BaseController
+    public class MessagesController
     {
         // GET: Messages
 
@@ -15,8 +10,8 @@ namespace MeuClass.Controllers.Messages.Controller
 
         public ActionResult Index()
         {
-            
-            return View();
+
+            return null;
 
         }
     }

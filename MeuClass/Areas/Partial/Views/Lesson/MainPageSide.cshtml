@@ -1,0 +1,93 @@
+﻿@model List<MeuClass.Data.Lesson>
+
+<script>
+    function ModelJoinLesson() {
+        swal({
+            text: 'Ders Kodunu Giriniz',
+            content: "input",
+            button: {
+                text: "Katıl",
+                closeModal: false,
+            },
+        })
+            .then(code => {
+                if (!code) throw null;
+                @{
+                    var url = @String.Format("{0}://{1}:{2}", Request.Url.Scheme, Request.Url.Host, Request.Url.Port);
+                    url += "/Lesson/Join/";
+                }
+                return fetch('@url' + code+"/"+ @Session["user_id"]);
+            })
+            .then(results => {
+
+                return results.json();
+            })
+            .then(json => {
+                var resultdata = json;
+                console.log(resultdata);
+
+                if (resultdata.Success == false) {
+                    return swal(resultdata.Message);
+                }
+                swal({
+                    title: resultdata.Data.LessonName + " Dersine Katıldınız",
+
+                        icon: "success",
+                        button: "Tamam"
+
+                    })
+                    .then((val) => {
+                        @{ var detail = @String.Format("{0}://{1}:{2}", Request.Url.Scheme, Request.Url.Host, Request.Url.Port);}
+                        window.location.href = "@detail"+ "/Lesson/Detail/" + resultdata.Data.LessonID;
+                    });
+
+            })
+            .catch(err => {
+                if (err) {
+                    swal("Oh noes!", "The AJAX request failed!", "error");
+                } else {
+                    swal.stopLoading();
+                    swal.close();
+                }
+            });
+
+        return false;
+    }
+</script>
+
+<div class="panel panel-default">
+
+
+    <div class="panel-heading">
+        <h5>Dersler</h5>
+    </div>
+    <div class="list-group">
+
+        @{
+            if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+
+                    @Html.ActionLink(item.LessonName, "Detail", "Lesson", new { area = "", id = item.LessonID }, new { @class = "list-group-item" })
+                }
+            }
+        }
+
+        <a href="#" class="list-group-item">Tüm Sınıflar</a>
+        @if (Convert.ToInt32(Session["usertypeid"]) == 2)
+        {
+            @Html.ActionLink("Ders Oluştur", "Add", "Lesson", new { area = "" }, new { @class = "list-group-item" })
+        }
+        else
+        {
+            <a href="#" onclick="ModelJoinLesson()" class="list-group-item">Derse Katıl</a>
+           
+        }
+
+
+    </div>
+
+
+</div>
+

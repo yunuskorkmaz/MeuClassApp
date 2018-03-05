@@ -13,7 +13,7 @@ namespace MeuClass.Business.Repository
 
         public ResultData<User> CheckAuth(string schoolNumber, string password)
         {
-            var result = _search(a => a.SchoolNumber == schoolNumber && a.Password == password);
+            var result = _search(a => (a.MailAddress==schoolNumber || a.SchoolNumber == schoolNumber) && a.Password == password);
 
             if (result.Success == true)
             {

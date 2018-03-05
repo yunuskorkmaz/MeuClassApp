@@ -1,4 +1,70 @@
-﻿
+﻿@model MeuClass.Models.LessonDetailViewModel
+ 
+    
+
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h2>
+            @Model.Lesson.LessonName
+        </h2>
+        <p>
+            @Model.Teacher.Name @Model.Teacher.Surname
+        </p>
+        
+    </div>
+    <div class="panel-body">
+      
+
+        <ul class="nav nav-tabs">
+            @{
+                var contents = "";
+                var files = "";
+                var member = "";
+
+                if (ViewBag.SubView == ""){ contents = "active";}
+                if (ViewBag.SubView == "files"){ files = "active";}
+                if (ViewBag.SubView == "members"){ member = "active";}
+            }
+            <li role="presentation" class="@contents">
+                @Html.ActionLink("Gönderiler", "Detail", new {id = Model.Lesson.LessonID})
+            </li>
+            <li role="presentation" class="@files">
+                @Html.ActionLink("Dosyalar", "Detail", new {id = Model.Lesson.LessonID, subview = "files"})
+            </li>
+            <li role="presentation" class="@member">
+                @Html.ActionLink("Üyeler", "Detail", new {id = Model.Lesson.LessonID, subview = "members"})
+            </li>
+        </ul>
+
+       
+    </div>
+    
+    
+</div>
+
+<div class="panel panel-default">
+    
+    <div class="panel-body">
+
+        @switch (ViewBag.SubView)
+        {
+            case "":
+                Html.RenderAction("DetailContents", "Lesson", new {area = "Partial", lessonid = Model.Lesson.LessonID});
+                break;
+            case "files":
+                Html.RenderAction("DetailFiles", "Lesson", new {area = "Partial", lessonid = Model.Lesson.LessonID});
+                break;
+            case "members":
+                Html.RenderAction("DetailMembers", "Lesson", new {area = "Partial", lessonid = Model.Lesson.LessonID});
+                break;
+            default:
+                Html.RenderAction("DetailContents", "Lesson", new {area = "Partial", lessonid = Model.Lesson.LessonID});
+                break;
+        }
+    </div>
+</div>
+
+
 <div class="col-lg-12 col-sm-12 padl-0 padr-0 border">
 
     <div class="col-md-12 padr-0 padl-0">
