@@ -2,11 +2,9 @@
     &-left {
         &-profile{
             &-follow{
-                display: flex;
-                justify-content:flex-end;
-                button{
-                    margin-right:$gutter;
-                }
+                
+                margin-top:7px;
+               
             }
         }
         .about {
