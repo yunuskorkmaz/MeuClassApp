@@ -1,3 +1,39 @@
+.shareBox {
+        
+          
+            .shareBox-Right {
+                .shareBox-Name {
+                    a {
+                        color:blue;                    }
+                }
+                .shareBox-ShareInfo{
+                    margin-top:15px;
+                }
+            }
+         
+        
+        &-Operations {
+            padding-top:7px;
+            padding-bottom:7px;
+            margin-top:20px;
+           
+          
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                li {
+                    float: left;
+                    a {
+                       margin-right:16px;
+                    }
+                }
+            }
+        }
+    
+}
+
 .button {
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     display: inline-flex;

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,OAAO;EACH,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,OAAO",
+"sources": ["../../../sass/Login/global/header.scss"],
+"names": [],
+"file": "header.css"
+}
