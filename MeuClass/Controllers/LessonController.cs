@@ -20,10 +20,11 @@ namespace MeuClass.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult Detail(int id, string subview = "")
         {
             var lesson = LessonRepository.Instance._getByID(id);
-            var teacher = lesson.Data.LessonAccess.Where(a => a.User.UserTypeID == 2).FirstOrDefault().User;
+            var teacher = lesson.Data.LessonAccess.FirstOrDefault(a => a.User.UserTypeID == 2)?.User;
             ViewBag.SubView = subview;
 
             var data = new LessonDetailViewModel()
@@ -34,6 +35,25 @@ namespace MeuClass.Controllers
 
 
             return View(data);
+        }
+
+        [HttpPost]
+        public ActionResult Detail(int id,FormCollection form)
+        {
+            var content = form["content"];
+
+            if (content != String.Empty)
+            {
+                LessonRepository.Instance.AddLessonContent(new LessonContent()
+                {
+                    AddedUserID = Convert.ToInt32(Session["user_id"]),
+                    LessonID = id,
+                    RecordDate = DateTime.Now,
+                    LessonContentText = content.Trim()
+                });
+            }
+
+            return Detail(id, "");
         }
 
         [CheckAuth(UserRole.OnlyTeacher)]

@@ -97,7 +97,8 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p>
-                                                @Html.ActionLink("Çıkış Yap","Logout","Home",new { @class= "btn btn-danger btn-block" })
+                                                
+                                                @Html.ActionLink("Çıkış Yap","Logout","Home",new { area =""},new {@class="btn btn-danger btn-block"})
                                             </p>
                                         </div>
                                     </div>
@@ -168,7 +169,7 @@
                                 <img src="/Content/img/users/noImage.png" alt="" class="img-responsive">
                             </div>
                             <div class="col-sm-9 indexProfileBox-Text">
-                                <h4>Şefik Furkan Bayram</h4>
+                                <h4>@Session["name"] @Session["surname"]</h4>
                                 <h5>Öğrenci - Mersin Üniversitesi</h5>
                               
 

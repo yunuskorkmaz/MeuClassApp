@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MeuClass.Business.ResultData;
 using MeuClass.Data;
 using System.Collections.ObjectModel;
@@ -25,6 +26,33 @@ namespace MeuClass.Business.Repository
             {
                 return ResultData<Lesson>.Instance.Fill(false, result.Message);
             }
+        }
+
+        public List<LessonContent> GetLessonContent(int lessonID)
+        {
+            var db = new ClassAppContext();
+
+            return db.LessonContent.Where(l => l.LessonID == lessonID)?.ToList();
+        }
+
+        public bool AddLessonContent(LessonContent content)
+        {
+            var db = new ClassAppContext();
+
+            try
+            {
+                var added = db.LessonContent.Add(content);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+
+
+
         }
 
       

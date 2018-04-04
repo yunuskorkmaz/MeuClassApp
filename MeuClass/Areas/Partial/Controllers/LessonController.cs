@@ -17,7 +17,9 @@ namespace MeuClass.Areas.Partial.Controllers
 
         public ActionResult DetailContents(int lessonid)
         {
-            return View();
+            var lessonContents = LessonRepository.Instance.GetLessonContent(lessonid);
+
+            return View(lessonContents);
         }
 
         public ActionResult DetailFiles(int lessonid)
