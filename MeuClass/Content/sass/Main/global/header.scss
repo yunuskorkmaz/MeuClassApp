@@ -1,10 +1,25 @@
 .myNavbar {
+    padding-left:15px;
+    background-color: $navbar-color;
     .navbar-brand,
     .navbar-nav>li>a {
-        color: $navbar-color;
+        background-color: $navbar-color;
+        color:white;
         line-height: $navbar-height;
         height: $navbar-height;
         padding-top: 0;
+        &:hover{
+            color:white;
+            background-color:purple;
+        }
+        &:active{
+            color:white;
+            background-color:purple;
+        }
+        &:focus{
+            color:white;
+            background-color:purple;
+        }
     }
     
     border:0;
