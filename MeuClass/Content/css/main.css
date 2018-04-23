@@ -94,28 +94,100 @@ button:focus {
   margin-left: auto;
   margin-right: auto; }
 
-#leftmenu-container ul li {
-  text-transform: uppercase; }
-  #leftmenu-container ul li a {
-    padding: 20px;
-    font-family: "Barlow Semi Condensed", sans-serif;
-    font-size: 18px;
-    color: #6E0985; }
-    #leftmenu-container ul li a:hover {
-      color: white;
-      background-color: purple; }
-    #leftmenu-container ul li a i {
-      margin-right: 15px; }
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
 
+#wrapper.toggled {
+  padding-left: 200px; }
+
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: 200px;
+  width: 0;
+  height: 100%;
+  margin-left: -200px;
+  overflow-y: auto;
+  background: #eef2f6;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+  #sidebar-wrapper .sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 200px;
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    #sidebar-wrapper .sidebar-nav li {
+      text-indent: 20px;
+      line-height: 40px; }
+      #sidebar-wrapper .sidebar-nav li a {
+        color: #6E0985;
+        display: block;
+        text-decoration: none;
+        font-size: 18px;
+        font-family: 'Tajawal', sans-serif; }
+        #sidebar-wrapper .sidebar-nav li a:hover {
+          color: white;
+          background-color: purple;
+          text-decoration: none; }
+        #sidebar-wrapper .sidebar-nav li a:active {
+          text-decoration: none; }
+        #sidebar-wrapper .sidebar-nav li a:focus {
+          text-decoration: none; }
+    #sidebar-wrapper .sidebar-nav .sidebar-brand {
+      height: 65px;
+      font-size: 18px;
+      line-height: 60px; }
+      #sidebar-wrapper .sidebar-nav .sidebar-brand a {
+        color: #999999; }
+      #sidebar-wrapper .sidebar-nav .sidebar-brand:hover {
+        color: #fff;
+        background: none; }
+
+#wrapper.toggled #sidebar-wrapper {
+  width: 200px; }
+
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px; }
+
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  margin-right: -200px; }
+
+/* Sidebar Styles */
 .myNavbar {
+  padding-left: 15px;
+  background-color: purple;
   border: 0;
   border-radius: 0; }
   .myNavbar .navbar-brand,
   .myNavbar .navbar-nav > li > a {
-    color: purple;
+    background-color: purple;
+    color: white;
     line-height: 50px;
     height: 50px;
     padding-top: 0; }
+    .myNavbar .navbar-brand:hover,
+    .myNavbar .navbar-nav > li > a:hover {
+      color: white;
+      background-color: purple; }
+    .myNavbar .navbar-brand:active,
+    .myNavbar .navbar-nav > li > a:active {
+      color: white;
+      background-color: purple; }
+    .myNavbar .navbar-brand:focus,
+    .myNavbar .navbar-nav > li > a:focus {
+      color: white;
+      background-color: purple; }
   .myNavbar-login {
     width: 305px;
     padding: 10px;
