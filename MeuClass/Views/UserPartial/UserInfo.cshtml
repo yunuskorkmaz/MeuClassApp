@@ -1,4 +1,4 @@
-﻿
+﻿@model MeuClass.Data.User
 <div class="content-left">
     <div class="panel panel-default about">
         <div class="panel-body">
@@ -22,7 +22,7 @@
         <div class="panel-body">
             <div class="about-content">
                 <h5>ID</h5>
-                <span>@ViewBag.ID</span>
+                <span>@Session["user_id"]</span>
             </div>
             <div class="about-content">
                 <h5>E-mail</h5>

@@ -1,4 +1,7 @@
 ﻿
+using MeuClass.Business.Repository;
+using MeuClass.Data;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -12,11 +15,14 @@ namespace MeuClass.Controllers
             return View();
         }
 
-        public ActionResult Profile(string number)
+        [HttpGet]
+        public ActionResult Profile(int number)
         {
-            ViewBag.Number = number;
-            return View();
+            var user = UserRepository.Instance.GetProfileInfo(number).Data;
+           
+            return View(user);
         }
+        
 
         public ActionResult About(string number)
         {

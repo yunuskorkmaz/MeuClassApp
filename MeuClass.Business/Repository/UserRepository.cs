@@ -34,6 +34,22 @@ namespace MeuClass.Business.Repository
 
         }
 
+        public ResultData<User> GetProfileInfo(int _userid)
+        {
+            var db = new ClassAppContext();
+
+            var user = db.User.FirstOrDefault(a => a.UserID == _userid);
+
+            if(user != null)
+            {
+                return ResultData<User>.Instance.Fill(true, user);
+            }
+            else
+            {
+                return ResultData<User>.Instance.Fill(false, "Kullanıcı Bulunamdı");
+            }
+        }
+
         public ResultData<int> GetUserType(int id)
         {
             var result = _search(a => a.UserID == id);
