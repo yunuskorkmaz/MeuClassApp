@@ -36,8 +36,14 @@
 .radius-0 {
   border-radius: 0px !important; }
 
+.bg-light-blue {
+  background-color: #3498DB !important; }
+
+.white-text {
+  color: white !important; }
+
 .shareBox .shareBox-Right .shareBox-Name a {
-  color: blue; }
+  color: #E74C3C; }
 
 .shareBox .shareBox-Right .shareBox-ShareInfo {
   margin-top: 15px; }
@@ -76,6 +82,13 @@
   .input-text::placeholder {
     color: black;
     opacity: 0.7; }
+
+.clickable {
+  cursor: pointer; }
+
+.panel-heading span {
+  margin-top: -20px;
+  font-size: 15px; }
 
 body {
   font-family: 'Source Sans Pro', sans-serif; }
@@ -128,14 +141,14 @@ button:focus {
       text-indent: 20px;
       line-height: 40px; }
       #sidebar-wrapper .sidebar-nav li a {
-        color: #6E0985;
+        color: #3498DB;
         display: block;
         text-decoration: none;
-        font-size: 18px;
+        font-size: 20px;
         font-family: 'Tajawal', sans-serif; }
         #sidebar-wrapper .sidebar-nav li a:hover {
           color: white;
-          background-color: purple;
+          background-color: #3498DB;
           text-decoration: none; }
         #sidebar-wrapper .sidebar-nav li a:active {
           text-decoration: none; }
@@ -166,12 +179,12 @@ button:focus {
 /* Sidebar Styles */
 .myNavbar {
   padding-left: 15px;
-  background-color: purple;
+  background-color: #3498DB;
   border: 0;
   border-radius: 0; }
   .myNavbar .navbar-brand,
   .myNavbar .navbar-nav > li > a {
-    background-color: purple;
+    background-color: #3498DB;
     color: white;
     line-height: 50px;
     height: 50px;
@@ -179,15 +192,15 @@ button:focus {
     .myNavbar .navbar-brand:hover,
     .myNavbar .navbar-nav > li > a:hover {
       color: white;
-      background-color: purple; }
+      background-color: #3498DB; }
     .myNavbar .navbar-brand:active,
     .myNavbar .navbar-nav > li > a:active {
       color: white;
-      background-color: purple; }
+      background-color: #3498DB; }
     .myNavbar .navbar-brand:focus,
     .myNavbar .navbar-nav > li > a:focus {
       color: white;
-      background-color: purple; }
+      background-color: #3498DB; }
   .myNavbar-login {
     width: 305px;
     padding: 10px;
@@ -209,7 +222,7 @@ button:focus {
   margin-right: 10px; }
 
 .shareBox .shareBox-Right .shareBox-Name a {
-  color: blue; }
+  color: #E74C3C; }
 
 .shareBox .shareBox-Right .shareBox-ShareInfo {
   margin-top: 15px; }
@@ -249,9 +262,18 @@ button:focus {
     color: black;
     opacity: 0.7; }
 
-.indexProfileBox-Text h4, .indexProfileBox-Text h5 {
-  padding-top: 4px;
-  padding-bottom: 4px; }
+.clickable {
+  cursor: pointer; }
+
+.panel-heading span {
+  margin-top: -20px;
+  font-size: 15px; }
+
+.indexProfileBox {
+  border: 1px solid #3498DB; }
+  .indexProfileBox-Text h4, .indexProfileBox-Text h5 {
+    padding-top: 4px;
+    padding-bottom: 4px; }
 
 .content-left-profile-follow {
   margin-top: 7px; }

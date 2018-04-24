@@ -55,15 +55,13 @@
     }
 </script>
 
-<div class="panel panel-default">
-
-
-    <div class="panel-heading">
-        <h5>Dersler</h5>
-    </div>
-    <div class="list-group">
-
-        @{
+			<div class="panel bg-light-blue">
+				<div class="panel-heading">
+					<h3 class="panel-title white-text">Dersler</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up white-text"></i></span>
+				</div>
+				<div class="panel-body pad-0">
+                      @{
             if (Model.Count > 0)
             {
                 foreach (var item in Model)
@@ -84,10 +82,31 @@
             <a href="#" onclick="ModelJoinLesson()" class="list-group-item">Derse Katıl</a>
            
         }
+                </div>
+			</div>
+	<div style="border:1px solid #3498DB" class="panel">
+				<div class="panel-heading bg-light-blue">
+					<h3 class="panel-title white-text">Takvim</h3>
+					<span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up white-text"></i></span>
+				</div>
+				<div class="panel-body">
+                 <span>Tarihi yaklaşan ödeviniz bulunmamaktadır.</span>
+                </div>
+			</div>
 
 
-    </div>
 
-
-</div>
-
+<script>
+    $(document).on('click', '.panel-heading span.clickable', function(e){
+    var $this = $(this);
+	if(!$this.hasClass('panel-collapsed')) {
+		$this.parents('.panel').find('.panel-body').slideUp();
+		$this.addClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+	} else {
+		$this.parents('.panel').find('.panel-body').slideDown();
+		$this.removeClass('panel-collapsed');
+		$this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+	}
+})
+</script>
