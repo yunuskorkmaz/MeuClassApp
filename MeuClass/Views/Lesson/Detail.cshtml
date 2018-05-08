@@ -59,7 +59,25 @@
     </form>
 </div>
 
+@*[HttpPost]
+        public ActionResult Profile(int number,FormCollection form)
+        {
+            var comment = form["comment"];
+            var lesson_content_id = form["LessonContentId"];
 
+            if (comment != String.Empty)
+            {
+                LessonRepository.Instance.AddLessonComment(new LessonComment()
+                {
+                    AddedUserID = Convert.ToInt32(Session["user_id"]),
+                    LessonContentID=Convert.ToInt32(lesson_content_id),
+                    RecordDate = DateTime.Now,
+                    LessonCommentText = comment.Trim()
+                });
+            }
+            var user = UserRepository.Instance.GetProfileInfo(number).Data;
+            return View(user);
+        }*@
 
         @switch (ViewBag.SubView)
     {
@@ -79,7 +97,7 @@
 
 
 
-<div class="col-lg-12 col-sm-12 padl-0 padr-0 border">
+@*<div class="col-lg-12 col-sm-12 padl-0 padr-0 border">
 
     <div class="col-md-12 padr-0 padl-0">
 
@@ -170,4 +188,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@

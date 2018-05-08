@@ -1,124 +1,57 @@
-﻿@{ Layout = "~/Views/Shared/View.cshtml"; }
-<div class="panel panel-default shareBox">
-    <div class="panel-body ">
-        <div class="shareBox-Left col-sm-1">
-            <div class="shareBoxUserInfoImage">
-                <img src="/Content/img/users/noImage.png" alt="" class="img-responsive">
-            </div>
-        </div>
-        <div class="shareBox-Right col-sm-11">
-            <div class="shareBox-Name col-sm-12">
-                <span>
-                    <a href="">Furkan Bayram</a> tarafından
-                    <a href="">Sinir Ağları</a>'na</span>
-            </div>
-            <div class="shareBox-ShareInfo col-sm-12">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi fugiat eaque, sit nostrum incidunt laudantium totam cupiditate
-                eveniet in nobis doloribus iure, delectus numquam consequatur rerum veniam aspernatur suscipit earum.
-            </div>
-        </div>
-        <div class="shareBox-Operations col-sm-12">
-            <div class="col-sm-1"></div>
-            <div class="col-sm-11">
-                <ul class="col-sm-12">
-                    <li>
-                        <a href="">Beğen -</a>
-                    </li>
-                    <li>
-                        <a href="">Yorum yap -</a>
-                    </li>
-                    <li>
-                        <a href="">Paylaş -</a>
-                    </li>
-                    <li>
-                        <a href="">Bildirimleri Aç -</a>
-                    </li>
-                    <li style="opacity:0.7;">24 Mayıs 2018, 15:40</li>
+﻿@model MeuClass.Data.User
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
 
-                </ul>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padl-0">
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 padr-0">
+                @Html.Action("UserInfo", "UserPartial", new { id = Model.UserID })
             </div>
-        </div>
-        <div class="shareBox-Comments col-sm-12">
-            <div class="col-sm-1">
-                <div class="shareBoxUserInfoImage">
-                    <img src="/Content/img/users/noImaage.png" alt="" class="img-responsive">
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <div class="content-right">
+                    <div class="row">
+                        <div class="content-right-menu">
+                            <ul class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nav navbar-nav">
+                                @{
+                                    var detail = "";
+                                    var about = "";
+                                    var lesson = "";
+
+
+                                    if (ViewBag.SubView == "") { detail = "active"; }
+                                    if (ViewBag.SubView == "about") { about = "active"; }
+                                    if (ViewBag.SubView == "lesson") { lesson = "active"; }
+                                }
+                                <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4 @detail">
+                                    @Html.ActionLink("Profil", "Profile")
+                                </li>
+                                <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    @Html.ActionLink("Hakkında", "Profile", new {subview = "about" })
+                                </li>
+                                <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    @Html.ActionLink("Dersler", "Profile", new {subview = "lesson" })
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        @switch (ViewBag.SubView)
+                        {
+                            case "":
+                                Html.RenderAction("Detail", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                            case "about":
+                                Html.RenderAction("About", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                            case "lesson":
+                                Html.RenderAction("Lesson", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                            default:
+                                Html.RenderAction("Detail", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                        }
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-11">
-                <form>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Cevap yaz..">
-                    </div>
-
-                    <div class="form-group">
-
-                        <button type="submit" class="btn btn-default">Cevapla</button>
-                    </div>
-                </form>
             </div>
         </div>
     </div>
-
 </div>
- <div class="panel panel-default shareBox">
-                <div class="panel-body ">
-                    <div class="shareBox-Left col-sm-1">
-                        <div class="shareBoxUserInfoImage">
-                            <img src="/Content/img/users/noImage.png" alt="" class="img-responsive">
-                        </div>
-                    </div>
-                    <div class="shareBox-Right col-sm-11">
-                        <div class="shareBox-Name col-sm-12">
-                            <span>
-                                <a href="">Furkan Bayram</a> tarafından
-                                <a href="">Sinir Ağları</a>'na</span>
-                        </div>
-                        <div class="shareBox-ShareInfo col-sm-12">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi fugiat eaque, sit nostrum incidunt laudantium totam cupiditate
-                            eveniet in nobis doloribus iure, delectus numquam consequatur rerum veniam aspernatur suscipit earum.
-                        </div>
-                    </div>
-                    <div class="shareBox-Operations col-sm-12">
-                        <div class="col-sm-1"></div>
-                        <div class="col-sm-11">
-                            <ul class="col-sm-12">
-                                <li>
-                                    <a href="">Beğen -</a>
-                                </li>
-                                <li>
-                                    <a href="">Yorum yap -</a>
-                                </li>
-                                <li>
-                                    <a href="">Paylaş -</a>
-                                </li>
-                                <li>
-                                    <a href="">Bildirimleri Aç -</a>
-                                </li>
-                                <li style="opacity:0.7;">24 Mayıs 2018, 15:40</li>
-        
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="shareBox-Comments col-sm-12">
-                        <div class="col-sm-1">
-                            <div class="shareBoxUserInfoImage">
-                                <img src="/Content/img/users/noImaage.png" alt="" class="img-responsive">
-                            </div>
-                        </div>
-                        <div class="col-sm-11">
-                            <form>
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Cevap yaz..">
-                                </div>
-        
-                                <div class="form-group">
-        
-                                    <button type="submit" class="btn btn-default">Cevapla</button>
-                                    
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-        
-            </div>

@@ -37,6 +37,30 @@ namespace MeuClass.Controllers
             return View(data);
         }
 
+
+
+        //[HttpPost]
+        //public ActionResult Profile(int number, FormCollection form)
+        //{
+        //    var comment = form["comment"];
+        //    var lesson_content_id = form["LessonContentId"];
+
+        //    if (comment != String.Empty)
+        //    {
+        //        LessonRepository.Instance.AddLessonComment(new LessonComment()
+        //        {
+        //            AddedUserID = Convert.ToInt32(Session["user_id"]),
+        //            LessonContentID = Convert.ToInt32(lesson_content_id),
+        //            RecordDate = DateTime.Now,
+        //            LessonCommentText = comment.Trim()
+        //        });
+        //    }
+        //    var user = UserRepository.Instance.GetProfileInfo(number).Data;
+        //    return View(user);
+        //}
+
+
+
         [HttpPost]
         public ActionResult Detail(int id,FormCollection form)
         {

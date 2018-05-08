@@ -1,11 +1,12 @@
-﻿
+﻿@model MeuClass.Data.User
 <div class="content-left">
     <div class="panel panel-default about">
         <div class="panel-body">
             <div class="content-left-profile">
                 <div class="col-sm-12">
-                <img style="" src="/Content/img/profile.jpg" alt="" class="img-thumbnail img-circle"></div>
-                
+                    <img style="" src="/Content/img/profile.jpg" alt="" class="img-thumbnail img-circle">
+                </div>
+
                 <div class="content-left-profile-follow ">
                     <button class="btn btn-default">Takip Et</button>
                     <button class="btn btn-default">Mesaj Yaz</button>
@@ -22,23 +23,41 @@
         <div class="panel-body">
             <div class="about-content">
                 <h5>ID</h5>
-                <span>@ViewBag.ID</span>
+                <span>@Model.UserID</span>
             </div>
             <div class="about-content">
                 <h5>E-mail</h5>
-                <span>sefikfurkanbayram@gmail.com</span>
+                @if (String.IsNullOrEmpty(Model.MailAddress))
+                {
+                    <span>Mail bilgisi yok</span>
+                }
+                else
+                {
+                    <span>@Model.MailAddress</span>
+                }
             </div>
             <div class="about-content">
                 <h5>Doğum Tarihi</h5>
-                <span>18 Temmuz</span>
+                @if (String.IsNullOrEmpty(Model.Birthday.ToString()))
+                {                    
+                    <span>Doğumgünü bilgisi yok</span>
+                }
+                else
+                {
+                    DateTime bday = Convert.ToDateTime(Model.Birthday);
+                    <span>@bday.ToString("dd/MM/yyyy")</span>
+                }
             </div>
             <div class="about-content">
                 <h5>Bölüm</h5>
-                <span>Bilgisayar Teknolojisi ve Bilişim Sistemleri</span>
-            </div>
-            <div class="about-content">
-                <h5>Sınıf</h5>
-                <span>4. Sınıf</span>
+                @if (Model.DepartmentID is null)
+                {
+                    <span>Bölüm bilgisi yok</span>
+                }
+                else
+                {
+                    <span>@Model.Department.DepartmentName</span>
+                }
             </div>
         </div>
     </div>

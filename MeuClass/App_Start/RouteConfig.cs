@@ -17,7 +17,8 @@ namespace MeuClass
             routes.MapRoute(
                 name: "Profile",
                 url: "Profile/{number}",
-                defaults: new { controller = "User", action = "Profile", number = "" }
+                defaults: new { controller = "User", action = "Profile", number = "" },
+                namespaces: new string[] { "MeuClass.Controllers" }
                 );
 
             routes.MapRoute(

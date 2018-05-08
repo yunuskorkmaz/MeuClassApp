@@ -1,0 +1,43 @@
+﻿@model MeuClass.Data.User
+@{
+    foreach (var item in Model.LessonContents)
+    {
+        <div class="panel panel-default shareBox">
+            <div class="panel-body ">
+                <div class="shareBox-Left col-sm-1">
+                    <div class="shareBoxUserInfoImage">
+                        <img src="/Content/img/users/noImage.png" alt="" class="img-responsive">
+                    </div>
+                </div>
+                <div class="shareBox-Right col-sm-11">
+                    <div class="shareBox-Name col-sm-12">
+                        <span>
+                            <a href="/Profile/@item.User.UserID">@Model.Name @Model.Surname</a> tarafından
+                            <a href="/Lesson/Detail/@item.LessonID">@item.Lesson.LessonName</a> dersine
+                        </span>
+                    </div>
+                    <div class="shareBox-ShareInfo col-sm-12">
+                        @item.LessonContentText
+                    </div>
+                </div>
+                <div class="shareBox-Operations col-sm-12">
+                    <div class="col-sm-1"></div>
+                    <div class="col-sm-11">
+                        <ul class="col-sm-12">
+                            <li>
+                                <a href="">beğen -</a>
+                            </li>
+                            <li>
+                                <a href="">yorum yap -</a>
+                            </li>
+                            <li>
+                                <a href="">paylaş -</a>
+                            </li>
+                            <li style="opacity:0.7;">@item.RecordDate.ToString();</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

@@ -50,13 +50,25 @@ namespace MeuClass.Business.Repository
                 return false;
             }
 
-
-
-
         }
 
-      
-        public ResultData<Lesson> Join(string code,int userid)
+        public bool AddLessonComment (LessonComment comment)
+        {
+            var db = new ClassAppContext();
+            try
+            {
+                var added = db.LessonComment.Add(comment);
+                db.SaveChanges();
+                return true;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+
+        public ResultData<Lesson> Join(string code, int userid)
         {
             try
             {
@@ -98,7 +110,7 @@ namespace MeuClass.Business.Repository
             }
             catch (Exception ex)
             {
-                return ResultData<Lesson>.Instance.Fill(false, "hata oluştu"+ ex.Message);
+                return ResultData<Lesson>.Instance.Fill(false, "hata oluştu" + ex.Message);
             }
         }
 
@@ -107,15 +119,15 @@ namespace MeuClass.Business.Repository
         private string CodeControl()
         {
             var success = false;
-            string code ="";
+            string code = "";
             while (success == false)
             {
-                 code = _codeCreate();
+                code = _codeCreate();
 
                 var control = _search(a => a.LessonCode == code);
                 if (code != "")
                 {
-                    if (control.Data.Count < 1 )
+                    if (control.Data.Count < 1)
                     {
                         success = true;
                     }
