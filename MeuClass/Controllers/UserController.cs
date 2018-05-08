@@ -16,31 +16,13 @@ namespace MeuClass.Controllers
         }
 
         [HttpGet]
-        public ActionResult Profile(int number)
+        public ActionResult Profile(int number,string subview="")
         {
             var user = UserRepository.Instance.GetProfileInfo(number).Data;
-           
+            ViewBag.SubView = subview;
             return View(user);
         }
         
-
-        public ActionResult About(string number)
-        {
-            ViewBag.Number = number;
-            return View();
-        }
-
-        public ActionResult Friends(string number)
-        {
-            ViewBag.Number = number;
-            return View();
-        }
-
-        public ActionResult Lesson(string number)
-        {
-            ViewBag.Number = number;
-            return View();
-        }
 
         public ActionResult Search(FormCollection form)
         {

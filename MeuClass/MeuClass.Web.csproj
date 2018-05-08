@@ -149,6 +149,9 @@
     <Content Include="Areas\Partial\Views\Lesson\DetailContents.cshtml" />
     <Content Include="Areas\Partial\Views\Lesson\DetailFiles.cshtml" />
     <Content Include="Areas\Partial\Views\Lesson\DetailMembers.cshtml" />
+    <Content Include="Areas\Partial\Views\User\About.cshtml" />
+    <Content Include="Areas\Partial\Views\User\Lesson.cshtml" />
+    <Content Include="Areas\Partial\Views\User\Detail.cshtml" />
     <None Include="Content\sass\LoginMain.scss" />
     <Content Include="Global.asax" />
     <Content Include="Content\sass\main.scss" />
@@ -201,12 +204,9 @@
     <Content Include="Views\Messages\Index.cshtml" />
     <Content Include="Views\Shared\Test.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
-    <Content Include="Views\User\About.cshtml" />
     <Content Include="Views\UserPartial\UserInfo.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
-    <Content Include="Views\User\Friends.cshtml" />
     <Content Include="Views\Lesson\Index.cshtml" />
-    <Content Include="Views\User\Lesson.cshtml" />
     <Content Include="Views\Lesson\Detail.cshtml" />
     <Content Include="Views\Lesson\AddLesson.cshtml" />
     <Content Include="Views\Lesson\Add.cshtml" />

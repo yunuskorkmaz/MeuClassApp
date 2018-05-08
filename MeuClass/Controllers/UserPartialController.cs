@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MeuClass.Business.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,8 +11,8 @@ namespace MeuClass.Controllers
     {
         public ActionResult UserInfo(int id)
         {
-            ViewBag.ID = id;
-            return PartialView();
+            var user = UserRepository.Instance.GetProfileInfo(id).Data;
+            return PartialView(user);
         }
     }
 }

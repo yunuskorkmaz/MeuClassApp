@@ -22,6 +22,25 @@ namespace MeuClass.Areas.Partial.Controllers
                 return null;
             }
         }
+        public ActionResult Detail(int number)
+        {
+            var user = UserRepository.Instance.GetProfileInfo(number).Data;
+            return View(user);
+        }
+
+        public ActionResult About(int number)
+        {
+            var user = UserRepository.Instance.GetProfileInfo(number).Data;
+            return View(user);
+        }
+
+
+        public ActionResult Lesson(int number)
+        {
+            var userid = Convert.ToInt32(number);
+            var data = UserRepository.Instance._getByID(userid).Data.LessonAccesses.Select(a => a.Lesson).ToList();
+            return View(data);
+        }
 
         public ActionResult Info()
         {

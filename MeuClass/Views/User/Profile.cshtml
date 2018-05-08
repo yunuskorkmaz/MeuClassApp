@@ -1,44 +1,57 @@
 ﻿@model MeuClass.Data.User
-@{ Layout = "~/Views/Shared/View.cshtml"; }
-@{
-    foreach (var item in Model.LessonContents)
-    {
-        <div class="panel panel-default shareBox">
-            <div class="panel-body ">
-                <div class="shareBox-Left col-sm-1">
-                    <div class="shareBoxUserInfoImage">
-                        <img src="/Content/img/users/noImage.png" alt="" class="img-responsive">
-                    </div>
-                </div>
-                <div class="shareBox-Right col-sm-11">
-                    <div class="shareBox-Name col-sm-12">
-                        <span>
-                            <a href="/Profile/@item.User.UserID">@Model.Name @Model.Surname</a> tarafından
-                            <a href="/Lesson/Detail/@item.LessonID">@item.Lesson.LessonName</a> dersine
-                        </span>
-                    </div>
-                    <div class="shareBox-ShareInfo col-sm-12">
-                        @item.LessonContentText
-                    </div>
-                </div>
-                <div class="shareBox-Operations col-sm-12">
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-11">
-                        <ul class="col-sm-12">
-                            <li>
-                                <a href="">beğen -</a>
-                            </li>
-                            <li>
-                                <a href="">yorum yap -</a>
-                            </li>
-                            <li>
-                                <a href="">paylaş -</a>
-                            </li>
-                            <li style="opacity:0.7;">@item.RecordDate.ToString();</li>
-                        </ul>
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padl-0">
+    <div class="content">
+        <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 padr-0">
+                @Html.Action("UserInfo", "UserPartial", new { id = Model.UserID })
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <div class="content-right">
+                    <div class="row">
+                        <div class="content-right-menu">
+                            <ul class="col-xs-12 col-sm-12 col-md-12 col-lg-12 nav navbar-nav">
+                                @{
+                                    var detail = "";
+                                    var about = "";
+                                    var lesson = "";
+
+
+                                    if (ViewBag.SubView == "") { detail = "active"; }
+                                    if (ViewBag.SubView == "about") { about = "active"; }
+                                    if (ViewBag.SubView == "lesson") { lesson = "active"; }
+                                }
+                                <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4 @detail">
+                                    @Html.ActionLink("Profil", "Profile")
+                                </li>
+                                <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    @Html.ActionLink("Hakkında", "Profile", new {subview = "about" })
+                                </li>
+                                <li class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                    @Html.ActionLink("Dersler", "Profile", new {subview = "lesson" })
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        @switch (ViewBag.SubView)
+                        {
+                            case "":
+                                Html.RenderAction("Detail", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                            case "about":
+                                Html.RenderAction("About", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                            case "lesson":
+                                Html.RenderAction("Lesson", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                            default:
+                                Html.RenderAction("Detail", "User", new { area = "Partial", lessonid = Model.UserID });
+                                break;
+                        }
                     </div>
                 </div>
             </div>
         </div>
-    }
-}
+    </div>
+</div>
