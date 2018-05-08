@@ -1,0 +1,99 @@
+﻿@model MeuClass.Data.User
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table table-user-information">
+            <tbody>
+                <tr>
+                    <td>Adı Soyadı:</td>
+                    @if (String.IsNullOrEmpty(Model.Name))
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else if (String.IsNullOrEmpty(Model.Surname))
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        <td>@Model.Name @Model.Surname</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Ünvanı: </td>
+
+                    @if (Model.PersonnelTitleID is null)
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        <td>@Model.PersonnelTitle.personnel_title</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td>Bölümü:</td>
+
+                    @if (Model.DepartmentID is null)
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        <td>@Model.Department.DepartmentName</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td>Doğum Tarihi:</td>
+
+                    @if (String.IsNullOrEmpty(Model.Birthday.ToString()))
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        DateTime bday = Convert.ToDateTime(Model.Birthday);
+                        <td>@bday.ToString("dd/MM/yyyy")</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td>E-mail Adresi</td>
+                    @if (String.IsNullOrEmpty(Model.MailAddress))
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        <td>@Model.MailAddress</td>
+
+                    }
+                </tr>
+                <tr>
+                    <td>Kayıt Olma Tarihi:</td>
+                    @if (String.IsNullOrEmpty(Model.RecordDate.ToString()))
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        DateTime rDay = Convert.ToDateTime(Model.RecordDate);
+                        <td>@rDay.ToString("dd/MM/yyyy")</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Telefon Numarası</td>
+                    @if (String.IsNullOrEmpty(Model.TelephoneNumber))
+                    {
+                        <td>Bilgi Girilmedi</td>
+                    }
+                    else
+                    {
+                        <td>@Model.TelephoneNumber</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

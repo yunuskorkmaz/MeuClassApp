@@ -1,0 +1,36 @@
+﻿@model List<MeuClass.Data.Lesson>
+@{
+    if (Model.Count > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 friends">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <a href="/Lesson/Detail/@item.LessonID">
+                                <img src="/Content/img/lesson/gpg.png" alt="" class="img-responsive img-thumbnail">
+                            </a>
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 friends-info">
+                            <h5><a href="/Lesson/Detail/@item.LessonID">@item.LessonName</a></h5>
+                            @if (String.IsNullOrEmpty(item.RecordDate.ToString()))
+                    {
+                                <span>Bilgi Girilmedi</span>
+                            }
+                            else
+                            {
+                                DateTime rDate = Convert.ToDateTime(item.RecordDate);
+                                <span>@rDate.ToString("dd/MM/yyyy") tarihinde oluşturuldu.</span>
+                            }
+                        </div>
+                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 friends-button">
+                            <button class="btn btn-default"><a href="/Lesson/Detail/@item.LessonID">Derse Git</a></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+}

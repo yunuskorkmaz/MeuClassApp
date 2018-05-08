@@ -88,7 +88,6 @@
                                             <p class="text-left">
                                                 <strong>@Session["name"] @Session["surname"]</strong>
                                             </p>
-                                            <p class="text-left small">mail@gmail.com</p>
                                             <p class="text-left">
                                                 <a href="#" class="btn btn-primary btn-block btn-sm">Ayarlar</a>
                                             </p>
@@ -128,7 +127,7 @@
                     <a href="#">Anasayfa</a>
                 </li>
                 <li>
-                    <a href="#">Profil</a>
+                    <a href="/Profile/@Session["user_id"]">Profil</a>
                 </li>
                 <li>
                     <a href="#">Sınıflar</a>
