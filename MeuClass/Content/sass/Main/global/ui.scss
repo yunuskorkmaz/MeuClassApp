@@ -1,37 +1,31 @@
 .shareBox {
-        
-          
-            .shareBox-Right {
-                .shareBox-Name {
-                    a {
-                        color:blue;                    }
-                }
-                .shareBox-ShareInfo{
-                    margin-top:15px;
-                }
+    .shareBox-Right {
+        .shareBox-Name {
+            a {
+                color: #E74C3C;
             }
-         
-        
-        &-Operations {
-            padding-top:7px;
-            padding-bottom:7px;
-            margin-top:20px;
-           
-          
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                li {
-                    float: left;
-                    a {
-                       margin-right:16px;
-                    }
+        }
+        .shareBox-ShareInfo {
+            margin-top: 15px;
+        }
+    }
+    &-Operations {
+        padding-top: 7px;
+        padding-bottom: 7px;
+        margin-top: 20px;
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            li {
+                float: left;
+                a {
+                    margin-right: 16px;
                 }
             }
         }
-    
+    }
 }
 
 .button {
@@ -57,4 +51,14 @@
         color: black;
         opacity: 0.7;
     }
+}
+
+//PANELLL
+.clickable {
+    cursor: pointer;
+}
+
+.panel-heading span {
+    margin-top: -20px;
+    font-size: 15px;
 }

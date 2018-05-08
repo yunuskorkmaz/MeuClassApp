@@ -8,17 +8,20 @@ $navbar-height:50px;
 $font-barlow:'Barlow Semi Condensed', sans-serif;
 
 //COLOR
-$navbar-color:purple;
+$navbar-color:#3498DB;
 $header-backgroundcolor:#F23E16;
 $twitter-color:#1da1f2;
 $facebook-color:#3b5998;
 $instagram-color:#e1306c;
+$light-blue:#3498DB;
+
+
 
 
 //LEFTMENU
-$leftmenu-color:#6E0985;
+$leftmenu-color:#3498DB;
 $leftmenu-hover-color:white;
-$leftmenu-hover-background:purple;
+$leftmenu-hover-background:#3498DB;
 
 
 //FRIENDS
@@ -82,3 +85,10 @@ $button-gutter:20px;
     border-radius: 0px !important;
 }
 
+.bg-light-blue{
+    background-color:$light-blue !important;
+}
+
+.white-text{
+    color:white !important;
+}
