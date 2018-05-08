@@ -221,6 +221,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Partial\Models\" />
     <Folder Include="Areas\Partial\Views\Shared\" />
+    <Folder Include="Content\LessonContent\" />
     <Folder Include="Controllers\Messages\ViewModel\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

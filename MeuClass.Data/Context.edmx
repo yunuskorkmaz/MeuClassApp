@@ -814,7 +814,7 @@
           </Key>
           <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FileAdderUserID" Type="Int32" />
-          <Property Name="FileLink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ThumbnailLink" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FileTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FileInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
