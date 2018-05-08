@@ -42,7 +42,7 @@
     
 </div>
 <div class="panel panel-default">
-    <form method="post" action="">
+    <form method="post" action="" enctype="multipart/form-data">
         <div class="panel-body">
 
             <div class="col-lg-1 col-xs-1 col-sm-1 col-md-1">
@@ -54,6 +54,7 @@
 
         </div>
         <div class="panel-footer " style="text-align: right">
+            <input style="float:left" type="file" name="file" />
             <button type="submit" class="btn btn-primary">Gönder</button>
         </div>
     </form>
@@ -77,7 +78,7 @@
             }
             var user = UserRepository.Instance.GetProfileInfo(number).Data;
             return View(user);
-        }*@
+}*@
 
         @switch (ViewBag.SubView)
     {

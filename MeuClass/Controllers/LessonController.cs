@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
+using System.Web;
 using MeuClass.Business.Repository;
 using MeuClass.Data;
 using MeuClass.Filters;
@@ -62,19 +64,46 @@ namespace MeuClass.Controllers
 
 
         [HttpPost]
-        public ActionResult Detail(int id,FormCollection form)
+        public ActionResult Detail(int id,FormCollection form,HttpPostedFileBase file)
         {
             var content = form["content"];
 
             if (content != String.Empty)
             {
-                LessonRepository.Instance.AddLessonContent(new LessonContent()
+                UserFile filerecord = null;
+                if (file != null)
+                {
+                    var ext = Path.GetExtension(file.FileName);
+                    var fileName = Path.GetFileNameWithoutExtension(file.FileName);
+                    var newFilename = Guid.NewGuid() + ext;
+                    var path = Path.Combine(Server.MapPath("~/Content/LessonContent/"), newFilename);
+                    file.SaveAs(path);
+
+                    filerecord = new UserFile()
+                    {
+                        FileAdderUserID = Convert.ToInt32(Session["user_id"]),
+                        RecordDate = DateTime.Now,
+                        FileLink = $"~/Content/LessonContent/{newFilename}",
+                        FileTitle = fileName
+                    };
+
+                }
+
+                var lessonContent = new LessonContent()
                 {
                     AddedUserID = Convert.ToInt32(Session["user_id"]),
                     LessonID = id,
                     RecordDate = DateTime.Now,
                     LessonContentText = content.Trim()
-                });
+                };
+
+                if (filerecord != null)
+                {
+                    lessonContent.UserFile = filerecord;
+                }
+
+
+            LessonRepository.Instance.AddLessonContent(lessonContent);
             }
 
             return Detail(id, "");
