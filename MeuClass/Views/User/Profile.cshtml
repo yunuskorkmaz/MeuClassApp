@@ -37,16 +37,19 @@
                         @switch (ViewBag.SubView)
                         {
                             case "":
-                                Html.RenderAction("Detail", "User", new { area = "Partial", lessonid = Model.UserID });
+                                Html.RenderAction("Detail", "User", new { area = "Partial", userid = Model.UserID });
                                 break;
                             case "about":
-                                Html.RenderAction("About", "User", new { area = "Partial", lessonid = Model.UserID });
+                                Html.RenderAction("About", "User", new { area = "Partial", userid = Model.UserID });
                                 break;
                             case "lesson":
-                                Html.RenderAction("Lesson", "User", new { area = "Partial", lessonid = Model.UserID });
+                                Html.RenderAction("Lesson", "User", new { area = "Partial", userid = Model.UserID });
+                                break;
+                            case "edit":
+                                Html.RenderAction("EditProfile", "User", new { area = "Partial", userid = Model.UserID });
                                 break;
                             default:
-                                Html.RenderAction("Detail", "User", new { area = "Partial", lessonid = Model.UserID });
+                                Html.RenderAction("Detail", "User", new { area = "Partial", userid = Model.UserID });
                                 break;
                         }
                     </div>

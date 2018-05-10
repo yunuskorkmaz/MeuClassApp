@@ -152,6 +152,7 @@
     <Content Include="Areas\Partial\Views\User\About.cshtml" />
     <Content Include="Areas\Partial\Views\User\Lesson.cshtml" />
     <Content Include="Areas\Partial\Views\User\Detail.cshtml" />
+    <Content Include="Areas\Partial\Views\User\EditProfile.cshtml" />
     <None Include="Content\sass\LoginMain.scss" />
     <Content Include="Global.asax" />
     <Content Include="Content\sass\main.scss" />
