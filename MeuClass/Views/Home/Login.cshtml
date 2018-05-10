@@ -41,43 +41,41 @@
                     <img src="~/Content/img/login-img.png" />
                 </div>
                 <div class="col-md-6 kayitFormu">
-                    @using (Html.BeginForm("DoRegister", "Home", FormMethod.Post, new { @class = "mt-5" })) {
+                    @using (Html.BeginForm("DoRegister", "Home", FormMethod.Post, new { @class = "mt-5",@id="registerform", @onsubmit="return formControl()" })) {
                     <h3 class="display-4">Üye Ol</h3>
                     <div class="form-group row">
 
                         <div class="col">
-                            <input type="text" class="form-control" id="ad" name="Name" placeholder="Adın">
+                            <input  type="text" class="form-control" id="ad" name="Name" placeholder="Adı">
                         </div>
                     </div>
                     <div class="form-group row">
 
                         <div class="col">
-                            <input type="text" class="form-control" id="soyad" name="Surname" placeholder="Soyadın">
+                            <input  type="text" class="form-control" id="soyad" name="Surname" placeholder="Soyadı">
                         </div>
                     </div>
                     <div class="form-group row">
 
                         <div class="col">
-                            <input type="text" class="form-control" id="okulnumarasi" name="SchoolNumber" placeholder="Okul Numaran">
+                            <input  type="email" class="form-control" id="okulnumarasi" name="Email" placeholder="E-Posta Adresi">
                         </div>
                     </div>
-                    <div class="form-group row">
+                        <div class="form-group row">
 
-                        <div class="col">
-                            <input type="password" class="form-control" id="sifre" name="Password" placeholder="Şifre">
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-
-                        <div class="col">
-                            <div class="form-check">
-                                <label class="form-check-label float-right">
-                                    <input class="form-check-input" type="checkbox"> Beni Hatırla
-                                </label>
+                            <div class="col">
+                                <input  type="password" class="form-control" id="sifre" name="Password" placeholder="Şifre">
                             </div>
+                      
                         </div>
-                    </div>
+
+                        <div class="form-group row">
+                            <div class="col">
+                                <input  type="password" class="form-control" id="sifreConfirm"  placeholder="Şifre Tekar">
+                            </div>
+                        </div> 
+
+                    
                     <div class="form-group row">
                         <div class="col">
                             <button type="submit" class="btn btn-primary float-right">Kaydol</button>
@@ -90,5 +88,11 @@
     </div>
 </section>
 <script>
-  
+    function formControl() {
+        if ($('#sifre').val() != $('#sifreConfirm').val()) {
+            alert("Şifreler Uyuşmuyor");
+            return false;
+
+        }
+    }
 </script>

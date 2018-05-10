@@ -63,7 +63,7 @@ namespace MeuClass.Controllers
             {
                 Name = form.Get("Name"),
                 Surname = form.Get("Surname"),
-                SchoolNumber = form.Get("SchoolNumber"),
+                MailAddress = form.Get("Email"),
                 Password = form.Get("Password"),
                 Birthday = DateTime.Now,
                 RecordDate = DateTime.Now,
