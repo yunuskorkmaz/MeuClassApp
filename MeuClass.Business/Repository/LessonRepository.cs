@@ -32,7 +32,7 @@ namespace MeuClass.Business.Repository
         {
             var db = new ClassAppContext();
 
-            return db.LessonContent.Where(l => l.LessonID == lessonID)?.ToList();
+            return db.LessonContent.Where(l => l.LessonID == lessonID).OrderByDescending(a=> a.RecordDate)?.ToList();
         }
 
         public bool AddLessonContent(LessonContent content)
