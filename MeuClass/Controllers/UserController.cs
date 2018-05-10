@@ -22,7 +22,15 @@ namespace MeuClass.Controllers
             ViewBag.SubView = subview;
             return View(user);
         }
+
         
+        public  ActionResult Edit(User user)
+        {
+            UserRepository.Instance._update(user);
+
+
+            return Redirect(Request.UrlReferrer.ToString());
+        }
 
         public ActionResult Search(FormCollection form)
         {

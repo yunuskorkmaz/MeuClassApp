@@ -22,25 +22,32 @@ namespace MeuClass.Areas.Partial.Controllers
                 return null;
             }
         }
-        public ActionResult Detail(int number)
+        public ActionResult Detail(int userid)
         {
-            var user = UserRepository.Instance.GetProfileInfo(number).Data;
+            var user = UserRepository.Instance.GetProfileInfo(userid).Data;
             return View(user);
         }
 
-        public ActionResult About(int number)
+        public ActionResult About(int userid)
         {
-            var user = UserRepository.Instance.GetProfileInfo(number).Data;
+            var user = UserRepository.Instance.GetProfileInfo(userid).Data;
             return View(user);
         }
 
 
-        public ActionResult Lesson(int number)
+        public ActionResult Lesson(int userid)
         {
-            var userid = Convert.ToInt32(number);
-            var data = UserRepository.Instance._getByID(userid).Data.LessonAccesses.Select(a => a.Lesson).ToList();
+            var user_id = Convert.ToInt32(userid);
+            var data = UserRepository.Instance._getByID(user_id).Data.LessonAccesses.Select(a => a.Lesson).ToList();
             return View(data);
         }
+        [HttpGet]
+        public ActionResult EditProfile(int userid)
+        {
+            var user = UserRepository.Instance.GetProfileInfo(userid).Data;
+            return View(user);
+        }
+
 
         public ActionResult Info()
         {
