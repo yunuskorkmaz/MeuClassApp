@@ -22,8 +22,19 @@
         </div>
         <div class="panel-body">
             <div class="about-content">
-                <h5>ID</h5>
-                <span>@Model.UserID</span>
+                <h5>Adı Soyadı</h5>
+                @if (String.IsNullOrEmpty(Model.Name))
+                {
+                    <span>Bilgi Girilmedi</span>
+                }
+                else if (String.IsNullOrEmpty(Model.Surname))
+                {
+                    <span>Bilgi Girilmedi</span>
+                }
+                else
+                {
+                    <span>@Model.Name @Model.Surname</span>
+                }
             </div>
             <div class="about-content">
                 <h5>E-mail</h5>
